@@ -1,0 +1,345 @@
+{
+	"RstEnable 1'b1": {
+		"prefix": "RstEnable",
+		"body": [
+			"RstEnable"
+		],
+		"description": "复位有效"
+	},
+	"RstDisable 1'b0": {
+		"prefix": "RstDisable",
+		"body": [
+			"RstDisable"
+		],
+		"description": "复位无效"
+	},
+	"ZeroWord 32'h00000000": {
+		"prefix": "ZeroWord",
+		"body": [
+			"ZeroWord"
+		],
+		"description": "32位的数值0"
+	},
+	"WriteEnable 1'b1": {
+		"prefix": "WriteEnable",
+		"body": [
+			"WriteEnable"
+		],
+		"description": "写使能"
+	},
+	"WriteDisable 1'b0": {
+		"prefix": "WriteDisable",
+		"body": [
+			"WriteDisable"
+		],
+		"description": "禁止写"
+	},
+	"ReadEnable 1'b1": {
+		"prefix": "ReadEnable",
+		"body": [
+			"ReadEnable"
+		],
+		"description": "读使能"
+	},
+	"ReadDisable 1'b0": {
+		"prefix": "ReadDisable",
+		"body": [
+			"ReadDisable"
+		],
+		"description": "禁止读"
+	},
+	"AluOpBus 7:0": {
+		"prefix": "AluOpBus",
+		"body": [
+			"AluOpBus"
+		],
+		"description": "译码阶段的输出 aluop_o 的宽度"
+	},
+	"AluSelBus 2:0": {
+		"prefix": "AluSelBus",
+		"body": [
+			"AluSelBus"
+		],
+		"description": "译码阶段的输出 alusel_o的宽度"
+	},
+	"InstValid 1'b0": {
+		"prefix": "InstValid",
+		"body": [
+			"InstValid"
+		],
+		"description": "指令有效"
+	},
+	"InstInvalid 1'b1": {
+		"prefix": "InstInvalid",
+		"body": [
+			"InstInvalid"
+		],
+		"description": "指令无效"
+	},
+	"True_v 1'b1": {
+		"prefix": "True_v",
+		"body": [
+			"True_v"
+		],
+		"description": "逻辑真"
+	},
+	"False_v 1'b0": {
+		"prefix": "False_v",
+		"body": [
+			"False_v"
+		],
+		"description": "逻辑假"
+	},
+	"ChipEnable 1'b1": {
+		"prefix": "ChipEnable",
+		"body": [
+			"ChipEnable"
+		],
+		"description": "芯片使能"
+	},
+	"ChipDisable 1'b0": {
+		"prefix": "ChipDisable",
+		"body": [
+			"ChipDisable"
+		],
+		"description": "芯片禁止"
+	},
+	"EXE_ORI 6'b001101": {
+		"prefix": "EXE_ORI",
+		"body": [
+			"EXE_ORI"
+		],
+		"description": "指令 ORI 功能码"
+	},
+	"EXE_NOP 6'b000000": {
+		"prefix": "EXE_NOP",
+		"body": [
+			"EXE_NOP"
+		],
+		"description": "指令 NOR 功能码"
+	},
+	"EXE_AND 6'b100100": {
+		"prefix": "EXE_AND",
+		"body": [
+			"EXE_AND"
+		],
+		"description": " "
+	},
+	"EXE_OR 6'b100101": {
+		"prefix": "EXE_OR",
+		"body": [
+			"EXE_OR"
+		],
+		"description": " "
+	},
+	"EXE_XOR 6'b100110": {
+		"prefix": "EXE_XOR",
+		"body": [
+			"EXE_XOR"
+		],
+		"description": " "
+	},
+	"EXE_NOR 6'b100111": {
+		"prefix": "EXE_NOR",
+		"body": [
+			"EXE_NOR"
+		],
+		"description": " "
+	},
+	"EXE_ANDI 6'b001100": {
+		"prefix": "EXE_ANDI",
+		"body": [
+			"EXE_ANDI"
+		],
+		"description": " "
+	},
+	"EXE_XORI 6'b001110": {
+		"prefix": "EXE_XORI",
+		"body": [
+			"EXE_XORI"
+		],
+		"description": " "
+	},
+	"EXE_LUI 6'b001111": {
+		"prefix": "EXE_LUI",
+		"body": [
+			"EXE_LUI"
+		],
+		"description": " "
+	},
+	"EXD_SLL 6'b000000": {
+		"prefix": "EXD_SLL",
+		"body": [
+			"EXD_SLL"
+		],
+		"description": " "
+	},
+	"EXE_SLLV 6'b000100": {
+		"prefix": "EXE_SLLV",
+		"body": [
+			"EXE_SLLV"
+		],
+		"description": " "
+	},
+	"EXE_SRL 6'b000010": {
+		"prefix": "EXE_SRL",
+		"body": [
+			"EXE_SRL"
+		],
+		"description": " "
+	},
+	"EXE_SRLV 6'b000110": {
+		"prefix": "EXE_SRLV",
+		"body": [
+			"EXE_SRLV"
+		],
+		"description": " "
+	},
+	"EXE_SRA 6'b000011": {
+		"prefix": "EXE_SRA",
+		"body": [
+			"EXE_SRA"
+		],
+		"description": " "
+	},
+	"EXE_SRAV 6'b000111": {
+		"prefix": "EXE_SRAV",
+		"body": [
+			"EXE_SRAV"
+		],
+		"description": " "
+	},
+	"EXE_SYNC 6'b001111": {
+		"prefix": "EXE_SYNC",
+		"body": [
+			"EXE_SYNC"
+		],
+		"description": " "
+	},
+	"EXE_PREF 6'b110011": {
+		"prefix": "EXE_PREF",
+		"body": [
+			"EXE_PREF"
+		],
+		"description": " "
+	},
+	"EXE_SPECIAL_INST 6'b000000": {
+		"prefix": "EXE_SPECIAL_INST",
+		"body": [
+			"EXE_SPECIAL_INST"
+		],
+		"description": " "
+	},
+	"EXE_OR_OP 8'b00100101": {
+		"prefix": "EXE_OR_OP",
+		"body": [
+			"EXE_OR_OP"
+		],
+		"description": " "
+	},
+	"EXE_NOP_OP 8'b00000000": {
+		"prefix": "EXE_NOP_OP",
+		"body": [
+			"EXE_NOP_OP"
+		],
+		"description": " "
+	},
+	"EXE_RES_LOGIC 3'b001": {
+		"prefix": "EXE_RES_LOGIC",
+		"body": [
+			"EXE_RES_LOGIC"
+		],
+		"description": " "
+	},
+	"EXE_RES_NOP 3'b000": {
+		"prefix": "EXE_RES_NOP",
+		"body": [
+			"EXE_RES_NOP"
+		],
+		"description": " "
+	},
+	"InstAddrBus 31:0": {
+		"prefix": "InstAddrBus",
+		"body": [
+			"InstAddrBus"
+		],
+		"description": "ROM的地址总线宽度"
+	},
+	"InstBus 31:0": {
+		"prefix": "InstBus",
+		"body": [
+			"InstBus"
+		],
+		"description": "ROM的数据总线宽度"
+	},
+	"InstMemNum 131071": {
+		"prefix": "InstMemNum",
+		"body": [
+			"InstMemNum"
+		],
+		"description": "ROM的实际大小"
+	},
+	"InstMemNumLog2 17": {
+		"prefix": "InstMemNumLog2",
+		"body": [
+			"InstMemNumLog2"
+		],
+		"description": "ROM实际使用的地址线宽度"
+	},
+	"RegAddrBus 4:0": {
+		"prefix": "RegAddrBus",
+		"body": [
+			"RegAddrBus"
+		],
+		"description": "RegFile的地址线宽度"
+	},
+	"RegBus 31:0": {
+		"prefix": "RegBus",
+		"body": [
+			"RegBus"
+		],
+		"description": "RegFile的数据线宽度"
+	},
+	"RegWidth 32": {
+		"prefix": "RegWidth",
+		"body": [
+			"RegWidth"
+		],
+		"description": "通用寄存器的宽度"
+	},
+	"DoubleRegWidth 64": {
+		"prefix": "DoubleRegWidth",
+		"body": [
+			"DoubleRegWidth"
+		],
+		"description": "通用寄存器的两倍宽度"
+	},
+	"DoubleRegBus 63:0": {
+		"prefix": "DoubleRegBus",
+		"body": [
+			"DoubleRegBus"
+		],
+		"description": "通用寄存器的数据线宽度的两倍"
+	},
+	"RegNum 32": {
+		"prefix": "RegNum",
+		"body": [
+			"RegNum"
+		],
+		"description": "通用寄存器的数量"
+	},
+	"RegNumLog2 5": {
+		"prefix": "RegNumLog2",
+		"body": [
+			"RegNumLog2"
+		],
+		"description": "寻址通用寄存器使用的地址位宽"
+	},
+	"NOPRegAddr": {
+		"prefix": "NOPRegAddr",
+		"body": [
+			"NOPRegAddr"
+		],
+		"description": " "
+	}
+}

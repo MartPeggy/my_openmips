@@ -1,0 +1,25 @@
+{
+    "verilog-formatter.istyle.path": "D:\\Code\\my_OpenMIPS\\.vscode\\iStyle.exe",
+    "verilog-formatter.istyle.style": "ANSI",
+    "verilog-formatter.istyle.args": "-b -p -G -o --break-blocks",
+    "verilog.ctags.path": "D:\\Code\\my_OpenMIPS\\.vscode\\ctags.exe",
+    "verilog.linting.linter": "iverilog",
+    "editor.fontLigatures": false,
+    "verilog.linting.iverilog.runAtFileLocation": true,
+    "verilog.linting.iverilog.arguments": "-i",
+    "search.exclude": {
+        ".vscode/license": true,
+        ".vscode/man": true,
+        "**/*.code-search": true
+    },
+    "files.exclude": {
+        ".vscode/ctags.exe": true,
+        ".vscode/iStyle.exe": true,
+        ".vscode/readtags.exe": true,
+        ".vscode/README.md": true,
+        ".vscode/man": true,
+        ".vscode/license": true,
+        ".vscode/docs": true,
+        ".vscode/iverilog": true
+    }
+}
