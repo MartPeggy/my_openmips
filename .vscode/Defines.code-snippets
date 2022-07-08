@@ -104,6 +104,76 @@
 		],
 		"description": "芯片禁止"
 	},
+	"Stop 1'b1": {
+		"prefix": "Stop",
+		"body": [
+			"Stop",
+		],
+		"description": ""
+	},
+	"NoStop 1'b0": {
+		"prefix": "NoStop",
+		"body": [
+			"NoStop",
+		],
+		"description": ""
+	},
+	"InDelaySlot 1'b1": {
+		"prefix": "InDelaySlot",
+		"body": [
+			"InDelaySlot",
+		],
+		"description": ""
+	},
+	"NotInDelaySlot 1'b0": {
+		"prefix": "NotInDelaySlot",
+		"body": [
+			"NotInDelaySlot",
+		],
+		"description": ""
+	},
+	"Branch 1'b1": {
+		"prefix": "Branch",
+		"body": [
+			"Branch",
+		],
+		"description": ""
+	},
+	"NotBranch 1'b0": {
+		"prefix": "NotBranch",
+		"body": [
+			"NotBranch",
+		],
+		"description": ""
+	},
+	"InterruptAssert 1'b1": {
+		"prefix": "InterruptAssert",
+		"body": [
+			"InterruptAssert",
+		],
+		"description": ""
+	},
+	"InterruptNotAssert 1'b0": {
+		"prefix": "InterruptNotAssert",
+		"body": [
+			"InterruptNotAssert",
+		],
+		"description": ""
+	},
+	"TrapAssert 1'b1": {
+		"prefix": "TrapAssert",
+		"body": [
+			"TrapAssert",
+		],
+		"description": ""
+	},
+	"TrapNotAssert 1'b0": {
+		"prefix": "TrapNotAssert",
+		"body": [
+			"TrapNotAssert",
+		],
+		"description": ""
+	},
 	"EXE_ORI 6'b001101": {
 		"prefix": "EXE_ORI",
 		"body": [
