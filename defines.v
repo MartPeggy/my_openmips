@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\defines.v
 //* @Date         : 2022-04-24 09:53:09
-//* @LastEditTime : 2022-07-08 20:21:29
+//* @LastEditTime : 2022-07-09 09:31:15
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB Ctrl+t 转到定义
 //* @Description  : 一些宏定义
@@ -56,6 +56,13 @@
 `define EXE_SRA             6'b000011       // SRA 寄存器中的值进行算术右移并把结果保存到新的寄存器中
 `define EXE_SRAV            6'b000111       // SRAV 寄存器中的值进行算术右移并把结果保存到新的寄存器中，移位位数由寄存器决定
 
+`define EXE_MOVZ            6'b001010       // MOVZ 若寄存器中的值为0，则将源寄存器的值赋值给新的寄存器
+`define EXE_MOVN            6'b001011       // MOVN 若寄存器中的值为1，则将源寄存器的值赋值给新的寄存器
+`define EXE_MFHI            6'b010000       // 将HI中的值赋值给寄存器
+`define EXE_MTHI            6'b010001       // 将寄存器中的值赋值给HI
+`define EXE_MFLO            6'b010010       // 将LO中的值赋值给寄存器
+`define EXE_MTLO            6'b010011       // 将寄存器中的值赋值给LO
+
 `define EXE_SYNC            6'b001111       // SYNC 这里相当于空指令
 `define EXE_PREF            6'b110011       // PREF 这里相当于空指令
 `define SSNOP               32'b00000000000000000000000001000000
@@ -81,10 +88,19 @@
 `define EXE_SRAV_OP      8'b00000111
 `define EXE_NOP_OP       8'b00000000
 
+`define EXE_MOVZ_OP  8'b00001010
+`define EXE_MOVN_OP  8'b00001011
+`define EXE_MFHI_OP  8'b00010000
+`define EXE_MTHI_OP  8'b00010001
+`define EXE_MFLO_OP  8'b00010010
+`define EXE_MTLO_OP  8'b00010011
+
 //AluSel
 `define EXE_RES_LOGIC   3'b001
 `define EXE_RES_SHIFT   3'b010
 `define EXE_RES_NOP     3'b000
+
+`define EXE_RES_MOVE 3'b011	
 
 
 //*   与ROM相关的宏指令    *//

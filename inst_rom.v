@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\inst_rom.v
 //* @Date         : 2022-04-28 12:04:38
-//* @LastEditTime : 2022-07-04 18:43:28
+//* @LastEditTime : 2022-07-09 14:04:20
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 指令存储器
@@ -16,7 +16,7 @@
 module inst_rom(
            input wire ce,
            input wire [ `InstAddrBus ] addr,
-           output reg [ `InstBus ]  inst  
+           output reg [ `InstBus ] inst
        );
 // 二维数组，大小是 InstMemNum 宽度为 InstBus
 reg [ `InstBus ] inst_mem [ 0: `InstMemNum - 1 ];
@@ -27,13 +27,14 @@ initial
 
 always @ ( * )
     begin
-        if ( ce == `ChipDisable )    
+        if ( ce == `ChipDisable )
             begin
                 inst <= `ZeroWord;
             end
         else
             begin
-                inst <= inst_mem[ addr [ `InstMemNumLog2 + 1: 2 ] ];
+                inst <= inst_mem [ addr [ `InstMemNumLog2 + 1: 2 ] ];
             end
     end
+
 endmodule
