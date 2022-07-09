@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\id.v
 //* @Date         : 2022-04-24 14:06:57
-//* @LastEditTime : 2022-07-08 09:04:55
+//* @LastEditTime : 2022-07-09 08:47:41
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 对指令进行译码，得到最终运算的类型和操作数
@@ -232,7 +232,7 @@ always @( * )
                     `EXE_XORI:
                         begin
                             wreg_o <= `WriteEnable;
-                            aluop_o <= `EXE_XORI_OP;                  // 该指令所属的子类型是 “XORI” 运算
+                            aluop_o <= `EXE_XOR_OP;                  // 该指令所属的子类型是 “XORI” 运算
                             alusel_o <= `EXE_RES_LOGIC;
                             reg1_read_o <= 1'b1;
                             reg2_read_o <= 1'b0;
