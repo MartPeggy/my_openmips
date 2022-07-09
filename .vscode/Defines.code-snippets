@@ -6,6 +6,8 @@
 		],
 		"description": "",
 	},
+
+	//*  全局宏定义  *//
 	"RstEnable 1'b1": {
 		"prefix": "RstEnable",
 		"body": [
@@ -55,6 +57,8 @@
 		],
 		"description": "禁止读"
 	},
+
+
 	"AluOpBus 7:0": {
 		"prefix": "AluOpBus",
 		"body": [
@@ -111,6 +115,8 @@
 		],
 		"description": "芯片禁止"
 	},
+
+
 	"Stop 1'b1": {
 		"prefix": "Stop",
 		"body": [
@@ -181,20 +187,8 @@
 		],
 		"description": ""
 	},
-	"EXE_ORI 6'b001101": {
-		"prefix": "EXE_ORI",
-		"body": [
-			"EXE_ORI",
-		],
-		"description": "指令 ORI 功能码"
-	},
-	"EXE_NOP 6'b000000": {
-		"prefix": "EXE_NOP",
-		"body": [
-			"EXE_NOP",
-		],
-		"description": "指令 NOR 功能码"
-	},
+
+	//*   指令宏定义    *//
 	"EXE_AND 6'b100100": {
 		"prefix": "EXE_AND",
 		"body": [
@@ -230,6 +224,13 @@
 		],
 		"description": " "
 	},
+	"EXE_ORI 6'b001101": {
+		"prefix": "EXE_ORI",
+		"body": [
+			"EXE_ORI",
+		],
+		"description": "指令 ORI 功能码"
+	},
 	"EXE_XORI 6'b001110": {
 		"prefix": "EXE_XORI",
 		"body": [
@@ -244,6 +245,7 @@
 		],
 		"description": " "
 	},
+
 	"EXD_SLL 6'b000000": {
 		"prefix": "EXD_SLL",
 		"body": [
@@ -286,6 +288,157 @@
 		],
 		"description": " "
 	},
+
+	"EXE_MOVZ 6'b001010": {
+		"prefix": "EXE_MOVZ",
+		"body": [
+			"EXE_MOVZ"
+		],
+		"description": "",
+	},
+	"EXE_MOVN 6'b001011": {
+		"prefix": "EXE_MOVN",
+		"body": [
+			"EXE_MOVN"
+		],
+		"description": "",
+	},
+	"EXE_MFHI 6'b010000": {
+		"prefix": "EXE_MFHI",
+		"body": [
+			"EXE_MFHI"
+		],
+		"description": "",
+	},
+	"EXE_MTHI 6'b010001": {
+		"prefix": "EXE_MTHI",
+		"body": [
+			"EXE_MTHI"
+		],
+		"description": "",
+	},
+	"EXE_MFLO 6'b010010": {
+		"prefix": "EXE_MFLO",
+		"body": [
+			"EXE_MFLO"
+		],
+		"description": "",
+	},
+	"EXE_MTLO 6'b010011": {
+		"prefix": "EXE_MTLO",
+		"body": [
+			"EXE_MTLO"
+		],
+		"description": "",
+	},
+
+	"EXE_SLT 6'b101010": {
+		"prefix": "EXE_SLT",
+		"body": [
+			"EXE_SLT"
+		],
+		"description": "",
+	},
+	"EXE_SLTU 6'b101011": {
+		"prefix": "EXE_SLTU",
+		"body": [
+			"EXE_SLTU"
+		],
+		"description": "",
+	},
+	"EXE_SLTI 6'b001010": {
+		"prefix": "EXE_SLTI",
+		"body": [
+			"EXE_SLTI"
+		],
+		"description": "",
+	},
+	"EXE_SLTIU 6'b001011": {
+		"prefix": "EXE_SLTIU",
+		"body": [
+			"EXE_SLTIU"
+		],
+		"description": "",
+	},
+	"EXE_ADD 6'b100000": {
+		"prefix": "EXE_ADD",
+		"body": [
+			"EXE_ADD"
+		],
+		"description": "",
+	},
+	"EXE_ADDU 6'b100001": {
+		"prefix": "EXE_ADDU",
+		"body": [
+			"EXE_ADDU"
+		],
+		"description": "",
+	},
+	"EXE_SUB 6'b100010": {
+		"prefix": "EXE_SUB",
+		"body": [
+			"EXE_SUB"
+		],
+		"description": "",
+	},
+	"EXE_SUBU 6'b100011": {
+		"prefix": "EXE_SUBU",
+		"body": [
+			"EXE_SUBU"
+		],
+		"description": "",
+	},
+	"EXE_ADDI 6'b001000": {
+		"prefix": "EXE_ADDI",
+		"body": [
+			"EXE_ADDI"
+		],
+		"description": "",
+	},
+	"EXE_ADDIU 6'b001001": {
+		"prefix": "EXE_ADDIU",
+		"body": [
+			"EXE_ADDIU"
+		],
+		"description": "",
+	},
+	"EXE_CLZ 6'b100000": {
+		"prefix": "EXE_CLZ",
+		"body": [
+			"EXE_CLZ"
+		],
+		"description": "",
+	},
+	"EXE_CLO 6'b100001": {
+		"prefix": "EXE_CLO",
+		"body": [
+			"EXE_CLO"
+		],
+		"description": "",
+	},
+	
+	"EXE_MULT 6'b011000": {
+		"prefix": "EXE_MULT",
+		"body": [
+			"EXE_MULT"
+		],
+		"description": "",
+	},
+	"EXE_MULTU 6'b011001": {
+		"prefix": "EXE_MULTU",
+		"body": [
+			"EXE_MULTU"
+		],
+		"description": "",
+	},
+	"EXE_MUL 6'b000010": {
+		"prefix": "EXE_MUL",
+		"body": [
+			"EXE_MUL"
+		],
+		"description": "",
+	},
+
 	"EXE_SYNC 6'b001111": {
 		"prefix": "EXE_SYNC",
 		"body": [
@@ -300,7 +453,29 @@
 		],
 		"description": " "
 	},
-	"EXE_SPECIAL2_INST 6'b01110": {
+	"EXE_NOP 6'b000000": {
+		"prefix": "EXE_NOP",
+		"body": [
+			"EXE_NOP",
+		],
+		"description": ""
+	},
+	"SSNOP 32'b00000000000000000000000001000000": {
+		"prefix": "SSNOP",
+		"body": [
+			"SSNOP",
+		],
+		"description": " "
+	},
+
+	"EXE_REGIMM_INST 6'b000001": {
+		"prefix": "EXE_REGIMM_INST",
+		"body": [
+			"EXE_REGIMM_INST",
+		],
+		"description": " "
+	},
+	"EXE_SPECIAL2_INST 6'b011100": {
 		"prefix": "EXE_SPECIAL2_INST",
 		"body": [
 			"EXE_SPECIAL2_INST",
@@ -314,20 +489,7 @@
 		],
 		"description": " "
 	},
-	"EXE_REGIMM_INST 6'b000001": {
-		"prefix": "EXE_REGIMM_INST",
-		"body": [
-			"EXE_REGIMM_INST",
-		],
-		"description": " "
-	},
-	"SSNOP 32'b00000000000000000000000001000000": {
-		"prefix": "SSNOP",
-		"body": [
-			"SSNOP",
-		],
-		"description": " "
-	},
+
 	// Aluop
 	"EXE_AND_OP 8'b00100100": {
 		"prefix": "EXE_AND_OP",
@@ -427,14 +589,173 @@
 		],
 		"description": " "
 	},
-	"EXE_NOP_OP 8'b00000000": {
-		"prefix": "EXE_NOP_OP",
+	
+	"EXE_MOVZ_OP 8'b00001010": {
+		"prefix": "EXE_MOVZ_OP",
 		"body": [
-			"EXE_NOP_OP",
+			"EXE_MOVZ_OP"
+		],
+		"description": "",
+	},
+	"EXE_MOVN_OP 8'b00001011": {
+		"prefix": "EXE_MOVN_OP",
+		"body": [
+			"EXE_MOVN_OP"
+		],
+		"description": "",
+	},
+	"EXE_MFHI_OP 8'b00010000": {
+		"prefix": "EXE_MFHI_OP",
+		"body": [
+			"EXE_MFHI_OP"
+		],
+		"description": "",
+	},
+	"EXE_MTHI_OP 8'b00010001": {
+		"prefix": "EXE_MTHI_OP",
+		"body": [
+			"EXE_MTHI_OP"
+		],
+		"description": "",
+	},
+	"EXE_MFLO_OP 8'b00010010": {
+		"prefix": "EXE_MFLO_OP",
+		"body": [
+			"EXE_MFLO_OP"
+		],
+		"description": "",
+	},
+	"EXE_MTLO_OP 8'b00010011": {
+		"prefix": "EXE_MTLO_OP",
+		"body": [
+			"EXE_MTLO_OP"
+		],
+		"description": "",
+	},
+
+	"EXE_SLT_OP 8'b00101010": {
+		"prefix": "EXE_SLT_OP",
+		"body": [
+			"EXE_SLT_OP"
+		],
+		"description": "",
+	},
+	"EXE_SLTU_OP 8'b00101011": {
+		"prefix": "EXE_SLTU_OP",
+		"body": [
+			"EXE_SLTU_OP"
+		],
+		"description": "",
+	},
+	"EXE_SLTI_OP 8'b01010111": {
+		"prefix": "EXE_SLTI_OP",
+		"body": [
+			"EXE_SLTI_OP"
+		],
+		"description": "",
+	},
+	"EXE_SLTIU_OP 8'b01011000": {
+		"prefix": "EXE_SLTIU_OP",
+		"body": [
+			"EXE_SLTIU_OP"
+		],
+		"description": "",
+	},
+	"EXE_ADD_OP 8'b00100000": {
+		"prefix": "EXE_ADD_OP",
+		"body": [
+			"EXE_ADD_OP"
+		],
+		"description": "",
+	},
+	"EXE_ADDU_OP 8'b00100001": {
+		"prefix": "EXE_ADDU_OP",
+		"body": [
+			"EXE_ADDU_OP"
+		],
+		"description": "",
+	},
+	"EXE_SUB_OP 8'b00100010": {
+		"prefix": "EXE_SUB_OP",
+		"body": [
+			"EXE_SUB_OP"
+		],
+		"description": "",
+	},
+	"EXE_SUBU_OP 8'b00100011": {
+		"prefix": "EXE_SUBU_OP",
+		"body": [
+			"EXE_SUBU_OP"
+		],
+		"description": "",
+	},
+	"EXE_ADDI_OP 8'b01010101": {
+		"prefix": "EXE_ADDI_OP",
+		"body": [
+			""
+		],
+		"description": "EXE_ADDI_OP",
+	},
+	"EXE_ADDIU_OP 8'b01010110": {
+		"prefix": "EXE_ADDIU_OP",
+		"body": [
+			"EXE_ADDIU_OP"
+		],
+		"description": "",
+	},
+	"EXE_CLZ_OP 8'b10110000": {
+		"prefix": "EXE_CLZ_OP",
+		"body": [
+			"EXE_CLZ_OP"
+		],
+		"description": "",
+	},
+	"EXE_CLO_OP 8'b10110001": {
+		"prefix": "EXE_CLO_OP",
+		"body": [
+			"EXE_CLO_OP"
+		],
+		"description": "",
+	},
+
+	"EXE_MULT_OP 8'b00011000": {
+		"prefix": "EXE_MULT_OP",
+		"body": [
+			"EXE_MULT_OP"
+		],
+		"description": "",
+	},
+	"EXE_MULTU_OP 8'b00011001": {
+		"prefix": "EXE_MULTU_OP",
+		"body": [
+			"EXE_MULTU_OP"
+		],
+		"description": "",
+	},
+	"EXE_MUL_OP 8'b10101001": {
+		"prefix": "EXE_MUL_OP",
+		"body": [
+			"EXE_MUL_OP"
+		],
+		"description": "",
+	},
+	
+	"EXE_NOP_OP 8'b00000000": {
+		"prefix": "EXE_NOP",
+		"body": [
+			"EXE_NOP",
+		],
+		"description": "指令 NOR 功能码"
+	},
+
+	// AluSel
+	"EXE_RES_LOGIC 3'b001": {
+		"prefix": "EXE_RES_LOGIC",
+		"body": [
+			"EXE_RES_LOGIC",
 		],
 		"description": " "
 	},
-	// AluSel
 	"EXE_RES_SHIFT 3'b010": {
 		"prefix": "EXE_RES_SHIFT",
 		"body": [
@@ -442,12 +763,26 @@
 		],
 		"description": " "
 	},
-	"EXE_RES_LOGIC 3'b001": {
-		"prefix": "EXE_RES_LOGIC",
+	"EXE_RES_MOVE 3'b011": {
+		"prefix": "EXE_RES_MOVE",
 		"body": [
-			"EXE_RES_LOGIC",
+			"EXE_RES_MOVE"
 		],
-		"description": " "
+		"description": "",
+	},
+	"EXE_RES_ARITHMETIC 3'b100": {
+		"prefix": "EXE_RES_ARITHMETIC",
+		"body": [
+			"EXE_RES_ARITHMETIC"
+		],
+		"description": "",
+	},
+	"EXE_RES_MUL 3'b101": {
+		"prefix": "EXE_RES_MUL",
+		"body": [
+			"EXE_RES_MUL"
+		],
+		"description": "",
 	},
 	"EXE_RES_NOP 3'b000": {
 		"prefix": "EXE_RES_NOP",
@@ -456,6 +791,8 @@
 		],
 		"description": " "
 	},
+
+	//*   与ROM相关的宏指令    *//
 	"InstAddrBus 31:0": {
 		"prefix": "InstAddrBus",
 		"body": [
@@ -484,6 +821,8 @@
 		],
 		"description": "ROM实际使用的地址线宽度"
 	},
+
+	//*    与通用寄存器regfile有关的宏指令    *//
 	"RegAddrBus 4:0": {
 		"prefix": "RegAddrBus",
 		"body": [
@@ -533,7 +872,7 @@
 		],
 		"description": "寻址通用寄存器使用的地址位宽"
 	},
-	"NOPRegAddr": {
+	"NOPRegAddr 5'b000000": {
 		"prefix": "NOPRegAddr",
 		"body": [
 			"NOPRegAddr",

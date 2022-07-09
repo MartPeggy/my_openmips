@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\defines.v
 //* @Date         : 2022-04-24 09:53:09
-//* @LastEditTime : 2022-07-09 09:31:15
+//* @LastEditTime : 2022-07-09 16:59:37
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB Ctrl+t 转到定义
 //* @Description  : 一些宏定义
@@ -18,7 +18,6 @@
 
 `define AluOpBus        7:0             // 译码阶段的输出 aluop_o 的宽度
 `define AluSelBus       2:0             // 译码阶段的输出 alusel_o的宽度
-
 `define InstValid       1'b0            // 指令有效
 `define InstInvalid     1'b1            // 指令无效
 `define True_v          1'b1            // 逻辑真
@@ -37,8 +36,6 @@
 `define TrapAssert      1'b1
 `define TrapNotAssert   1'b0
 //*   指令宏定义    *//
-
-`define EXE_NOP             6'b000000       // NOP
 
 `define EXE_AND             6'b100100       // AND
 `define EXE_OR              6'b100101       // OR
@@ -63,12 +60,30 @@
 `define EXE_MFLO            6'b010010       // 将LO中的值赋值给寄存器
 `define EXE_MTLO            6'b010011       // 将寄存器中的值赋值给LO
 
+`define EXE_SLT             6'b101010       
+`define EXE_SLTU            6'b101011
+`define EXE_SLTI            6'b001010
+`define EXE_SLTIU           6'b001011   
+`define EXE_ADD             6'b100000
+`define EXE_ADDU            6'b100001
+`define EXE_SUB             6'b100010
+`define EXE_SUBU            6'b100011
+`define EXE_ADDI            6'b001000
+`define EXE_ADDIU           6'b001001
+`define EXE_CLZ             6'b100000
+`define EXE_CLO             6'b100001
+
+`define EXE_MULT            6'b011000
+`define EXE_MULTU           6'b011001
+`define EXE_MUL             6'b000010
+
 `define EXE_SYNC            6'b001111       // SYNC 这里相当于空指令
 `define EXE_PREF            6'b110011       // PREF 这里相当于空指令
+`define EXE_NOP             6'b000000       // NOP
 `define SSNOP               32'b00000000000000000000000001000000
 
 `define EXE_REGIMM_INST     6'b000001
-`define EXE_SPECIAL2_INST   6'b01110
+`define EXE_SPECIAL2_INST   6'b011100
 `define EXE_SPECIAL_INST    6'b000000       // 特殊指令
 
 //Aluop
@@ -86,7 +101,6 @@
 `define EXE_SRLV_OP      8'b00000110
 `define EXE_SRA_OP       8'b00000011
 `define EXE_SRAV_OP      8'b00000111
-`define EXE_NOP_OP       8'b00000000
 
 `define EXE_MOVZ_OP  8'b00001010
 `define EXE_MOVN_OP  8'b00001011
@@ -95,12 +109,32 @@
 `define EXE_MFLO_OP  8'b00010010
 `define EXE_MTLO_OP  8'b00010011
 
-//AluSel
-`define EXE_RES_LOGIC   3'b001
-`define EXE_RES_SHIFT   3'b010
-`define EXE_RES_NOP     3'b000
+`define EXE_SLT_OP  8'b00101010
+`define EXE_SLTU_OP  8'b00101011
+`define EXE_SLTI_OP  8'b01010111
+`define EXE_SLTIU_OP  8'b01011000   
+`define EXE_ADD_OP  8'b00100000
+`define EXE_ADDU_OP  8'b00100001
+`define EXE_SUB_OP  8'b00100010
+`define EXE_SUBU_OP  8'b00100011
+`define EXE_ADDI_OP  8'b01010101
+`define EXE_ADDIU_OP  8'b01010110
+`define EXE_CLZ_OP  8'b10110000
+`define EXE_CLO_OP  8'b10110001
 
+`define EXE_MULT_OP  8'b00011000
+`define EXE_MULTU_OP  8'b00011001
+`define EXE_MUL_OP  8'b10101001
+
+`define EXE_NOP_OP    8'b00000000
+
+//AluSel
+`define EXE_RES_LOGIC 3'b001
+`define EXE_RES_SHIFT 3'b010
 `define EXE_RES_MOVE 3'b011	
+`define EXE_RES_ARITHMETIC 3'b100	
+`define EXE_RES_MUL 3'b101
+`define EXE_RES_NOP 3'b000
 
 
 //*   与ROM相关的宏指令    *//
