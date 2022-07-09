@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\id.v
 //* @Date         : 2022-04-24 14:06:57
-//* @LastEditTime : 2022-07-10 01:01:42
+//* @LastEditTime : 2022-07-10 01:03:02
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 对指令进行译码，得到最终运算的类型和操作数
@@ -394,7 +394,7 @@ always @( * )
                             endcase
                         end
 
-                    `EXE_ORI:                     // ORI：6‘b001101
+                    `EXE_ORI:         // ORI：6‘b001101
                         begin
                             wreg_o <= `WriteEnable;                     // 写使能打开
                             aluop_o <= `EXE_OR_OP;                      // 该指令所属的子类型是 “OR” 运算
@@ -406,7 +406,7 @@ always @( * )
                             instvalid <= `InstValid;                    // 写使能打开
                         end
 
-                    `EXE_ANDI:                   // ANDI：6‘b001100
+                    `EXE_ANDI:        // ANDI：6‘b001100
                         begin
                             wreg_o <= `WriteEnable;
                             aluop_o <= `EXE_AND_OP;                  // 该指令所属的子类型是 “AND” 运算
@@ -566,11 +566,11 @@ always @( * )
             begin
                 reg1_o <= mem_wdata_i;
             end
-        else if ( reg1_read_o == 1'b1 )              // 若reg1读端口使能，将读出的数据作为源操作数1
+        else if ( reg1_read_o == 1'b1 )    // 若reg1读端口使能，将读出的数据作为源操作数1
             begin
                 reg1_o <= reg1_data_i;
             end
-        else if ( reg1_read_o == 1'b0 )                 // 若使能关闭，则使用立即数作为源操作数1
+        else if ( reg1_read_o == 1'b0 )    // 若使能关闭，则使用立即数作为源操作数1
             begin
                 reg1_o <= imm;
             end
@@ -588,7 +588,7 @@ always @( * )
             end
         else if (
             ( reg2_read_o == 1'b1 ) && ( ex_wreg_i == 1'b1 ) && ( ex_wd_i == reg2_addr_o )
-        )                  //
+        )                 
             begin
                 reg2_o <= ex_wdata_i;
             end
