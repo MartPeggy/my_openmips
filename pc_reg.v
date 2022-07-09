@@ -1,10 +1,10 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\pc_reg.v
 //* @Date         : 2022-04-24 09:06:59
-//* @LastEditTime : 2022-07-04 14:17:08
+//* @LastEditTime : 2022-07-09 23:29:56
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
-//* @Description  : PC模块(取值阶段) 
+//* @Description  : PC模块(取值阶段)
 //************************************************
 
 //^ 序号   接口名   宽度   输入输出     作用
@@ -18,7 +18,7 @@ module pc_reg (
            input wire clk,
            input wire rst,
 
-           output reg [ `InstAddrBus ] pc,  // 32位线宽
+           output reg [ `InstAddrBus ] pc, 
            output reg ce
        );
 
@@ -28,8 +28,9 @@ always @( posedge clk )
     begin
         if ( rst == `RstEnable )
             begin
-                ce <= `ChipDisable; 
+                ce <= `ChipDisable;
             end
+
         else
             begin
                 ce <= `ChipEnable;
@@ -44,9 +45,10 @@ always @( posedge clk )
             begin
                 pc <= `ZeroWord;
             end
+
         else
             begin
-                pc <= pc + 4'h4;    
+                pc <= pc + 4'h4;
             end
     end
 
