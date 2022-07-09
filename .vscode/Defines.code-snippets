@@ -435,9 +435,6 @@
 		"description": " "
 	},
 	// AluSel
-	
-	
-	
 	"EXE_RES_SHIFT 3'b010": {
 		"prefix": "EXE_RES_SHIFT",
 		"body": [
