@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\ex.v
 //* @Date         : 2022-04-27 21:25:46
-//* @LastEditTime : 2022-07-09 14:27:17
+//* @LastEditTime : 2022-07-09 19:31:11
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 执行模块
@@ -27,11 +27,11 @@
 //^ 4  mem_hi_i     32      in      访存阶段指令要写入HI寄存器的值
 //^ 5  mem_lo_i     32      in      访存阶段指令要写入LO寄存器的值
 //^ 6  wb_whilo_i   1       in      回写阶段的指令是否要写HILO寄存器
-//^ 7  wb_hi_i      32      in      回写阶段指令要写入HI寄存器的值   
-//^ 8  wb_lo_i      32      in      回写阶段指令要写入LO寄存器的值   
+//^ 7  wb_hi_i      32      in      回写阶段指令要写入HI寄存器的值
+//^ 8  wb_lo_i      32      in      回写阶段指令要写入LO寄存器的值
 //^ 9  whilo_o      1      out      执行阶段的指令是否要写入HILO寄存器
 //^ 10  hi_o        32     out      执行阶段的指令要写入HI寄存器的值
-//^ 11  lo_o        32     out      执行阶段的指令要写入LO寄存器的值  
+//^ 11  lo_o        32     out      执行阶段的指令要写入LO寄存器的值
 
 
 `include "defines.v"
@@ -80,6 +80,30 @@ reg [ `RegBus ] moveres;
 // 保存HI，LO寄存器的值
 reg [ `RegBus ] HI;
 reg [ `RegBus ] LO;
+
+// 保存溢出结果
+wire ov_sum;
+// reg1等于reg2
+wire reg1_eq_reg2;
+// reg1小于reg2
+wire reg1_lt_reg2;
+// 算术运算结果
+reg [ `RegBus ] arithmeticres;
+// 保存reg2的补码
+wire [ `RegBus ] reg2_i_mux;
+// 保存reg1的反码
+wire [ `RegBus ] reg1_i_not;
+// 保存加法结果
+wire [ `RegBus ] result_sum;
+// 乘法运算中的被乘数
+wire [ `RegBus ] opdata1_mult;
+// 乘法运算中的乘数
+wire [ `RegBus ] opdata2_mult;
+// 临时保存乘法结果
+wire [ `DoubleRegBus ] hilo_temp;
+// 保存乘法结果
+reg [ `DoubleRegBus ] mulres;
+
 
 // 解决数据相关性问题：HI，LO寄存器
 always @( * )
@@ -137,7 +161,6 @@ always @( * )
             end
     end
 
-
 // 判断aluop_i指示的运算子类型;逻辑运算
 always @( * )
     begin
@@ -147,8 +170,8 @@ always @( * )
             end
         else
             begin
-                case ( aluop_i )             // 判断子类型
-                    `EXE_OR_OP:              // 子类型为 OR
+                case ( aluop_i )          // 判断子类型
+                    `EXE_OR_OP:          // 子类型为 OR
                         begin
                             logicout <= reg1_i | reg2_i;
                         end
@@ -219,7 +242,7 @@ always @( * )
         wd_o <= wd_i;
         wreg_o <= wreg_i;
 
-        case ( alusel_i )             // 判断类型
+        case ( alusel_i )      // 判断类型
             `EXE_RES_LOGIC:
                 begin
                     wdata_o <= logicout;
@@ -271,4 +294,38 @@ always @ ( * )
             end
     end
 
+//**** 算术运算 ****//
+
+// 对于减法运算或有符号数比较运算，reg2_i_mux为reg2_i的补码，其他情况下就等于原数
+assign reg2_i_mux = ( ( aluop_i == `EXE_SUB_OP ) || ( aluop_i == `EXE_SUBU_OP ) ||
+                      ( aluop_i == `EXE_SLT_OP ) )
+       ? ( ~reg2_i ) + 1 : reg2_i;
+
+// 对于加法运算，sum=reg1+reg2，不需要进行额外的操作
+// 对于减法运算，reg2为原数的补码，sum=reg1+reg2即为减法结果
+// 对于有符号数比较运算，与减法运算相同，则可以通过判断结果是否小于0判断大小
+assign result_sum = reg1_i + reg2_i_mux;
+
+// 对于溢出的计算：在加法和减法指令执行时会产生溢出
+// 当两个正数相加为负数，则溢出；两个负数相加为正数，则溢出
+assign ov_sum = ( ( !reg1_i[ 31 ] && !reg2_i_mux[ 31 ] ) && result_sum[ 31 ] ) ||
+       ( ( reg1_i[ 31 ] && reg2_i_mux[ 31 ] ) && ( !result_sum[ 31 ] ) );
+
+// 对于比较的计算：a)对于有符号数比较，负数 < 正数，正数 - 正数 < 0,负数 - 负数 < 0
+// b)对于无符号数比较，直接用 > < 运算符比较
+assign reg1_lt_reg2 = ( ( aluop_i == `EXE_SLT_OP ) ) ?
+       ( ( reg1_i[ 31 ] && !reg2_i[ 31 ] ) || ( !reg1_i[ 31 ] && !reg2_i[ 31 ] ) && ( result_sum[ 31 ] )
+         || ( reg1_i[ 31 ] && reg2_i[ 31 ] && result_sum[ 31 ] ) ) : ( reg1_i < reg2_i );
+
+// 对于反码的运算：逐位取反
+assign reg1_i_not = ~reg1_i;
+
+
+// 根据不同的算术类型，给 arithmeticres 赋值
+always @( *) begin
+    if(rst==`RstEnable)
+    begin
+        arithmeticres<=`ZeroWord;
+    end
+end
 endmodule //ex
