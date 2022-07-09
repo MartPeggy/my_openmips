@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\openmips.v
 //* @Date         : 2022-04-27 22:20:15
-//* @LastEditTime : 2022-07-09 14:01:12
+//* @LastEditTime : 2022-07-09 14:50:14
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 五级流水线的顶层模块,例化各个模块
@@ -24,12 +24,12 @@ module openmips (
            output wire rom_ce_o
        );
 
-// 连接IF/ID模块与译码模块ID模块的变量
+// 连接if_id模块与译码模块id模块的变量
 wire [ `InstAddrBus ] pc;
 wire [ `InstAddrBus ] id_pc_i;
 wire [ `InstBus ] id_inst_i;
 
-//连接译码阶段ID模块的输出与ID/EX模块的输入的变量
+// 连接译码阶段id模块的输出与id_ex模块的输入的变量
 wire [ `AluOpBus ] id_aluop_o;
 wire [ `AluSelBus ] id_alusel_o;
 wire [ `RegBus ] id_reg1_o;
@@ -37,7 +37,7 @@ wire [ `RegBus ] id_reg2_o;
 wire id_wreg_o;
 wire [ `RegAddrBus ] id_wd_o;
 
-//连接ID/EX模块的输出与执行阶段EX模块的输入的变量
+// 连接id_ex模块的输出与执行阶段ex模块的输入的变量
 wire [ `AluOpBus ] ex_aluop_i;
 wire [ `AluSelBus ] ex_alusel_i;
 wire [ `RegBus ] ex_reg1_i;
@@ -45,7 +45,7 @@ wire [ `RegBus ] ex_reg2_i;
 wire ex_wreg_i;
 wire [ `RegAddrBus ] ex_wd_i;
 
-//连接执行阶段EX模块的输出与EX/MEM模块的输入
+// 连接执行阶段ex模块的输出与ex_mem模块的输入
 wire ex_wreg_o;
 wire [ `RegAddrBus ] ex_wd_o;
 wire [ `RegBus ] ex_wdata_o;
@@ -53,7 +53,7 @@ wire [ `RegBus ] ex_hi_o;
 wire [ `RegBus ] ex_lo_o;
 wire ex_whilo_o;
 
-//连接EX/MEM模块的输出与访存阶段MEM模块的输入
+// 连接ex_mem模块的输出与访存阶段mem模块的输入
 wire mem_wreg_i;
 wire [ `RegAddrBus ] mem_wd_i;
 wire [ `RegBus ] mem_wdata_i;
@@ -62,7 +62,7 @@ wire [ `RegBus ] mem_lo_i;
 wire mem_whilo_i;
 
 
-//连接访存阶段MEM模块的输出与MEM/WB模块的输入
+// 连接访存阶段mem模块的输出与mem_wb模块的输入
 wire mem_wreg_o;
 wire [ `RegAddrBus ] mem_wd_o;
 wire [ `RegBus ] mem_wdata_o;
@@ -70,7 +70,7 @@ wire [ `RegBus ] mem_hi_o;
 wire [ `RegBus ] mem_lo_o;
 wire mem_whilo_o;
 
-//连接MEM/WB模块的输出与回写阶段的输入
+// 连接mem_wb模块的输出与回写阶段的输入
 wire wb_wreg_i;
 wire [ `RegAddrBus ] wb_wd_i;
 wire [ `RegBus ] wb_wdata_i;
@@ -78,7 +78,7 @@ wire [ `RegBus ] wb_hi_i;
 wire [ `RegBus ] wb_lo_i;
 wire wb_whilo_i;
 
-//连接译码阶段ID模块与通用寄存器Regfile模块
+// 连接译码阶段id模块与通用寄存器Regfile模块
 wire reg1_read;
 wire reg2_read;
 wire [ `RegBus ] reg1_data;
@@ -86,7 +86,7 @@ wire [ `RegBus ] reg2_data;
 wire [ `RegAddrBus ] reg1_addr;
 wire [ `RegAddrBus ] reg2_addr;
 
-//连接执行阶段与hilo模块的输出，读取HI、LO寄存器
+// 连接执行阶段ex与hilo模块的输出，读取HI、LO寄存器
 wire [ `RegBus ] hi;
 wire [ `RegBus ] lo;
 
@@ -148,7 +148,7 @@ id id0(
    );
 
 // 通用寄存器Regfile例化
-regfile regfile1(
+regfile regfile0(
             .clk ( clk ),
             .rst ( rst ),
             .we ( wb_wreg_i ),

@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\ex.v
 //* @Date         : 2022-04-27 21:25:46
-//* @LastEditTime : 2022-07-09 10:17:42
+//* @LastEditTime : 2022-07-09 14:27:17
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 执行模块
@@ -21,6 +21,18 @@
 //^ 10   wdata_o    32      out     执行阶段的指令最终要写入的目的寄存器的值
 
 // & 增加接口如下
+//^ 1   hi_i        32      in      HILO模块给出的HI寄存器的值
+//^ 2   lo_i        32      in      HILO模块给出的LO寄存器的值
+//^ 3  mem_whilo_i  1       in      访存阶段的指令是否要写HILO寄存器
+//^ 4  mem_hi_i     32      in      访存阶段指令要写入HI寄存器的值
+//^ 5  mem_lo_i     32      in      访存阶段指令要写入LO寄存器的值
+//^ 6  wb_whilo_i   1       in      回写阶段的指令是否要写HILO寄存器
+//^ 7  wb_hi_i      32      in      回写阶段指令要写入HI寄存器的值   
+//^ 8  wb_lo_i      32      in      回写阶段指令要写入LO寄存器的值   
+//^ 9  whilo_o      1      out      执行阶段的指令是否要写入HILO寄存器
+//^ 10  hi_o        32     out      执行阶段的指令要写入HI寄存器的值
+//^ 11  lo_o        32     out      执行阶段的指令要写入LO寄存器的值  
+
 
 `include "defines.v"
 module ex (
