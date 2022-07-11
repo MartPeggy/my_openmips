@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\defines.v
 //* @Date         : 2022-04-24 09:53:09
-//* @LastEditTime : 2022-07-09 16:59:37
+//* @LastEditTime : 2022-07-10 10:09:14
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB Ctrl+t 转到定义
 //* @Description  : 一些宏定义
@@ -25,8 +25,8 @@
 `define ChipEnable      1'b1            // 芯片使能
 `define ChipDisable     1'b0            // 芯片禁止
 
-`define Stop            1'b1
-`define NoStop          1'b0
+`define Stop            1'b1            // 流水线暂停
+`define NoStop          1'b0            // 流水线继续
 `define InDelaySlot     1'b1
 `define NotInDelaySlot  1'b0
 `define Branch          1'b1
@@ -34,7 +34,7 @@
 `define InterruptAssert 1'b1
 `define InterruptNotAssert 1'b0
 `define TrapAssert      1'b1
-`define TrapNotAssert   1'b0
+`define TrapNotAssert   1'b0 
 //*   指令宏定义    *//
 
 `define EXE_AND             6'b100100       // AND
@@ -60,10 +60,10 @@
 `define EXE_MFLO            6'b010010       // 将LO中的值赋值给寄存器
 `define EXE_MTLO            6'b010011       // 将寄存器中的值赋值给LO
 
-`define EXE_SLT             6'b101010       
+`define EXE_SLT             6'b101010
 `define EXE_SLTU            6'b101011
 `define EXE_SLTI            6'b001010
-`define EXE_SLTIU           6'b001011   
+`define EXE_SLTIU           6'b001011
 `define EXE_ADD             6'b100000
 `define EXE_ADDU            6'b100001
 `define EXE_SUB             6'b100010
@@ -82,8 +82,8 @@
 `define EXE_NOP             6'b000000       // NOP
 `define SSNOP               32'b00000000000000000000000001000000
 
-`define EXE_REGIMM_INST     6'b000001
-`define EXE_SPECIAL2_INST   6'b011100
+`define EXE_REGIMM_INST     6'b000001       //
+`define EXE_SPECIAL2_INST   6'b011100       //
 `define EXE_SPECIAL_INST    6'b000000       // 特殊指令
 
 //Aluop
@@ -112,7 +112,7 @@
 `define EXE_SLT_OP  8'b00101010
 `define EXE_SLTU_OP  8'b00101011
 `define EXE_SLTI_OP  8'b01010111
-`define EXE_SLTIU_OP  8'b01011000   
+`define EXE_SLTIU_OP  8'b01011000
 `define EXE_ADD_OP  8'b00100000
 `define EXE_ADDU_OP  8'b00100001
 `define EXE_SUB_OP  8'b00100010
@@ -131,8 +131,8 @@
 //AluSel
 `define EXE_RES_LOGIC 3'b001
 `define EXE_RES_SHIFT 3'b010
-`define EXE_RES_MOVE 3'b011	
-`define EXE_RES_ARITHMETIC 3'b100	
+`define EXE_RES_MOVE 3'b011
+`define EXE_RES_ARITHMETIC 3'b100
 `define EXE_RES_MUL 3'b101
 `define EXE_RES_NOP 3'b000
 
