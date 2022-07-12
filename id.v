@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\id.v
 //* @Date         : 2022-04-24 14:06:57
-//* @LastEditTime : 2022-07-10 01:03:02
+//* @LastEditTime : 2022-07-11 13:18:04
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 对指令进行译码，得到最终运算的类型和操作数
@@ -31,6 +31,8 @@
 //^ 4       mem_wreg_i  1       in      处于访存阶段的指令是否要写目的寄存器
 //^ 5       mem_wd_i    5       in      处于访存阶段的指令要写目的寄存器地址
 //^ 6       mem_wdata_i 32      in      处于访存阶段的指令要写入目的寄存器的数据
+//& 增加流水线暂停信号
+//^ 1       stall       1       out
 
 // ALU: Arithmetic and Logic Unit 网络算术逻辑单元
 // ALUOP: ALU operation ALU操作数
@@ -42,13 +44,13 @@ module id (
            input wire [ `InstAddrBus ] pc_i,
            input wire [ `InstBus ] inst_i,
 
-           input wire [ `RegBus ] reg1_data_i,           // 从reg1中读出的输出
-           input wire [ `RegBus ] reg2_data_i,           // 从reg2中读出的输出
+           input wire [ `RegBus ] reg1_data_i,            // 从reg1中读出的输出
+           input wire [ `RegBus ] reg2_data_i,            // 从reg2中读出的输出
 
-           output reg reg1_read_o,                       // 输出到reg1读使能信号
-           output reg reg2_read_o,                       // 输出到reg2读使能信号
-           output reg [ `RegAddrBus ] reg1_addr_o ,      // reg1中的读地址信号
-           output reg [ `RegAddrBus ] reg2_addr_o,       // reg2中的读地址信号
+           output reg reg1_read_o,                        // 输出到reg1读使能信号
+           output reg reg2_read_o,                        // 输出到reg2读使能信号
+           output reg [ `RegAddrBus ] reg1_addr_o ,       // reg1中的读地址信号
+           output reg [ `RegAddrBus ] reg2_addr_o,        // reg2中的读地址信号
 
            output reg [ `AluOpBus ] aluop_o,
            output reg [ `AluSelBus ] alusel_o,
@@ -57,13 +59,15 @@ module id (
            output reg [ `RegAddrBus ] wd_o,
            output reg wreg_o,
 
-           input wire ex_wreg_i ,                 // 处于执行阶段的指令的运算结果
+           input wire ex_wreg_i ,                  // 处于执行阶段的指令的运算结果
            input wire [ `RegBus ] ex_wdata_i,
            input wire [ `RegAddrBus ] ex_wd_i,
 
-           input wire mem_wreg_i,                 // 处于访存阶段的指令的运算结果
+           input wire mem_wreg_i,                  // 处于访存阶段的指令的运算结果
            input wire [ `RegBus ] mem_wdata_i,
-           input wire [ `RegAddrBus ] mem_wd_i
+           input wire [ `RegAddrBus ] mem_wd_i,
+
+           output wire stallreg
        );
 
 // 取得指令的指令码，功能码
@@ -78,10 +82,13 @@ reg [ `RegBus ] imm;
 // 指示指令是否有效
 reg instvalid;
 
+// 流水线暂停信号设定为Nostop
+assign stallreq = `NoStop;
+
 //********对指令译码*********//
 always @( * )
     begin
-        if ( rst == `RstEnable )                  //初始化各个连线，该置零的置零
+        if ( rst == `RstEnable )                   //初始化各个连线，该置零的置零
             begin
                 aluop_o <= `EXE_NOP_OP;       // 运算类型设置为None
                 alusel_o <= `EXE_RES_NOP;      // 运算类型设置为None
@@ -107,13 +114,13 @@ always @( * )
                 imm <= `ZeroWord;
 
                 // 利用case判断指令类型
-                case ( op )              // op:inst[31-26]
+                case ( op )               // op:inst[31-26]
                     `EXE_SPECIAL_INST:
                         begin
-                            case ( op2 )                // op2:inst[10-6]
+                            case ( op2 )                 // op2:inst[10-6]
                                 5'b00000:
-                                    case ( op3 )                // op3:inst[5-0]
-                                        `EXE_OR:                // 6'b100101
+                                    case ( op3 )                 // op3:inst[5-0]
+                                        `EXE_OR:                 // 6'b100101
                                             begin
                                                 wreg_o <= `WriteEnable;
                                                 aluop_o <= `EXE_OR_OP;
@@ -123,7 +130,7 @@ always @( * )
                                                 instvalid <= `InstValid;
                                             end
 
-                                        `EXE_XOR:                // 6'b100110
+                                        `EXE_XOR:                 // 6'b100110
                                             begin
                                                 wreg_o <= `WriteEnable;
                                                 aluop_o <= `EXE_XOR_OP;
@@ -133,7 +140,7 @@ always @( * )
                                                 instvalid <= `InstValid;
                                             end
 
-                                        `EXE_NOR:                // 6'b100111
+                                        `EXE_NOR:                 // 6'b100111
                                             begin
                                                 wreg_o <= `WriteEnable;
                                                 aluop_o <= `EXE_NOR_OP;
@@ -143,7 +150,7 @@ always @( * )
                                                 instvalid <= `InstValid;
                                             end
 
-                                        `EXE_AND:                // 6'b100100
+                                        `EXE_AND:                 // 6'b100100
                                             begin
                                                 wreg_o <= `WriteEnable;
                                                 aluop_o <= `EXE_AND_OP;
@@ -390,11 +397,46 @@ always @( * )
                                         reg2_read_o <= 1'b1;
                                         instvalid <= `InstValid;
                                     end
-
+                                `EXE_MADD:
+                                    begin
+                                        wreg_o<=`WriteDisable;
+                                        aluop_o<=`EXE_MADD_OP;
+                                        alusel_o<=`EXE_RES_MUL;
+                                        reg1_read_o<=1'b1;
+                                        reg2_read_o<=1'b1;
+                                        instvalid<=`InstValid;
+                                    end
+                                `EXE_MADDU:
+                                    begin
+                                        wreg_o<=`WriteDisable;
+                                        aluop_o<=`EXE_MADDU_OP;
+                                        alusel_o<=`EXE_RES_MUL;
+                                        reg1_read_o<=1'b1;
+                                        reg2_read_o<=1'b1;
+                                        instvalid<=`InstValid;
+                                    end   
+                                `EXE_MSUB:
+                                    begin
+                                        wreg_o<=`WriteDisable;
+                                        aluop_o<=`EXE_MSUB_OP;
+                                        alusel_o<=`EXE_RES_MUL;
+                                        reg1_read_o<=1'b1;
+                                        reg2_read_o<=1'b1;
+                                        instvalid<=`InstValid;
+                                    end
+                                `EXE_MSUBU:
+                                    begin
+                                        wreg_o<=`WriteDisable;
+                                        aluop_o<=`EXE_MSUBU_OP;
+                                        alusel_o<=`EXE_RES_MUL;
+                                        reg1_read_o<=1'b1;
+                                        reg2_read_o<=1'b1;
+                                        instvalid<=`InstValid;
+                                    end                             
                             endcase
                         end
 
-                    `EXE_ORI:         // ORI：6‘b001101
+                    `EXE_ORI:          // ORI：6‘b001101
                         begin
                             wreg_o <= `WriteEnable;                     // 写使能打开
                             aluop_o <= `EXE_OR_OP;                      // 该指令所属的子类型是 “OR” 运算
@@ -406,7 +448,7 @@ always @( * )
                             instvalid <= `InstValid;                    // 写使能打开
                         end
 
-                    `EXE_ANDI:        // ANDI：6‘b001100
+                    `EXE_ANDI:         // ANDI：6‘b001100
                         begin
                             wreg_o <= `WriteEnable;
                             aluop_o <= `EXE_AND_OP;                  // 该指令所属的子类型是 “AND” 运算
@@ -556,21 +598,21 @@ always @( * )
             end
         else if (
             ( reg1_read_o == 1'b1 ) && ( ex_wreg_i == 1'b1 ) && ( ex_wd_i == reg1_addr_o )
-        )                // 若要读取的数据就是执行阶段要写入的数据，则把执行结果直接输出
+        )                 // 若要读取的数据就是执行阶段要写入的数据，则把执行结果直接输出
             begin
                 reg1_o <= ex_wdata_i;
             end
         else if (
             ( reg1_read_o == 1'b1 ) && ( mem_wreg_i == 1'b1 ) && ( mem_wd_i == reg1_addr_o )
-        )                // 若要读取的数据就是访存阶段要写入的数据，则把访存结果直接输出
+        )                 // 若要读取的数据就是访存阶段要写入的数据，则把访存结果直接输出
             begin
                 reg1_o <= mem_wdata_i;
             end
-        else if ( reg1_read_o == 1'b1 )    // 若reg1读端口使能，将读出的数据作为源操作数1
+        else if ( reg1_read_o == 1'b1 )     // 若reg1读端口使能，将读出的数据作为源操作数1
             begin
                 reg1_o <= reg1_data_i;
             end
-        else if ( reg1_read_o == 1'b0 )    // 若使能关闭，则使用立即数作为源操作数1
+        else if ( reg1_read_o == 1'b0 )     // 若使能关闭，则使用立即数作为源操作数1
             begin
                 reg1_o <= imm;
             end
@@ -588,7 +630,7 @@ always @( * )
             end
         else if (
             ( reg2_read_o == 1'b1 ) && ( ex_wreg_i == 1'b1 ) && ( ex_wd_i == reg2_addr_o )
-        )                 
+        )
             begin
                 reg2_o <= ex_wdata_i;
             end

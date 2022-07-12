@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\mem.v
 //* @Date         : 2022-04-27 21:42:44
-//* @LastEditTime : 2022-07-09 14:43:05
+//* @LastEditTime : 2022-07-11 13:25:11
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 访存模块
@@ -25,9 +25,6 @@
 //^ 6      lo_o     32      out        访存阶段的指令最终要写入LO寄存器的值
 
 
-
-
-
 `include "defines.v"
 module mem(
            input wire rst,
@@ -48,7 +45,7 @@ module mem(
 
            output reg [ `RegBus ] hi_o,
            output reg [ `RegBus ] lo_o,
-           output reg [ `RegBus ] whilo_o
+           output reg  whilo_o
 
        );
 

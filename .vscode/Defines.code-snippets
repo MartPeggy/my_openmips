@@ -439,6 +439,35 @@
 		"description": "",
 	},
 
+	"EXE_MADD 6'b000000": {
+		"prefix": "EXE_MADD",
+		"body": [
+			"EXE_MADD"
+		],
+		"description": "",
+	},
+	"EXE_MADDU 6'b000001": {
+		"prefix": "EXE_MADDU",
+		"body": [
+			"EXE_MADDU"
+		],
+		"description": "",
+	},
+	"EXE_MSUB 6'b000100": {
+		"prefix": "EXE_MSUB",
+		"body": [
+			"EXE_MSUB"
+		],
+		"description": "",
+	},
+	"EXE_MSUBU 6'b000101": {
+		"prefix": "EXE_MSUBU",
+		"body": [
+			"EXE_MSUBU"
+		],
+		"description": "",
+	},
+
 	"EXE_SYNC 6'b001111": {
 		"prefix": "EXE_SYNC",
 		"body": [
@@ -736,6 +765,34 @@
 		"prefix": "EXE_MUL_OP",
 		"body": [
 			"EXE_MUL_OP"
+		],
+		"description": "",
+	},
+	"EXE_MADD_OP 8'b10100110": {
+		"prefix": "EXE_MADD_OP",
+		"body": [
+			"EXE_MADD_OP"
+		],
+		"description": "",
+	},
+	"EXE_MADDU_OP 8'b10101000": {
+		"prefix": "EXE_MADDU_OP",
+		"body": [
+			"EXE_MADDU_OP"
+		],
+		"description": "",
+	},
+	"EXE_MSUB_OP 8'b10101010": {
+		"prefix": "EXE_MSUB_OP",
+		"body": [
+			"EXE_MSUB_OP"
+		],
+		"description": "",
+	},
+	"EXE_MSUBU_OP 8'b10101011": {
+		"prefix": "EXE_MSUBU_OP",
+		"body": [
+			"EXE_MSUBU_OP"
 		],
 		"description": "",
 	},

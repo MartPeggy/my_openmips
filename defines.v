@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\defines.v
 //* @Date         : 2022-04-24 09:53:09
-//* @LastEditTime : 2022-07-10 10:09:14
+//* @LastEditTime : 2022-07-12 13:02:10
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB Ctrl+t 转到定义
 //* @Description  : 一些宏定义
@@ -77,6 +77,11 @@
 `define EXE_MULTU           6'b011001
 `define EXE_MUL             6'b000010
 
+`define EXE_MADD            6'b000000
+`define EXE_MADDU           6'b000001
+`define EXE_MSUB            6'b000100
+`define EXE_MSUBU           6'b000101
+
 `define EXE_SYNC            6'b001111       // SYNC 这里相当于空指令
 `define EXE_PREF            6'b110011       // PREF 这里相当于空指令
 `define EXE_NOP             6'b000000       // NOP
@@ -125,6 +130,11 @@
 `define EXE_MULT_OP  8'b00011000
 `define EXE_MULTU_OP  8'b00011001
 `define EXE_MUL_OP  8'b10101001
+
+`define EXE_MADD_OP     8'b10100110
+`define EXE_MADDU_OP    8'b10101000
+`define EXE_MSUB_OP     8'b10101010
+`define EXE_MSUBU_OP    8'b10101011
 
 `define EXE_NOP_OP    8'b00000000
 
