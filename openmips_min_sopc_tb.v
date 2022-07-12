@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\openmips_min_sopc_tb.v
 //* @Date         : 2022-07-04 19:09:01
-//* @LastEditTime : 2022-07-12 13:59:10
+//* @LastEditTime : 2022-07-12 16:21:09
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : Testbench
@@ -28,7 +28,7 @@ initial
     begin
         rst = `RstEnable;
         #195 rst = `RstDisable;
-        #1000 $stop;
+        #5000 $stop;
     end
 
 openmips_min_sopc openmips_min_sopc0(

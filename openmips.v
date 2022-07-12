@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\openmips.v
 //* @Date         : 2022-04-27 22:20:15
-//* @LastEditTime : 2022-07-12 14:16:08
+//* @LastEditTime : 2022-07-12 16:05:53
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 五级流水线的顶层模块,例化各个模块
@@ -101,6 +101,16 @@ wire[ 5: 0 ] stall;
 wire stallreq_from_id;
 wire stallreq_from_ex;
 
+// 除法相关
+wire[ `DoubleRegBus ] div_result;
+wire div_ready;
+wire[ `RegBus ] div_opdata1;
+wire[ `RegBus ] div_opdata2;
+wire div_start;
+wire div_annul;
+wire signed_div;
+
+
 // pc_reg例化
 pc_reg pc_reg0(
            .clk( clk ),
@@ -112,7 +122,7 @@ pc_reg pc_reg0(
 
 assign rom_addr_o = pc; // 指令存储器的输入地址就是pc的值
 
-// IF/ID模块例化
+// IF_ID模块例化
 if_fd if_id0(
           .clk( clk ),
           .rst( rst ),
@@ -175,7 +185,7 @@ regfile regfile0(
             .rdata2 ( reg2_data )
         );
 
-// ID/EX模块
+// ID_EX模块
 id_ex id_ex0(
           .clk( clk ),
           .rst( rst ),
@@ -223,7 +233,6 @@ ex ex0(
        .hilo_temp_i( hilo_temp_i ),
        .cnt_i( cnt_i ),
 
-       //EX模块的输出到EX/MEM模块信息
        .wd_o( ex_wd_o ),
        .wreg_o( ex_wreg_o ),
        .wdata_o( ex_wdata_o ),
@@ -235,11 +244,18 @@ ex ex0(
        .hilo_temp_o( hilo_temp_o ),
        .cnt_o( cnt_o ),
 
-       .stallreq( stallreq_from_ex )
+       .stallreq( stallreq_from_ex ),
 
+       // 除法
+       .div_result_i( div_result ),
+       .div_ready_i( div_ready ),
+       .div_opdata1_o( div_opdata1 ),
+       .div_opdata2_o( div_opdata2 ),
+       .div_start_o( div_start ),
+       .signed_div_o( signed_div )
    );
 
-// EX/MEM模块
+// EX_MEM模块
 ex_mem ex_mem0(
            .clk( clk ),
            .rst( rst ),
@@ -289,7 +305,7 @@ mem mem0(
         .whilo_o( mem_whilo_o )
     );
 
-// MEM/WB模块
+// MEM_WB模块
 mem_wb mem_wb0(
            .clk( clk ),
            .rst( rst ),
@@ -312,6 +328,7 @@ mem_wb mem_wb0(
            .wb_whilo( wb_whilo_i )
        );
 
+// HILO寄存器
 hilo_reg hilo_reg0(
              .clk( clk ),
              .rst( rst ),
@@ -326,6 +343,7 @@ hilo_reg hilo_reg0(
              .lo_o( lo )
          );
 
+// 流水线暂停控制
 ctrl ctrl0(
          .rst( rst ),
 
@@ -335,4 +353,21 @@ ctrl ctrl0(
 
          .stall( stall )
      );
+
+// 除法模块
+div div0(
+        .clk( clk ),
+        .rst( rst ),
+
+        .signed_div_i( signed_div ),
+        .opdata1_i( div_opdata1 ),
+        .opdata2_i( div_opdata2 ),
+        .start_i( div_start ),
+        .annul_i( 1'b0 ),
+
+        .result_o( div_result ),
+        .ready_o( div_ready )
+    );
+
+
 endmodule //openmips

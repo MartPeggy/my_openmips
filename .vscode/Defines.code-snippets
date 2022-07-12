@@ -467,6 +467,20 @@
 		],
 		"description": "",
 	},
+	"EXE_DIV 6'b011010": {
+		"prefix": "EXE_DIV ",
+		"body": [
+			"EXE_DIV"
+		],
+		"description": "",
+	},
+	"EXE_DIVU 6'b011011": {
+		"prefix": "EXE_DIVU",
+		"body": [
+			"EXE_DIVU"
+		],
+		"description": "",
+	},
 
 	"EXE_SYNC 6'b001111": {
 		"prefix": "EXE_SYNC",
@@ -796,6 +810,20 @@
 		],
 		"description": "",
 	},
+	"EXE_DIV_OP 8'b00011010": {
+		"prefix": "EXE_DIV_OP",
+		"body": [
+			"EXE_DIV_OP"
+		],
+		"description": "",
+	},
+	"EXE_DIVU_OP 8'b00011011": {
+		"prefix": "EXE_DIVU_OP",
+		"body": [
+			"EXE_DIVU_OP"
+		],
+		"description": "",
+	},
 	
 	"EXE_NOP_OP 8'b00000000": {
 		"prefix": "EXE_NOP",
@@ -935,5 +963,62 @@
 			"NOPRegAddr",
 		],
 		"description": " "
+	},
+	// 除法相关
+	"DivFree 2'b00": {
+		"prefix": "DivFree",
+		"body": [
+			"DivFree"
+		],
+		"description": "",
+	},
+	"DivByZero 2'b01": {
+		"prefix": "DivByZero",
+		"body": [
+			"DivByZero"
+		],
+		"description": "",
+	},
+	"DivOn 2'b10": {
+		"prefix": "DivOn",
+		"body": [
+			"DivOn"
+		],
+		"description": "",
+	},
+	"DivEnd 2'b11": {
+		"prefix": "DivEnd",
+		"body": [
+			"DivEnd"
+		],
+		"description": "",
+	},
+	"DivResultReady 1'b1": {
+		"prefix": "DivResultReady",
+		"body": [
+			"DivResultReady"
+		],
+		"description": "",
+	},
+	"DivResultNotReady 1'b0": {
+		"prefix": "DivResultNotReady",
+		"body": [
+			""
+		],
+		"description": "DivResultNotReady",
+	},
+	"DivStart 1'b1": {
+		"prefix": "DivStart",
+		"body": [
+			"DivStart"
+		],
+		"description": "",
+	},
+	"DivStop 1'b0": {
+		"prefix": "DivStop",
+		"body": [
+			"DivStop"
+		],
+		"description": "",
 	},
 }
