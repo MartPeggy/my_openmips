@@ -1,38 +1,38 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\id.v
 //* @Date         : 2022-04-24 14:06:57
-//* @LastEditTime : 2022-07-11 13:18:04
+//* @LastEditTime : 2022-07-12 14:12:20
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 对指令进行译码，得到最终运算的类型和操作数
 //* @Description  : ID:Instruction Decoder(指令译码)
 //************************************************
 
-//^ 序号    接口名      宽度    输入/输出   作用
-//^ 1       rst         1       in      复位信号
-//^ 2       pc_i        32      in      译码阶段的指令对应的地址
-//^ 3       inst_i      32      in      译码阶段的指令
-//^ 4       reg1_data_i 32      in      从regfile第一个读端口读出的信号
-//^ 5       reg2_data_i 32      in      从regfile第二个读端口读出的信号
-//^ 6       reg1_read_o 1       out     regfile第一个读端口的使能
-//^ 7       reg2_read_o 1       out     regfile第二个读端口的使能
-//^ 8       reg1_addr_o 5       out     regfile第一个读端口的地址信号
-//^ 9       reg2_addr_o 5       out     regfile第二个读端口的地址信号
-//^ 10      aluop_o     8       out     译码阶段的指令要进行的运算的子类型
-//^ 11      alusel_o    3       out     译码阶段的指令要进行的运算的类型
-//^ 12      reg1_o      32      out     译码阶段的指令要进行的运算的源操作数1
-//^ 13      reg2_o      32      out     译码阶段的指令要进行的运算的源操作数2
-//^ 14      wd_o        5       out     译码阶段的指令要写入的目的寄存器地址
-//^ 15      wreg_o      1       out     译码阶段的指令是否有要写入的目的寄存器
+//^序号     接口名          宽度    输入输出    作用
+//^ 1       rst             1       in      复位信号
+//^ 2       pc_i            32      in      译码阶段的指令对应的地址
+//^ 3       inst_i          32      in      译码阶段的指令
+//^ 4       reg1_data_i     32      in      从regfile第一个读端口读出的信号
+//^ 5       reg2_data_i     32      in      从regfile第二个读端口读出的信号
+//^ 6       reg1_read_o     1       out     regfile第一个读端口的使能
+//^ 7       reg2_read_o     1       out     regfile第二个读端口的使能
+//^ 8       reg1_addr_o     5       out     regfile第一个读端口的地址信号
+//^ 9       reg2_addr_o     5       out     regfile第二个读端口的地址信号
+//^ 10      aluop_o         8       out     译码阶段的指令要进行的运算的子类型
+//^ 11      alusel_o        3       out     译码阶段的指令要进行的运算的类型
+//^ 12      reg1_o          32      out     译码阶段的指令要进行的运算的源操作数1
+//^ 13      reg2_o          32      out     译码阶段的指令要进行的运算的源操作数2
+//^ 14      wd_o            5       out     译码阶段的指令要写入的目的寄存器地址
+//^ 15      wreg_o          1       out     译码阶段的指令是否有要写入的目的寄存器
 //& 为解决数据相关问题，增加以下接口
-//^ 1       ex_wreg_i   1       in      处于执行阶段的指令是否要写目的寄存器
-//^ 2       ex_wd_i     5       in      处于执行阶段的指令要写目的寄存器地址
-//^ 3       ex_wdata_i  32      in      处于执行阶段的指令要写入目的寄存器的数据
-//^ 4       mem_wreg_i  1       in      处于访存阶段的指令是否要写目的寄存器
-//^ 5       mem_wd_i    5       in      处于访存阶段的指令要写目的寄存器地址
-//^ 6       mem_wdata_i 32      in      处于访存阶段的指令要写入目的寄存器的数据
+//^ 1       ex_wreg_i       1       in      处于执行阶段的指令是否要写目的寄存器
+//^ 2       ex_wd_i         5       in      处于执行阶段的指令要写目的寄存器地址
+//^ 3       ex_wdata_i      32      in      处于执行阶段的指令要写入目的寄存器的数据
+//^ 4       mem_wreg_i      1       in      处于访存阶段的指令是否要写目的寄存器
+//^ 5       mem_wd_i        5       in      处于访存阶段的指令要写目的寄存器地址
+//^ 6       mem_wdata_i     32      in      处于访存阶段的指令要写入目的寄存器的数据
 //& 增加流水线暂停信号
-//^ 1       stall       1       out
+//^ 1       stall           1       out
 
 // ALU: Arithmetic and Logic Unit 网络算术逻辑单元
 // ALUOP: ALU operation ALU操作数

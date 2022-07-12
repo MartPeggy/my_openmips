@@ -1,16 +1,16 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\inst_rom.v
 //* @Date         : 2022-04-28 12:04:38
-//* @LastEditTime : 2022-07-09 14:04:20
+//* @LastEditTime : 2022-07-12 14:14:07
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 指令存储器
 //************************************************
 
-//^序号    接口名   宽度    输入/输出     作用
-//^ 1       ce      1       in       使能信号
-//^ 2       addr    32      in       要读取的指令地址
-//^ 3       inst    32      out      读出的指令
+//^序号     接口名          宽度    输入输出    作用
+//^ 1       ce              1       in      使能信号
+//^ 2       addr            32      in      要读取的指令地址
+//^ 3       inst            32      out     读出的指令
 
 `include "defines.v"
 module inst_rom(

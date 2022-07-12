@@ -1,18 +1,18 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\openmips.v
 //* @Date         : 2022-04-27 22:20:15
-//* @LastEditTime : 2022-07-11 13:23:34
+//* @LastEditTime : 2022-07-12 14:16:08
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 五级流水线的顶层模块,例化各个模块
 //************************************************
 
-//^序号    接口名   宽度    输入/输出   作用
-//^ 1       rst     1       in      复位信号
-//^ 2       clk     1       in      时钟信号
-//^ 3   rom_data_i  32      in      从指令存储器取得的指令
-//^ 4   rom_addr_o  32      out     输出到指令存储器的地址
-//^ 5   rom_ce_o    1       out     指令存储器使能信号
+//^序号     接口名          宽度    输入输出    作用
+//^ 1       rst             1       in      复位信号
+//^ 2       clk             1       in      时钟信号
+//^ 3       rom_data_i      32      in      从指令存储器取得的指令
+//^ 4       rom_addr_o      32      out     输出到指令存储器的地址
+//^ 5       rom_ce_o        1       out     指令存储器使能信号
 
 `include "defines.v"
 module openmips (

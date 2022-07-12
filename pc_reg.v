@@ -1,19 +1,19 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\pc_reg.v
 //* @Date         : 2022-04-24 09:06:59
-//* @LastEditTime : 2022-07-10 10:08:02
+//* @LastEditTime : 2022-07-12 14:12:02
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : PC模块(取值阶段)
 //************************************************
 
-//^ 序号   接口名   宽度   输入输出     作用
-//^  1     rst     1       in      复位信号
-//^  2     clk     1       in      时钟
-//^  3     pc      32      out     要读取的指令地址(Program Counter)
-//^  4     ce      1       out     指令存储器使能信号(Chip Enable)
+//^序号     接口名          宽度    输入输出    作用
+//^ 1       rst             1       in      复位信号
+//^ 2       clk             1       in      时钟
+//^ 3       pc              32      out     要读取的指令地址(Program Counter)
+//^ 4       ce              1       out     指令存储器使能信号(Chip Enable)
 //& 增加流水线暂停的端口
-//^  1     stall   6       in      流水线暂停信号
+//^ 1       stall           6       in      流水线暂停信号
 `include "defines.v"
 module pc_reg (
            input wire clk,

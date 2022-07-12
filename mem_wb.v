@@ -1,31 +1,31 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\mem_wb.v
 //* @Date         : 2022-04-27 21:45:59
-//* @LastEditTime : 2022-07-11 12:06:19
+//* @LastEditTime : 2022-07-12 14:10:37
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 将访存阶段的运算结果传递给写回阶段
 //* @Description  : wb:WriteBack (写回)
 //************************************************
 
-//^序号    接口名   宽度    输入/输出
-//^ 1       clk     1       in
-//^ 2       rst     1       in
-//^ 3       mem_wb  5       in
-//^ 4     mem_wreg  1       in
-//^ 5     mem_wdata 32      in
-//^ 6       wb_wd   5       out
-//^ 7     wb_wreg   1       out
-//^ 8     wb_wdata  32      out
+//^序号     接口名          宽度    输入输出
+//^ 1       clk             1       in
+//^ 2       rst             1       in
+//^ 3       mem_wb          5       in
+//^ 4       mem_wreg        1       in
+//^ 5       mem_wdata       32      in
+//^ 6       wb_wd           5       out
+//^ 7       wb_wreg         1       out
+//^ 8       wb_wdata        32      out
 // & 增加接口
-//^ 1       mem_hi  32      in
-//^ 2       mem_lo  32      in
-//^ 3     mem_whilo 1       in
-//^ 4       wb_hi   32      out
-//^ 5       wb_lo   32      out
-//^ 6     wb_whilo  i       out
+//^ 1       mem_hi          32      in
+//^ 2       mem_lo          32      in
+//^ 3       mem_whilo       1       in
+//^ 4       wb_hi           32      out
+//^ 5       wb_lo           32      out
+//^ 6       wb_whilo        i       out
 //  & 增加流水线暂停信号
-//^ 1      stall    6       in         流水线暂停信号
+//^ 1       stall           6       in        
 
 `include "defines.v"
 module mem_wb(

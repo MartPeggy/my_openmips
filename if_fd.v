@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\if_fd.v
 //* @Date         : 2022-04-24 11:08:17
-//* @LastEditTime : 2022-07-10 10:19:24
+//* @LastEditTime : 2022-07-12 14:13:57
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 暂时保存取值阶段取得的指令和指令地址
@@ -11,15 +11,15 @@
 //* @Description  : 参与流水线暂停
 //************************************************
 
-//^ 序号   接口名   宽度   输入输出
-//^  1     rst      1      in
-//^  2     clk      1      in
-//^  3     if_pc    32     in
-//^  4     if_inst  32     in
-//^  5     id_pc    32     out
-//^  6     id_inst  32     out
+//^序号     接口名          宽度    输入输出
+//^ 1       rst             1       in
+//^ 2       clk             1       in
+//^ 3       if_pc           32      in
+//^ 4       if_inst         32      in
+//^ 5       id_pc           32      out
+//^ 6       id_inst         32      out
 //& 增加流水线暂停信号
-//^  1      stall   6       in
+//^ 1       stall           6       in
 
 `include "defines.v"
 module if_fd (

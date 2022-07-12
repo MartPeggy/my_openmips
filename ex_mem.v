@@ -1,36 +1,36 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\ex_mem.v
 //* @Date         : 2022-04-27 21:38:56
-//* @LastEditTime : 2022-07-11 13:04:26
+//* @LastEditTime : 2022-07-12 14:07:47
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 执行阶段信息传递到访存模块
 //* @Description  : MEM：memory 存储器（访存）
 //************************************************
 
-//^序号    接口名   宽度    输入/输出
-//^ 1       clk     1       in
-//^ 2       rst     1       in
-//^ 3      ex_wd    5       in
-//^ 4    ex_wreg    1       in
-//^ 5    ex_wdata   32      in
-//^ 6    mem_wd     5       out
-//^ 7    mem_wreg   1       out
-//^ 8    mem_wdata  32      out
+//^序号     接口名          宽度    输入输出
+//^ 1       clk             1       in
+//^ 2       rst             1       in
+//^ 3       ex_wd           5       in
+//^ 4       ex_wreg         1       in
+//^ 5       ex_wdata        32      in
+//^ 6       mem_wd          5       out
+//^ 7       mem_wreg        1       out
+//^ 8       mem_wdata       32      out
 // & 增加接口如下
-//^ 1    ex_hi      1       in
-//^ 2    ex_lo      32      in
-//^ 3    ex_whilo   32      in
-//^ 4    mem_hi     1       out
-//^ 5    mem_lo     32      out
-//^ 6   mem_whilo   32      out
+//^ 1       ex_hi           1       in
+//^ 2       ex_lo           32      in
+//^ 3       ex_whilo        32      in
+//^ 4       mem_hi          1       out
+//^ 5       mem_lo          32      out
+//^ 6       mem_whilo       32      out
 // & 增加流水线暂停信号
-//^ 1    stall      6       in
+//^ 1       stall           6       in
 // & 增加多周期指令
-//^ 1    hilo_i     64      in
-//^ 2    cnt_i      2       in
-//^ 3    hilo_o     64      out
-//^ 4    cnt_o      2       out
+//^ 1       hilo_i          64      in
+//^ 2       cnt_i           2       in
+//^ 3       hilo_o          64      out
+//^ 4       cnt_o           2       out
 
 `include "defines.v"
 module ex_mem(

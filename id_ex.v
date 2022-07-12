@@ -1,30 +1,30 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\id_ex.v
 //* @Date         : 2022-04-27 21:20:29
-//* @LastEditTime : 2022-07-11 09:16:15
+//* @LastEditTime : 2022-07-12 14:12:55
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 将译码阶段译出的指令信息传递到执行模块
 //* @Description  : EX：execute 执行
 //************************************************
 
-//^ 序号   接口名   宽度   输入输出
-//^ 1       rst     1       in
-//^ 2       clk     1       in
-//^ 3   id_alusel   3       in
-//^ 4   id_aluop    8       in
-//^ 5   id_reg1     32      in
-//^ 6   id_reg2     32      in
-//^ 7   id_wd       5       in
-//^ 8   id_wreg     1       im
-//^ 9   ex_alusel   3       out
-//^ 10  ex_aluop    8       out
-//^ 11  ex_reg1     32      out
-//^ 12  ex_reg2     32      out
-//^ 13  ex_wd       5       out
-//^ 14  ex_wreg     1       out
+//^序号     接口名          宽度    输入输出
+//^ 1       rst             1       in
+//^ 2       clk             1       in
+//^ 3       id_alusel       3       in
+//^ 4       id_aluop        8       in
+//^ 5       id_reg1         32      in
+//^ 6       id_reg2         32      in
+//^ 7       id_wd           5       in
+//^ 8       id_wreg         1       im
+//^ 9       ex_alusel       3       out
+//^ 10      ex_aluop        8       out
+//^ 11      ex_reg1         32      out
+//^ 12      ex_reg2         32      out
+//^ 13      ex_wd           5       out
+//^ 14      ex_wreg         1       out
 //& 新增流水线暂停信号
-//^ 1   stall       1       in
+//^ 1       stall           1       in
 
 
 `include "defines.v"
