@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\ex.v
 //* @Date         : 2022-04-27 21:25:46
-//* @LastEditTime : 2022-07-12 13:53:55
+//* @LastEditTime : 2022-07-12 13:57:50
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 执行模块
@@ -132,11 +132,11 @@ always @( * )
             begin
                 { HI, LO } <= { `ZeroWord, `ZeroWord };
             end
-        else if ( mem_whilo_i == `WriteEnable )                                  //  访存阶段的指令要写HI，LO寄存器
+        else if ( mem_whilo_i == `WriteEnable )                                   //  访存阶段的指令要写HI，LO寄存器
             begin
                 { HI, LO } <= { mem_hi_i, mem_lo_i };
             end
-        else if ( wb_whilo_i == `WriteEnable )                                   //  回写阶段的指令要写HI，LO寄存器
+        else if ( wb_whilo_i == `WriteEnable )                                    //  回写阶段的指令要写HI，LO寄存器
             begin
                 { HI, LO } <= { wb_hi_i, wb_lo_i };
             end
@@ -190,8 +190,8 @@ always @( * )
             end
         else
             begin
-                case ( aluop_i )                                       // 判断子类型
-                    `EXE_OR_OP:                                       // 子类型为 OR
+                case ( aluop_i )                                        // 判断子类型
+                    `EXE_OR_OP:                                        // 子类型为 OR
                         begin
                             logicout <= reg1_i | reg2_i;
                         end
