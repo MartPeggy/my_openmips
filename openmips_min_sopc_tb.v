@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\openmips_min_sopc_tb.v
 //* @Date         : 2022-07-04 19:09:01
-//* @LastEditTime : 2022-07-04 19:09:01
+//* @LastEditTime : 2022-07-12 13:59:10
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : Testbench
@@ -12,16 +12,16 @@
 
 module openmips_min_sopc_tb();
 
-reg CLOCK_50;
+reg clk;
 reg rst;
 
 
 initial
     begin
-        CLOCK_50 = 1'b0;
+        clk = 1'b0;
 
         forever
-            #10 CLOCK_50 = ~CLOCK_50;
+            #10 clk = ~clk;
     end
 
 initial
@@ -32,7 +32,7 @@ initial
     end
 
 openmips_min_sopc openmips_min_sopc0(
-                      .clk( CLOCK_50 ),
+                      .clk( clk ),
                       .rst( rst )
                   );
 
