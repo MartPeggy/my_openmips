@@ -1,0 +1,121 @@
+# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,vivado,assembler
+# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,vivado,assembler
+
+### Assembler ###
+*.exe
+*.o
+*.obj
+*.bc
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
+
+# Support for Project snippet scope
+.vscode/*.code-snippets
+
+# Ignore code-workspaces
+*.code-workspace
+
+### Vivado ###
+#########################################################################################################
+##	This is an example .gitignore file for Vivado, please treat it as an example as
+##	it might not be complete. In addition, XAPP 1165 should be followed.
+#########
+#Exclude all
+*
+!*/
+###########################################################################
+##	VIVADO
+#Source files:
+#Do NOT ignore VHDL, Verilog, block diagrams or EDIF files.
+!*.vhd
+!*.v
+!*.sv
+!*.bd
+!*.edif
+#IP files
+#.xci: synthesis and implemented not possible - you need to return back to the previous version to generate output products
+#.xci + .dcp: implementation possible but not re-synthesis
+#*.xci(www.spiritconsortium.org)
+!*.xci
+#.xcix: Core container file
+#.xcix: https://www.xilinx.com/support/documentation/sw_manuals/xilinx2016_2/ug896-vivado-ip.pdf (Page 41)
+!*.xcix
+#*.dcp(checkpoint files)
+!*.dcp
+!*.vds
+!*.pb
+#All bd comments and layout coordinates are stored within .ui
+!*.ui
+!*.ooc
+#System Generator
+!*.mdl
+!*.slx
+!*.bxml
+#Simulation logic analyzer
+!*.wcfg
+!*.coe
+#MIG
+!*.prj
+!*.mem
+#Project files
+#XPR  +  *.XML ? XPR (Files are merged into a single XPR file for 2014.1 version)
+#Do NOT ignore *.xpr files
+!*.xpr
+#Include *.xml files for 2013.4 or earlier version
+!*.xml
+#Constraint files
+#Do NOT ignore *.xdc files
+!*.xdc
+#TCL - files
+!*.tcl
+#Journal - files
+!*.jou
+#Reports
+!*.rpt
+!*.txt
+!*.vdi
+#C-files
+!*.c
+!*.h
+!*.elf
+!*.bmm
+!*.xmp
+
+# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,vivado,assembler
+
+!*gitignore
+!README.md
+!LICENCE
+.vscode/iverilog/
+.vscode/license/
+.vscode/man/
+.vscode/license/
+.vscode/dryrun.log
+.vscode/ctags.exe
+.vscode/README.md
+.vscode/iStyle.exe
+.vscode/readtags.exe
+.vscode/targets.log
+.vscode/configurationCache.log
+.vscode/extensions.json
+*.tags
+!*.cmd
+
+
