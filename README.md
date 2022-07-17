@@ -16,16 +16,61 @@
 
 ## MIPS32简介
 
+#### 指令寻址方式
+
+1. **立即数寻址**：16位二进制立即数
+2. **寄存器寻址**：操作数放在寄存器中
+3. **基址寻址**：有效地址分为两部分，基地址放在寄存器中，偏移部分为一个立即数
+4. **PC相对寻址**：下一条指令的PC值加上16位偏移量地址左移两位的值
+5. **伪直接寻址**：指令中的26位偏置地址左移两位并替换掉PC的后28位
+
+### 指令类型
+
+1. **算术指令**：两个操作数的算术运算，加减乘除
+2. **逻辑运算**：两个操作数的逻辑运算和移位运算
+3. **数据传送**：数据存储器的读写或将立即数传输到一个寄存器
+4. **条件转移**：先进行逻辑判断，再根据条件是否满足进行特定操作（跳转或赋值）
+5. **无条件转移**：跳转到目标地址
+
+### 指令格式
+
+*op——**操作码**； rs——**源操作数**； rt——**源/目的操作数**； rd——**目的操作数**； shamt——**移位的位数**； funct——**功能码**； imm——**立即数**； address——**转移的目的地址***
+
+- **R类型：全为寄存器操作数**
+
+  - |   31 ~ 26    | 25 ~ 21 | 20 ~ 16 | 15 ~ 11 | 10 ~ 6 | 5 ~ 0 |
+    | :----------: | :-----: | :-----: | :-----: | :----: | :---: |
+    | op（000000） |   rs    |   rt    |   rd    | shamt  | funct |
+
+- **I类型：含立即数操作数**
+  - | 31 ~ 26 | 25 ~ 21 | 20 ~ 16 | 15 ~ 0 |
+    | :-----: | :-----: | :-----: | :----: |
+    |   op    |   rs    |   rt    |  imm   |
+
+- **J类型：含转移地址**
+
+    - | 31 ~ 26 | 25 ~ 0  |
+      | :-----: | :-----: |
+      |   op    | address |
+
+### 五大阶段
+
+1. **取值（IF）：从指令寄存器中取出32位指令并将PC+=4**
+2. **译码（ID）：读取操作数和相应字段**
+3. **执行（EX）：算术、移位、逻辑、比较、加载/存储**
+4. **访存（MEM）：对存储器的读写（仅加载/存储指令用到）**
+5. **回写（WB）：指令执行结果写回到寄存器**
+
 ## 使用的工具
 
 - **[VSCODE](https://code.visualstudio.com/)**
-- vscode useful extension
+- vscode useful extensions
   - **[Batch Runner](https://marketplace.visualstudio.com/items?itemName=NilsSoderman.batch-runner)**
   - **[Chinese (Simplified) (简体中文) Language Pack for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans)**
   - **[Code alignment](https://marketplace.visualstudio.com/items?itemName=cpmcgrath.codealignment-vscode)**
   - **[Colorful Comments](https://marketplace.visualstudio.com/items?itemName=ParthR2031.colorful-comments)**
   - **[Comment Translate](https://marketplace.visualstudio.com/items?itemName=intellsmi.comment-translate)**
-  - **[ctagsx](https://marketplace.visualstudio.com/items?itemName=jtanx.ctagsx)**
+  - **[ctagsxs](https://marketplace.visualstudio.com/items?itemName=jtanx.ctagsx)**
   - **[Error Lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens)**
   - **[filesize](https://marketplace.visualstudio.com/items?itemName=mkxml.vscode-filesize)**
   - **[koroFileHeader](https://marketplace.visualstudio.com/items?itemName=OBKoro1.korofileheader)**
