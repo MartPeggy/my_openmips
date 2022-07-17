@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\id.v
 //* @Date         : 2022-04-24 14:06:57
-//* @LastEditTime : 2022-07-12 15:38:04
+//* @LastEditTime : 2022-07-17 14:28:13
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 对指令进行译码，得到最终运算的类型和操作数
@@ -32,7 +32,14 @@
 //^ 5       mem_wd_i        5       in      处于访存阶段的指令要写目的寄存器地址
 //^ 6       mem_wdata_i     32      in      处于访存阶段的指令要写入目的寄存器的数据
 //& 增加流水线暂停信号
-//^ 1       stall           1       out
+//^ 1       stall           1       out     流水线暂停信号
+//& 增加转移指令接口
+//^ 1    is_in_delayslot_i  1       in      当前指令是否处于延迟槽中
+//^ 2       branch_flag_o   1       out     是否发生转移
+//^ 3   branch_target_address_o 32  out     转移到的目的地址
+//^ 4   is_in_delayslot_o   1       out     当前指令是否处于延迟槽中
+//^ 5       link_addr_o     32      out     转移指令要保存的返回地址
+//^ 6  next_inst_in_delayslot_o 32  out     下一条进入译码阶段的指令是否在延迟槽中
 
 // ALU: Arithmetic and Logic Unit 网络算术逻辑单元
 // ALUOP: ALU operation ALU操作数
@@ -44,13 +51,13 @@ module id (
            input wire [ `InstAddrBus ] pc_i,
            input wire [ `InstBus ] inst_i,
 
-           input wire [ `RegBus ] reg1_data_i,              // 从reg1中读出的输出
-           input wire [ `RegBus ] reg2_data_i,              // 从reg2中读出的输出
+           input wire [ `RegBus ] reg1_data_i,
+           input wire [ `RegBus ] reg2_data_i,
 
-           output reg reg1_read_o,                          // 输出到reg1读使能信号
-           output reg reg2_read_o,                          // 输出到reg2读使能信号
-           output reg [ `RegAddrBus ] reg1_addr_o ,         // reg1中的读地址信号
-           output reg [ `RegAddrBus ] reg2_addr_o,          // reg2中的读地址信号
+           output reg reg1_read_o,
+           output reg reg2_read_o,
+           output reg [ `RegAddrBus ] reg1_addr_o ,
+           output reg [ `RegAddrBus ] reg2_addr_o,
 
            output reg [ `AluOpBus ] aluop_o,
            output reg [ `AluSelBus ] alusel_o,
@@ -59,15 +66,22 @@ module id (
            output reg [ `RegAddrBus ] wd_o,
            output reg wreg_o,
 
-           input wire ex_wreg_i ,                    // 处于执行阶段的指令的运算结果
+           input wire ex_wreg_i ,
            input wire [ `RegBus ] ex_wdata_i,
            input wire [ `RegAddrBus ] ex_wd_i,
 
-           input wire mem_wreg_i,                    // 处于访存阶段的指令的运算结果
+           input wire mem_wreg_i,
            input wire [ `RegBus ] mem_wdata_i,
            input wire [ `RegAddrBus ] mem_wd_i,
 
-           output wire stallreg
+           output wire stallreq,
+
+           input wire is_in_delayslot_i,
+           output reg next_inst_in_delayslot_o,
+           output reg branch_flag_o,
+           output reg [ `RegBus ] branch_target_address_o,
+           output reg [ `RegBus ] link_addr_o,
+           output reg is_in_delayslot_o
        );
 
 // 取得指令的指令码，功能码
@@ -85,42 +99,88 @@ reg instvalid;
 // 流水线暂停信号设定为Nostop
 assign stallreq = `NoStop;
 
+// 转移指令
+wire [ `RegBus ] pc_plus_8;
+wire [ `RegBus ] pc_plus_4;
+wire [ `RegBus ] imm_sll2_signedext;
+
+// 保存接下来两条指令的地址
+assign pc_plus_8 = pc_i + 8;
+assign pc_plus_4 = pc_i + 4;
+
+// 对应分支指令中的offset左移两位再符号扩展至32位的值
+assign imm_sll2_signedext = { { 14{ inst_i[ 15 ] } }, inst_i[ 15: 0 ], 2'b00 };
+
+
 //********对指令译码*********//
 always @( * )
     begin
-        if ( rst == `RstEnable )                     //初始化各个连线，该置零的置零
+        if ( rst == `RstEnable )
+            // 初始化各个连线，该置零的置零
             begin
-                aluop_o <= `EXE_NOP_OP;       // 运算类型设置为None
-                alusel_o <= `EXE_RES_NOP;      // 运算类型设置为None
+                // 运算类型设置为None
+                aluop_o <= `EXE_NOP_OP;
+                // 运算类型设置为None
+                alusel_o <= `EXE_RES_NOP;
                 wd_o <= 4'b0;
-                wreg_o <= `WriteDisable;     // 不写入寄存器
-                reg1_read_o <= 1'b0;              // 读使能关闭
+                instvalid <= `InstValid;
+                // 不写入寄存器
+                wreg_o <= `WriteDisable;
+                // 读使能关闭
+                reg1_read_o <= 1'b0;
                 reg2_read_o <= 1'b0;
-                reg1_addr_o <= 4'b0;              // 读地址指令
+                // 读地址置零
+                reg1_addr_o <= 4'b0;
                 reg2_addr_o <= 4'b0;
-                imm <= `ZeroWord;         // 立即数置零
+                // 立即数置零
+                imm <= `ZeroWord;
+                // 转移指令部分全部置零
+                link_addr_o <= `ZeroWord;
+                branch_target_address_o <= `ZeroWord;
+                branch_flag_o <= `NotBranch;
+                next_inst_in_delayslot_o <= `NotInDelaySlot;
             end
         else
-            begin   // 非复位状态，默认信号
+            // 非复位状态，默认信号
+            begin
                 aluop_o <= `EXE_NOP_OP;
                 alusel_o <= `EXE_RES_NOP;
-                wd_o <= inst_i[ 15: 11 ];  // 要写入的寄存器
-                wreg_o <= `WriteDisable;     // 关闭写使能
-                instvalid <= `InstInvalid;      // 设置指令无效
-                reg1_read_o <= 1'b0;              // 关闭读使能
-                reg2_read_o <= 1'b0;              // 关闭读使能
-                reg1_addr_o <= inst_i[ 25: 21 ];  // Regfile读端口1读取寄存器地址
-                reg2_addr_o <= inst_i[ 20: 16 ];  // Regfile读端口2读取寄存器地址
-                imm <= `ZeroWord;
+                instvalid <= `InstInvalid;
 
-                // 利用case判断指令类型
-                case ( op )                 // op:inst[31-26]
+                // 要写入的寄存器
+                wd_o <= inst_i[ 15: 11 ];
+                // 关闭写使能
+                wreg_o <= `WriteDisable;
+                // 设置指令无效
+                instvalid <= `InstInvalid;
+                // 关闭读使能
+                reg1_read_o <= 1'b0;
+                reg2_read_o <= 1'b0;
+                // Regfile读端口1读取寄存器地址
+                reg1_addr_o <= inst_i[ 25: 21 ];
+                // Regfile读端口2读取寄存器地址
+                reg2_addr_o <= inst_i[ 20: 16 ];
+                // 立即数置零
+                imm <= `ZeroWord;
+                // 分支地址置零
+                link_addr_o <= `ZeroWord;
+                // 跳转地址置零
+                branch_target_address_o <= `ZeroWord;
+                // 默认不进行转移
+                branch_flag_o <= `NotBranch;
+                // 默认指令不在延迟槽中
+                next_inst_in_delayslot_o <= `NotInDelaySlot;
+
+                // 利用case判断指令类型 op:inst[31-26]
+                case ( op )
                     `EXE_SPECIAL_INST:
                         begin
-                            case ( op2 )                   // op2:inst[10-6]
+                            // op2:inst[10-6]
+                            case ( op2 )
                                 5'b00000:
-                                    case ( op3 )                   // op3:inst[5-0]
-                                        `EXE_OR:                   // 6'b100101
+                                    // op3:inst[5-0]
+                                    case ( op3 )
+                                        `EXE_OR:
                                             begin
                                                 wreg_o <= `WriteEnable;
                                                 aluop_o <= `EXE_OR_OP;
@@ -130,7 +190,7 @@ always @( * )
                                                 instvalid <= `InstValid;
                                             end
 
-                                        `EXE_XOR:                   // 6'b100110
+                                        `EXE_XOR:
                                             begin
                                                 wreg_o <= `WriteEnable;
                                                 aluop_o <= `EXE_XOR_OP;
@@ -140,7 +200,7 @@ always @( * )
                                                 instvalid <= `InstValid;
                                             end
 
-                                        `EXE_NOR:                   // 6'b100111
+                                        `EXE_NOR:
                                             begin
                                                 wreg_o <= `WriteEnable;
                                                 aluop_o <= `EXE_NOR_OP;
@@ -150,7 +210,7 @@ always @( * )
                                                 instvalid <= `InstValid;
                                             end
 
-                                        `EXE_AND:                   // 6'b100100
+                                        `EXE_AND:
                                             begin
                                                 wreg_o <= `WriteEnable;
                                                 aluop_o <= `EXE_AND_OP;
@@ -371,6 +431,35 @@ always @( * )
                                                 instvalid <= `InstValid;
                                             end
 
+                                        `EXE_JR:
+                                            begin
+                                                wreg_o <= `WriteDisable;
+                                                aluop_o <= `EXE_JR_OP;
+                                                alusel_o <= `EXE_RES_JUMP_BRANCH;
+                                                reg1_read_o <= 1'b1;
+                                                reg2_read_o <= 1'b0;
+                                                link_addr_o <= `ZeroWord;
+                                                branch_target_address_o <= reg1_o;
+                                                branch_flag_o <= `Branch;
+                                                next_inst_in_delayslot_o <= `InDelaySlot;
+                                                instvalid <= `InstValid;
+                                            end
+
+                                        `EXE_JALR:
+                                            begin
+                                                wreg_o <= `WriteEnable;
+                                                aluop_o <= `EXE_JALR_OP;
+                                                alusel_o <= `EXE_RES_JUMP_BRANCH;
+                                                reg1_read_o <= 1'b1;
+                                                reg2_read_o <= 1'b0;
+                                                wd_o <= inst_i[ 15: 11 ];
+                                                link_addr_o <= pc_plus_8;
+                                                branch_target_address_o <= reg1_o;
+                                                branch_flag_o <= `Branch;
+                                                next_inst_in_delayslot_o <= `InDelaySlot;
+                                                instvalid <= `InstValid;
+                                            end
+
                                         default :
                                             begin
                                             end
@@ -456,25 +545,34 @@ always @( * )
                                         instvalid <= `InstValid;
                                     end
 
+
                             endcase
                         end
 
-                    `EXE_ORI:            // ORI：6‘b001101
+                    `EXE_ORI:
                         begin
-                            wreg_o <= `WriteEnable;                     // 写使能打开
-                            aluop_o <= `EXE_OR_OP;                      // 该指令所属的子类型是 “OR” 运算
-                            alusel_o <= `EXE_RES_LOGIC;                 // 运算类型为 "LOGIC"
-                            reg1_read_o <= 1'b1;                        // 读使能开启，对应的 rs 地址已经写入 reg1_addr_o ,即指令的 25~21
-                            reg2_read_o <= 1'b0;                        // 关闭2的读使能，ORI指令不需要读这个端口
-                            imm <= { 16'h0, inst_i[ 15: 0 ] };          // 立即数拼接，立即数对应指令的 15~0 ，再通过填充0满足32位
-                            wd_o <= inst_i[ 20: 16 ];                   // 要写入的寄存器，对应指令的 rt ，20~16
-                            instvalid <= `InstValid;                    // 写使能打开
+                            // 写使能打开
+                            wreg_o <= `WriteEnable;
+                            // 该指令所属的子类型是 “OR” 运算
+                            aluop_o <= `EXE_OR_OP;
+                            // 运算类型为 "LOGIC"
+                            alusel_o <= `EXE_RES_LOGIC;
+                            // 读使能开启，对应的 rs 地址已经写入 reg1_addr_o ,即指令的 25~21
+                            reg1_read_o <= 1'b1;
+                            // 关闭2的读使能，ORI指令不需要读这个端口
+                            reg2_read_o <= 1'b0;
+                            // 立即数拼接，立即数对应指令的 15~0 ，再通过填充0满足32位
+                            imm <= { 16'h0, inst_i[ 15: 0 ] };
+                            // 要写入的寄存器，对应指令的 rt ，20~16位
+                            wd_o <= inst_i[ 20: 16 ];
+                            // 写使能打开
+                            instvalid <= `InstValid;
                         end
 
-                    `EXE_ANDI:           // ANDI：6‘b001100
+                    `EXE_ANDI:
                         begin
                             wreg_o <= `WriteEnable;
-                            aluop_o <= `EXE_AND_OP;                  // 该指令所属的子类型是 “AND” 运算
+                            aluop_o <= `EXE_AND_OP;
                             alusel_o <= `EXE_RES_LOGIC;
                             reg1_read_o <= 1'b1;
                             reg2_read_o <= 1'b0;
@@ -486,7 +584,7 @@ always @( * )
                     `EXE_XORI:
                         begin
                             wreg_o <= `WriteEnable;
-                            aluop_o <= `EXE_XOR_OP;                  // 该指令所属的子类型是 “XORI” 运算
+                            aluop_o <= `EXE_XOR_OP;
                             alusel_o <= `EXE_RES_LOGIC;
                             reg1_read_o <= 1'b1;
                             reg2_read_o <= 1'b0;
@@ -569,6 +667,186 @@ always @( * )
                         begin
                         end
 
+                    `EXE_J:
+                        begin
+                            wreg_o <= `WriteDisable;
+                            aluop_o <= `EXE_J_OP;
+                            alusel_o <= `EXE_RES_JUMP_BRANCH;
+                            reg1_read_o <= 1'b0;
+                            reg2_read_o <= 1'b0;
+                            link_addr_o <= `ZeroWord;
+                            branch_flag_o <= `Branch;
+                            next_inst_in_delayslot_o <= `InDelaySlot;
+                            instvalid <= `InstValid;
+                            branch_target_address_o <=
+                            { pc_plus_4[ 31: 28 ], inst_i[ 25: 0 ], 2'b00 };
+                        end
+
+                    `EXE_JAL:
+                        begin
+                            wreg_o <= `WriteEnable;
+                            aluop_o <= `EXE_JAL_OP;
+                            alusel_o <= `EXE_RES_JUMP_BRANCH;
+                            reg1_read_o <= 1'b0;
+                            reg2_read_o <= 1'b0;
+                            wd_o <= 5'b11111;
+                            link_addr_o <= pc_plus_8 ;
+                            branch_target_address_o <=
+                            { pc_plus_4[ 31: 28 ], inst_i[ 25: 0 ], 2'b00 };
+                            branch_flag_o <= `Branch;
+                            next_inst_in_delayslot_o <= `InDelaySlot;
+                            instvalid <= `InstValid;
+                        end
+
+                    `EXE_BEQ:
+                        begin
+                            wreg_o <= `WriteEnable;
+                            aluop_o <= `EXE_BEQ_OP;
+                            alusel_o <= `EXE_RES_JUMP_BRANCH;
+                            reg1_read_o <= 1'b1;
+                            reg2_read_o <= 1'b1;
+                            instvalid <= `InstValid;
+
+                            if ( reg1_o == reg2_o )
+                                begin
+                                    branch_target_address_o <=
+                                    pc_plus_4 + imm_sll2_signedext;
+                                    branch_flag_o <= `Branch;
+                                    next_inst_in_delayslot_o <= `InDelaySlot;
+                                end
+                        end
+
+                    `EXE_BNE:
+                        begin
+                            wreg_o <= `WriteDisable;
+                            aluop_o <= `EXE_BLEZ_OP;
+                            alusel_o <= `EXE_RES_JUMP_BRANCH;
+                            reg1_read_o <= 1'b1;
+                            reg2_read_o <= 1'b1;
+                            instvalid <= `InstValid;
+
+                            if ( reg1_o != reg2_o )
+                                begin
+                                    branch_target_address_o <=
+                                    pc_plus_4 + imm_sll2_signedext;
+                                    branch_flag_o <= `Branch;
+                                    next_inst_in_delayslot_o <= `InDelaySlot;
+                                end
+                        end
+
+                    `EXE_BGTZ:
+                        begin
+                            wreg_o <= `WriteDisable;
+                            aluop_o <= `EXE_BGTZ_OP;
+                            alusel_o <= `EXE_RES_JUMP_BRANCH;
+                            reg1_read_o <= 1'b1;
+                            reg2_read_o <= 1'b0;
+                            instvalid <= `InstValid;
+
+                            if ( ( reg1_o[ 31 ] == 1'b0 ) && ( reg1_o != `ZeroWord ) )
+                                begin
+                                    branch_target_address_o <= pc_plus_4 + imm_sll2_signedext;
+                                    branch_flag_o <= `Branch;
+                                    next_inst_in_delayslot_o <= `InDelaySlot;
+                                end
+                        end
+
+                    `EXE_BLEZ:
+                        begin
+                            wreg_o <= `WriteDisable;
+                            aluop_o <= `EXE_BLEZ_OP;
+                            alusel_o <= `EXE_RES_JUMP_BRANCH;
+                            reg1_read_o <= 1'b1;
+                            reg2_read_o <= 1'b0;
+                            instvalid <= `InstValid;
+
+                            if ( ( reg1_o[ 31 ] == 1'b1 ) || ( reg1_o == `ZeroWord ) )
+                                begin
+                                    branch_target_address_o <= pc_plus_4 + imm_sll2_signedext;
+                                    branch_flag_o <= `Branch;
+                                    next_inst_in_delayslot_o <= `InDelaySlot;
+                                end
+                        end
+
+                    `EXE_REGIMM_INST:
+                        begin
+                            case ( op4 )
+                                `EXE_BGEZ:
+                                    begin
+                                        wreg_o <= `WriteDisable;
+                                        aluop_o <= `EXE_BGEZ_OP;
+                                        alusel_o <= `EXE_RES_JUMP_BRANCH;
+                                        reg1_read_o <= 1'b1;
+                                        reg2_read_o <= 1'b0;
+                                        instvalid <= `InstValid;
+
+                                        if ( reg1_o[ 31 ] == 1'b0 )
+                                            begin
+                                                branch_target_address_o <= pc_plus_4 + imm_sll2_signedext;
+                                                branch_flag_o <= `Branch;
+                                                next_inst_in_delayslot_o <= `InDelaySlot;
+                                            end
+                                    end
+
+                                `EXE_BGEZAL:
+                                    begin
+                                        wreg_o <= `WriteEnable;
+                                        aluop_o <= `EXE_BGEZAL_OP;
+                                        alusel_o <= `EXE_RES_JUMP_BRANCH;
+                                        reg1_read_o <= 1'b1;
+                                        reg2_read_o <= 1'b0;
+                                        link_addr_o <= pc_plus_8;
+                                        wd_o <= 5'b11111;
+                                        instvalid <= `InstValid;
+
+                                        if ( reg1_o[ 31 ] == 1'b0 )
+                                            begin
+                                                branch_target_address_o <= pc_plus_4 + imm_sll2_signedext;
+                                                branch_flag_o <= `Branch;
+                                                next_inst_in_delayslot_o <= `InDelaySlot;
+                                            end
+                                    end
+
+                                `EXE_BLTZ:
+                                    begin
+                                        wreg_o <= `WriteDisable;
+                                        aluop_o <= `EXE_BGEZAL_OP;
+                                        alusel_o <= `EXE_RES_JUMP_BRANCH;
+                                        reg1_read_o <= 1'b1;
+                                        reg2_read_o <= 1'b0;
+                                        instvalid <= `InstValid;
+
+                                        if ( reg1_o[ 31 ] == 1'b1 )
+                                            begin
+                                                branch_target_address_o <= pc_plus_4 + imm_sll2_signedext;
+                                                branch_flag_o <= `Branch;
+                                                next_inst_in_delayslot_o <= `InDelaySlot;
+                                            end
+                                    end
+
+                                `EXE_BLTZAL:
+                                    begin
+                                        wreg_o <= `WriteEnable;
+                                        aluop_o <= `EXE_BGEZAL_OP;
+                                        alusel_o <= `EXE_RES_JUMP_BRANCH;
+                                        reg1_read_o <= 1'b1;
+                                        reg2_read_o <= 1'b0;
+                                        link_addr_o <= pc_plus_8;
+                                        wd_o <= 5'b11111;
+                                        instvalid <= `InstValid;
+
+                                        if ( reg1_o[ 31 ] == 1'b1 )
+                                            begin
+                                                branch_target_address_o <= pc_plus_4 + imm_sll2_signedext;
+                                                branch_flag_o <= `Branch;
+                                                next_inst_in_delayslot_o <= `InDelaySlot;
+                                            end
+                                    end
+
+                            endcase
+                        end
+
+
                 endcase // endcase op
                 if ( inst_i[ 31: 21 ] == 11'b00000000000 )
                     begin
@@ -610,6 +888,20 @@ always @( * )
 
     end
 
+// 输出变量 is_in_delayslot_o
+always @( * )
+    begin
+        if ( rst == `RstEnable )
+            begin
+                is_in_delayslot_o <= `NotInDelaySlot;
+            end
+        else
+            begin
+                is_in_delayslot_o <= is_in_delayslot_i;
+            end
+    end
+
+
 // 在case中得到的一系列信息中有要读的寄存器的地址和读使能情况
 // 这里来读取寄存器得到其余的信息，包括操作数1和2
 // 真正送到下一级流水线不包括地址，仅仅将这里取得的操作数送下去
@@ -619,23 +911,32 @@ always @( * )
             begin
                 reg1_o <= `ZeroWord;
             end
+
+        // 若要读取的数据就是执行阶段要写入的数据，则把执行结果直接输出
         else if (
             ( reg1_read_o == 1'b1 ) && ( ex_wreg_i == 1'b1 ) && ( ex_wd_i == reg1_addr_o )
-        )                   // 若要读取的数据就是执行阶段要写入的数据，则把执行结果直接输出
+        )
+
             begin
                 reg1_o <= ex_wdata_i;
             end
+
+        // 若要读取的数据就是访存阶段要写入的数据，则把访存结果直接输出
         else if (
             ( reg1_read_o == 1'b1 ) && ( mem_wreg_i == 1'b1 ) && ( mem_wd_i == reg1_addr_o )
-        )                   // 若要读取的数据就是访存阶段要写入的数据，则把访存结果直接输出
+        )
             begin
                 reg1_o <= mem_wdata_i;
             end
-        else if ( reg1_read_o == 1'b1 )       // 若reg1读端口使能，将读出的数据作为源操作数1
+
+        // 若reg1读端口使能，将读出的数据作为源操作数1
+        else if ( reg1_read_o == 1'b1 )
             begin
                 reg1_o <= reg1_data_i;
             end
-        else if ( reg1_read_o == 1'b0 )       // 若使能关闭，则使用立即数作为源操作数1
+
+        // 若使能关闭，则使用立即数作为源操作数1
+        else if ( reg1_read_o == 1'b0 )
             begin
                 reg1_o <= imm;
             end

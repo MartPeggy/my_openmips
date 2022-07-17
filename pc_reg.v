@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\pc_reg.v
 //* @Date         : 2022-04-24 09:06:59
-//* @LastEditTime : 2022-07-12 14:12:02
+//* @LastEditTime : 2022-07-17 14:05:49
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : PC模块(取值阶段)
@@ -14,6 +14,10 @@
 //^ 4       ce              1       out     指令存储器使能信号(Chip Enable)
 //& 增加流水线暂停的端口
 //^ 1       stall           6       in      流水线暂停信号
+//& 增加转移指令的接口
+//^ 1       branch_flag_i   1       in      是否发生转移
+//^ 2   branch_target_address_i  32 in      转移到的目的地址
+
 `include "defines.v"
 module pc_reg (
            input wire clk,
@@ -21,6 +25,9 @@ module pc_reg (
 
            output reg [ `InstAddrBus ] pc,
            output reg ce,
+
+           input wire branch_flag_i,
+           input wire [ `RegBus ] branch_target_address_i,
 
            input wire [ 5: 0 ] stall
        );
@@ -52,7 +59,15 @@ always @( posedge clk )
 
         else if ( stall[ 0 ] == `NoStop )
             begin
-                pc <= pc + 4'h4;
+                if ( branch_flag_i == `Branch )
+                    begin
+                        pc <= branch_target_address_i;
+                    end
+                else
+                    begin
+                        pc <= pc + 4'h4;
+                    end
+
             end
     end
 

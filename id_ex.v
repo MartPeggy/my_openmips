@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\id_ex.v
 //* @Date         : 2022-04-27 21:20:29
-//* @LastEditTime : 2022-07-12 14:12:55
+//* @LastEditTime : 2022-07-17 14:05:21
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 将译码阶段译出的指令信息传递到执行模块
@@ -25,6 +25,13 @@
 //^ 14      ex_wreg         1       out
 //& 新增流水线暂停信号
 //^ 1       stall           1       in
+//& 增加转移指令接口
+//^ 1   id_link_address     32      in
+//^ 2   id_is_in_delayslot  1       in
+//^ 3   next_inst_in_delayslot_i 1  in
+//^ 4   ex_link_address     32      out
+//^ 5  ex_is_in_delayslot   1       out
+//^ 6   is_in_delayslot_o   1       out
 
 
 `include "defines.v"
@@ -48,7 +55,14 @@ module id_ex (
            output reg [ `RegAddrBus ] ex_wd,
            output reg ex_wreg,
 
-           input wire [ 5: 0 ] stall
+           input wire [ 5: 0 ] stall,
+
+           input wire [ `RegBus ] id_link_address,
+           input wire id_is_in_delayslot,
+           input wire next_inst_in_delayslot_i,
+           output reg [ `RegBus ] ex_link_address,
+           output reg ex_is_in_delayslot,
+           output reg is_in_delayslot_o
        );
 
 // stall[2]==Stop 译码阶段暂停
@@ -65,6 +79,9 @@ always @ ( posedge clk )
                 ex_reg2 <= `ZeroWord;
                 ex_wd <= 4'b0000;
                 ex_wreg <= `WriteDisable;
+                ex_link_address <= `ZeroWord;
+                ex_is_in_delayslot <= `NotInDelaySlot;
+                is_in_delayslot_o <= `NotInDelaySlot;
             end
         else if ( stall[ 2 ] == `Stop && stall[ 3 ] == `NoStop )
             begin
@@ -74,6 +91,8 @@ always @ ( posedge clk )
                 ex_reg2 <= `ZeroWord;
                 ex_wd <= 4'b0000;
                 ex_wreg <= `WriteDisable;
+                ex_link_address <= `ZeroWord;
+                ex_is_in_delayslot <= `NotInDelaySlot;
             end
         else if ( stall[ 2 ] == `NoStop )
             begin
@@ -83,6 +102,9 @@ always @ ( posedge clk )
                 ex_reg2 <= id_reg2;
                 ex_wd <= id_wd;
                 ex_wreg <= id_wreg;
+                ex_link_address <= id_link_address;
+                ex_is_in_delayslot <= id_is_in_delayslot;
+                is_in_delayslot_o <= next_inst_in_delayslot_i;
             end
     end
 

@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\ex.v
 //* @Date         : 2022-04-27 21:25:46
-//* @LastEditTime : 2022-07-12 16:46:36
+//* @LastEditTime : 2022-07-17 14:04:12
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 执行模块
@@ -45,6 +45,9 @@
 //^ 4       div_opdata2_o   32      out     除数
 //^ 5       div_start_o     1       out     是否开始除法运算
 //^ 6       signed_div_o    1       out     是否为有符号除法，1是
+//& 转移指令相关接口
+//^ 1   is_in_delayslot_i   1       in      当前处于执行阶段的指令是否位于延迟槽
+//^ 2       link_address_i  32      in      处于执行阶段的转移指令要保存的返回地址
 
 `include "defines.v"
 module ex (
@@ -98,7 +101,11 @@ module ex (
            output reg [ `RegBus ] div_opdata1_o,
            output reg [ `RegBus ] div_opdata2_o,
            output reg div_start_o,
-           output reg signed_div_o
+           output reg signed_div_o,
+
+           // 转移指令相关接口
+           input  wire is_in_delayslot_i,
+           input  wire [`RegBus] link_address_i
 
        );
 
@@ -472,7 +479,10 @@ always @ ( * )
                 begin
                     wdata_o <= mulres[ 31: 0 ];
                 end
-
+            `EXE_RES_JUMP_BRANCH:
+                begin
+                    wdata_o<=link_address_i;
+                end
             default :
                 begin
                     wdata_o <= `ZeroWord;

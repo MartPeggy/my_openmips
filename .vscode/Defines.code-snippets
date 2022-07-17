@@ -6,6 +6,27 @@
 		],
 		"description": "",
 	},
+	
+	//*  常用的语句  *//
+	"!!! always ": {
+		"prefix": "always",
+		"body": [
+			"always @ ( * )",
+			"    begin",
+			"        if ( rst == `RstEnable )",
+			"            begin",
+			"                $1",
+			"            end",
+			"        else if ($2)",
+			"            begin",
+			"                $3",
+			"            end",
+			"        $4",
+			"    end"
+		],
+		"description": "always 代码片段",
+	},
+
 
 	//*  全局宏定义  *//
 	"RstEnable 1'b1": {
@@ -122,42 +143,42 @@
 		"body": [
 			"Stop",
 		],
-		"description": ""
+		"description": "流水线暂停"
 	},
 	"NoStop 1'b0": {
 		"prefix": "NoStop",
 		"body": [
 			"NoStop",
 		],
-		"description": ""
+		"description": "不发生流水线暂停"
 	},
 	"InDelaySlot 1'b1": {
 		"prefix": "InDelaySlot",
 		"body": [
 			"InDelaySlot",
 		],
-		"description": ""
+		"description": "在延迟槽中"
 	},
 	"NotInDelaySlot 1'b0": {
 		"prefix": "NotInDelaySlot",
 		"body": [
 			"NotInDelaySlot",
 		],
-		"description": ""
+		"description": "不在延迟槽中"
 	},
 	"Branch 1'b1": {
 		"prefix": "Branch",
 		"body": [
 			"Branch",
 		],
-		"description": ""
+		"description": "发生转移"
 	},
 	"NotBranch 1'b0": {
 		"prefix": "NotBranch",
 		"body": [
 			"NotBranch",
 		],
-		"description": ""
+		"description": "不发生转移"
 	},
 	"InterruptAssert 1'b1": {
 		"prefix": "InterruptAssert",
@@ -481,7 +502,90 @@
 		],
 		"description": "",
 	},
-
+	"EXE_J 6'b000010": {
+		"prefix": "EXE_J",
+		"body": [
+			""
+		],
+		"description": "EXE_J",
+	},
+	"EXE_JAL 6'b000011": {
+		"prefix": "EXE_JAL",
+		"body": [
+			"EXE_JAL"
+		],
+		"description": "",
+	},
+	"EXE_JALR 6'b001001": {
+		"prefix": "EXE_JALR",
+		"body": [
+			"EXE_JALR"
+		],
+		"description": "",
+	},
+	"EXE_JR 6'b001000": {
+		"prefix": "EXE_JR",
+		"body": [
+			"EXE_JR"
+		],
+		"description": "",
+	},
+	"EXE_BEQ 6'b000100": {
+		"prefix": "EXE_BEQ",
+		"body": [
+			"EXE_BEQ"
+		],
+		"description": "",
+	},
+	"EXE_BGEZ 5'b00001": {
+		"prefix": "EXE_BGEZ",
+		"body": [
+			"EXE_BGEZ"
+		],
+		"description": "",
+	},
+	"EXE_BGEZAL 5'b10001": {
+		"prefix": "EXE_BGEZAL",
+		"body": [
+			"EXE_BGEZAL"
+		],
+		"description": "",
+	},
+	"EXE_BGTZ 6'b000111": {
+		"prefix": "EXE_BGTZ",
+		"body": [
+			"EXE_BGTZ"
+		],
+		"description": "",
+	},
+	"EXE_BLEZ 6'b000110": {
+		"prefix": "EXE_BLEZ",
+		"body": [
+			"EXE_BLEZ"
+		],
+		"description": "",
+	},
+	"EXE_BLTZ 5'b00000": {
+		"prefix": "EXE_BLTZ",
+		"body": [
+			"EXE_BLTZ"
+		],
+		"description": "",
+	},
+	"EXE_BLTZAL 5'b10000": {
+		"prefix": "EXE_BLTZAL",
+		"body": [
+			"EXE_BLTZAL"
+		],
+		"description": "",
+	},
+	"EXE_BNE 6'b000101": {
+		"prefix": "EXE_BNE",
+		"body": [
+			"EXE_BNE"
+		],
+		"description": "",
+	},
 	"EXE_SYNC 6'b001111": {
 		"prefix": "EXE_SYNC",
 		"body": [
@@ -824,6 +928,103 @@
 		],
 		"description": "",
 	},
+	"EXE_J_OP 8'b01001111": {
+		"prefix": "EXE_J_OP",
+		"body": [
+			"EXE_J_OP"
+		],
+		"description": "",
+	},
+
+	"EXE_JAL_OP 8'b01010000": {
+		"prefix": "EXE_JAL_OP",
+		"body": [
+			"EXE_JAL_OP"
+		],
+		"description": "",
+	},
+
+	"EXE_JALR_OP 8'b00001001": {
+		"prefix": "EXE_JALR_OP",
+		"body": [
+			"EXE_JALR_OP"
+		],
+		"description": "",
+	},
+
+	"EXE_JR_OP 8'b00001000": {
+		"prefix": "EXE_JR_OP",
+		"body": [
+			"EXE_JR_OP"
+		],
+		"description": "",
+	},
+
+	"EXE_BEQ_OP 8'b01010001": {
+		"prefix": "EXE_BEQ_OP",
+		"body": [
+			"EXE_BEQ_OP"
+		],
+		"description": "",
+	},
+
+	"EXE_BGEZ_OP 8'b01000001": {
+		"prefix": "EXE_BGEZ_OP",
+		"body": [
+			"EXE_BGEZ_OP"
+		],
+		"description": "",
+	},
+
+	"EXE_BGEZAL_OP 8'b01001011": {
+		"prefix": "EXE_BGEZAL_OP",
+		"body": [
+			"EXE_BGEZAL_OP"
+		],
+		"description": "",
+	},
+
+	"EXE_BGTZ_OP 8'b01010100": {
+		"prefix": "EXE_BGTZ_OP",
+		"body": [
+			"EXE_BGTZ_OP"
+		],
+		"description": "",
+	},
+
+	"EXE_BLEZ_OP 8'b01010011": {
+		"prefix": "EXE_BLEZ_OP",
+		"body": [
+			"EXE_BLEZ_OP"
+		],
+		"description": "",
+	},
+
+	"EXE_BLTZ_OP 8'b01000000": {
+		"prefix": "EXE_BLTZ_OP",
+		"body": [
+			"EXE_BLTZ_OP"
+		],
+		"description": "",
+	},
+
+	"EXE_BLTZAL_OP 8'b01001010": {
+		"prefix": "EXE_BLTZAL_OP",
+		"body": [
+			"EXE_BLTZAL_OP"
+		],
+		"description": "",
+	},
+
+	"EXE_BNE_OP 8'b01010010": {
+		"prefix": "EXE_BNE_OP",
+		"body": [
+			"EXE_BNE_OP"
+		],
+		"description": "",
+	},
+
+	
 	
 	"EXE_NOP_OP 8'b00000000": {
 		"prefix": "EXE_NOP",
@@ -869,6 +1070,14 @@
 		],
 		"description": "",
 	},
+	"EXE_RES_JUMP_BRANCH 3'b110": {
+		"prefix": "EXE_RES_JUMP_BRANCH",
+		"body": [
+			"EXE_RES_JUMP_BRANCH"
+		],
+		"description": "",
+	},
+	
 	"EXE_RES_NOP 3'b000": {
 		"prefix": "EXE_RES_NOP",
 		"body": [
