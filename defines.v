@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\defines.v
 //* @Date         : 2022-04-24 09:53:09
-//* @LastEditTime : 2022-07-17 11:48:50
+//* @LastEditTime : 2022-07-17 15:59:43
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB Ctrl+t 转到定义
 //* @Description  : 一些宏定义
@@ -37,71 +37,75 @@
 `define TrapNotAssert       1'b0            // 
 //*   指令宏定义    *//
 
-`define EXE_AND             6'b100100       // AND
-`define EXE_OR              6'b100101       // OR
-`define EXE_XOR             6'b100110       // XOR 异或
-`define EXE_NOR             6'b100111       // NOR 非或
-`define EXE_ANDI            6'b001100       // ANDI 寄存器+立即数 进行与运算
-`define EXE_ORI             6'b001101       // ORI
-`define EXE_XORI            6'b001110       // XORI 寄存器+立即数 进行异或运算
-`define EXE_LUI             6'b001111       // LUI  立即数保存到寄存器高16位
+`define EXE_AND             6'b100100       // 逻辑与指令
+`define EXE_OR              6'b100101       // 逻辑或指令
+`define EXE_XOR             6'b100110       // 逻辑异或指令
+`define EXE_NOR             6'b100111       // 逻辑或非指令
+`define EXE_ANDI            6'b001100       // 立即数逻辑与指令
+`define EXE_ORI             6'b001101       // 立即数逻辑或指令
+`define EXE_XORI            6'b001110       // 立即数逻辑异或指令
+`define EXE_LUI             6'b001111       // 立即数赋值指令
 
-`define EXE_SLL             6'b000000       // SLL 寄存器中的值左移并把结果保存到新的寄存器中
-`define EXE_SLLV            6'b000100       // SLLV 寄存器中的值左移并把结果保存到新的寄存器中，移位位数由寄存器决定
-`define EXE_SRL             6'b000010       // SRL 寄存器中的值右移并把结果保存到新的寄存器中
-`define EXE_SRLV            6'b000110       // SRLV 寄存器中的值右移并把结果保存到新的寄存器中，移位位数由寄存器决定
-`define EXE_SRA             6'b000011       // SRA 寄存器中的值进行算术右移并把结果保存到新的寄存器中
-`define EXE_SRAV            6'b000111       // SRAV 寄存器中的值进行算术右移并把结果保存到新的寄存器中，移位位数由寄存器决定
+`define EXE_SLL             6'b000000       // 逻辑左移指令
+`define EXE_SLLV            6'b000100       // 按寄存器值逻辑左移指令
+`define EXE_SRL             6'b000010       // 逻辑右移指令
+`define EXE_SRLV            6'b000110       // 按寄存器值逻辑右移指令
+`define EXE_SRA             6'b000011       // 算术右移指令
+`define EXE_SRAV            6'b000111       // 按寄存器值算术右移指令
 
-`define EXE_MOVZ            6'b001010       // MOVZ 若寄存器中的值为0，则将源寄存器的值赋值给新的寄存器
-`define EXE_MOVN            6'b001011       // MOVN 若寄存器中的值为1，则将源寄存器的值赋值给新的寄存器
-`define EXE_MFHI            6'b010000       // 将HI中的值赋值给寄存器
-`define EXE_MTHI            6'b010001       // 将寄存器中的值赋值给HI
-`define EXE_MFLO            6'b010010       // 将LO中的值赋值给寄存器
-`define EXE_MTLO            6'b010011       // 将寄存器中的值赋值给LO
+`define EXE_MOVZ            6'b001010       // 按寄存器值移动数据指令
+`define EXE_MOVN            6'b001011       // 按寄存器值移动数据指令
+`define EXE_MFHI            6'b010000       // 读HI寄存器指令
+`define EXE_MTHI            6'b010001       // 写HI寄存器指令
+`define EXE_MFLO            6'b010010       // 读LO寄存器指令
+`define EXE_MTLO            6'b010011       // 写LO寄存器指令
 
-`define EXE_SLT             6'b101010
-`define EXE_SLTU            6'b101011
-`define EXE_SLTI            6'b001010
-`define EXE_SLTIU           6'b001011
-`define EXE_ADD             6'b100000
-`define EXE_ADDU            6'b100001
-`define EXE_SUB             6'b100010
-`define EXE_SUBU            6'b100011
-`define EXE_ADDI            6'b001000
-`define EXE_ADDIU           6'b001001
-`define EXE_CLZ             6'b100000
-`define EXE_CLO             6'b100001
+`define EXE_SLT             6'b101010       // 小于则设置指令
+`define EXE_SLTU            6'b101011       // 无符号小于则设置指令
+`define EXE_SLTI            6'b001010       // 小于立即数则设置指令
+`define EXE_SLTIU           6'b001011       // 小于无符号立即数则设置指令
+`define EXE_ADD             6'b100000       // 加法指令
+`define EXE_ADDU            6'b100001       // 无符号数加法指令
+`define EXE_SUB             6'b100010       // 减法指令
+`define EXE_SUBU            6'b100011       // 无符号数减法指令
+`define EXE_ADDI            6'b001000       // 有符号立即数加法指令
+`define EXE_ADDIU           6'b001001       // 无符号立即数加法指令
+`define EXE_CLZ             6'b100000       // 对零计数指令
+`define EXE_CLO             6'b100001       // 对一计数指令
 
-`define EXE_MULT            6'b011000
-`define EXE_MULTU           6'b011001
-`define EXE_MUL             6'b000010
+`define EXE_MULT            6'b011000       // 有符号数乘法指令
+`define EXE_MULTU           6'b011001       // 无符号数乘法指令
+`define EXE_MUL             6'b000010       // 乘法指令
 
-`define EXE_MADD            6'b000000
-`define EXE_MADDU           6'b000001
-`define EXE_MSUB            6'b000100
-`define EXE_MSUBU           6'b000101
+`define EXE_MADD            6'b000000       // 有符号数乘累加指令
+`define EXE_MADDU           6'b000001       // 无符号数乘累加指令
+`define EXE_MSUB            6'b000100       // 有符号数乘累减指令
+`define EXE_MSUBU           6'b000101       // 无符号数乘累减指令
 
-`define EXE_DIV             6'b011010
-`define EXE_DIVU            6'b011011
+`define EXE_DIV             6'b011010       // 除法指令
+`define EXE_DIVU            6'b011011       // 无符号数除法指令
 
-`define EXE_J               6'b000010
-`define EXE_JAL             6'b000011
-`define EXE_JALR            6'b001001
-`define EXE_JR              6'b001000
-`define EXE_BEQ             6'b000100
+`define EXE_J               6'b000010       // 无条件转移指令
+`define EXE_JAL             6'b000011       // 过程调用指令
+`define EXE_JALR            6'b001001       // 
+`define EXE_JR              6'b001000       // 按寄存器内容转移指令
+`define EXE_BEQ             6'b000100       // 相等则转移指令
 `define EXE_BGEZ            5'b00001
 `define EXE_BGEZAL          5'b10001
 `define EXE_BGTZ            6'b000111
 `define EXE_BLEZ            6'b000110
 `define EXE_BLTZ            5'b00000
 `define EXE_BLTZAL          5'b10000
-`define EXE_BNE             6'b000101
+`define EXE_BNE             6'b000101       // 不相等则转移指令
 
 `define EXE_SYNC            6'b001111       // SYNC 这里相当于空指令
 `define EXE_PREF            6'b110011       // PREF 这里相当于空指令
 `define EXE_NOP             6'b000000       // NOP
 `define SSNOP               32'b00000000000000000000000001000000
+
+`define lw                                  // 存储器读（字操作）指令
+`define sw                                  // 存储器写（字操作）指令
+
 
 `define EXE_REGIMM_INST     6'b000001       //
 `define EXE_SPECIAL2_INST   6'b011100       //
