@@ -93,6 +93,8 @@
 - [**iverilog(Icarus Verilog)**](https://github.com/steveicarus/iverilog) 
   - 可执行文件 [iverilog-v12-20220611-x64_setup.exe](http://bleyer.org/icarus/iverilog-v12-20220611-x64_setup.exe)
 - [**Modelsim**](http://www.modelsim.com/) 
+- **[Quartus](https://www.intel.cn/content/www/cn/zh/products/details/fpga/development-tools/quartus-prime/resource.html)**
+- **[Xilinx Vivado](https://www.xilinx.cn/vivado/)**
 
 ## 参考书目
 

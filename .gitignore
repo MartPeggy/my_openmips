@@ -117,5 +117,5 @@
 .vscode/extensions.json
 *.tags
 !*.cmd
-
+!指令说明/*
 
