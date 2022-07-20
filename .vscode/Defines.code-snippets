@@ -586,6 +586,106 @@
 		],
 		"description": "",
 	},
+
+	"EXE_LB": {
+		"prefix": "EXE_LB",
+		"body": [
+			"EXE_LB"
+		],
+		"description": "",
+	},
+	"EXE_LBU": {
+		"prefix": "EXE_LBU",
+		"body": [
+			"EXE_LBU"
+		],
+		"description": "",
+	},
+	"EXE_LH": {
+		"prefix": "EXE_LH",
+		"body": [
+			"EXE_LH"
+		],
+		"description": "",
+	},
+	"EXE_LHU": {
+		"prefix": "EXE_LHU",
+		"body": [
+			"EXE_LHU"
+		],
+		"description": "",
+	},
+	"EXE_LL": {
+		"prefix": "EXE_LL",
+		"body": [
+			"EXE_LL"
+		],
+		"description": "",
+	},
+	"EXE_LW": {
+		"prefix": "EXE_LW",
+		"body": [
+			"EXE_LW"
+		],
+		"description": "",
+	},
+	"EXE_LWL": {
+		"prefix": "EXE_LWL",
+		"body": [
+			"EXE_LWL"
+		],
+		"description": "",
+	},
+	"EXE_LWR": {
+		"prefix": "EXE_LWR",
+		"body": [
+			"EXE_LWR"
+		],
+		"description": "",
+	},
+	"EXE_SB": {
+		"prefix": "EXE_SB",
+		"body": [
+			"EXE_SB"
+		],
+		"description": "",
+	},
+	"EXE_SC": {
+		"prefix": "EXE_SC",
+		"body": [
+			"EXE_SC"
+		],
+		"description": "",
+	},
+	"EXE_SH": {
+		"prefix": "EXE_SH",
+		"body": [
+			"EXE_SH"
+		],
+		"description": "",
+	},
+	"EXE_SW": {
+		"prefix": "EXE_SW",
+		"body": [
+			"EXE_SW"
+		],
+		"description": "",
+	},
+	"EXE_SWL": {
+		"prefix": "EXE_SWL",
+		"body": [
+			"EXE_SWL"
+		],
+		"description": "",
+	},
+	"EXE_SWR": {
+		"prefix": "EXE_SWR",
+		"body": [
+			"EXE_SWR"
+		],
+		"description": "",
+	},
+
 	"EXE_SYNC 6'b001111": {
 		"prefix": "EXE_SYNC",
 		"body": [
@@ -1024,8 +1124,113 @@
 		"description": "",
 	},
 
-	
-	
+	"EXE_LB_OP": {
+		"prefix": "EXE_LB_OP",
+		"body": [
+			"EXE_LB_OP"
+		],
+		"description": "",
+	},
+	"EXE_LBU_OP": {
+		"prefix": "EXE_LBU_OP",
+		"body": [
+			"EXE_LBU_OP"
+		],
+		"description": "",
+	},
+	"EXE_LH_OP": {
+		"prefix": "EXE_LH_OP",
+		"body": [
+			"EXE_LH_OP"
+		],
+		"description": "",
+	},
+	"EXE_LHU_OP": {
+		"prefix": "EXE_LHU_OP",
+		"body": [
+			"EXE_LHU_OP"
+		],
+		"description": "",
+	},
+	"EXE_LL_OP": {
+		"prefix": "EXE_LL_OP",
+		"body": [
+			"EXE_LL_OP"
+		],
+		"description": "",
+	},
+	"EXE_LW_OP": {
+		"prefix": "EXE_LW_OP",
+		"body": [
+			"EXE_LW_OP"
+		],
+		"description": "",
+	},
+	"EXE_LWL_OP": {
+		"prefix": "EXE_LWL_OP",
+		"body": [
+			"EXE_LWL_OP"
+		],
+		"description": "",
+	},
+	"EXE_LWR_OP": {
+		"prefix": "EXE_LWR_OP",
+		"body": [
+			"EXE_LWR_OP"
+		],
+		"description": "",
+	},
+	"EXE_PREF_OP": {
+		"prefix": "EXE_PREF_OP",
+		"body": [
+			"EXE_PREF_OP"
+		],
+		"description": "",
+	},
+	"EXE_SB_OP": {
+		"prefix": "EXE_SB_OP",
+		"body": [
+			"EXE_SB_OP"
+		],
+		"description": "",
+	},
+
+	"EXE_SC_OP": {
+		"prefix": "EXE_SC_OP",
+		"body": [
+			"EXE_SC_OP"
+		],
+		"description": "",
+	},
+	"EXE_SH_OP": {
+		"prefix": "EXE_SH_OP",
+		"body": [
+			"EXE_SH_OP"
+		],
+		"description": "",
+	},
+	"EXE_SW_OP": {
+		"prefix": "EXE_SW_OP",
+		"body": [
+			"EXE_SW_OP"
+		],
+		"description": "",
+	},
+	"EXE_SWL_OP": {
+		"prefix": "EXE_SWL_OP",
+		"body": [
+			"EXE_SWL_OP"
+		],
+		"description": "",
+	},
+	"EXE_SWR_OP": {
+		"prefix": "EXE_SWR_OP",
+		"body": [
+			"EXE_SWR_OP"
+		],
+		"description": "",
+	},
+
 	"EXE_NOP_OP 8'b00000000": {
 		"prefix": "EXE_NOP",
 		"body": [
@@ -1074,6 +1279,13 @@
 		"prefix": "EXE_RES_JUMP_BRANCH",
 		"body": [
 			"EXE_RES_JUMP_BRANCH"
+		],
+		"description": "",
+	},
+	"EXE_RES_LOAD_STORE 3'b111": {
+		"prefix": "EXE_RES_LOAD_STORE",
+		"body": [
+			"EXE_RES_LOAD_STORE"
 		],
 		"description": "",
 	},

@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\mem.v
 //* @Date         : 2022-04-27 21:42:44
-//* @LastEditTime : 2022-07-12 14:10:14
+//* @LastEditTime : 2022-07-20 11:24:30
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 访存模块
@@ -45,9 +45,31 @@ module mem(
 
            output reg [ `RegBus ] hi_o,
            output reg [ `RegBus ] lo_o,
-           output reg  whilo_o
+           output reg whilo_o,
+
+           // 加载存储指令接口
+           // 来自执行阶段
+           input wire [ `AluOpBus ] aluop_i,
+           input wire [ `RegBus ] mem_addr_i,
+           input wire [ `RegBus ] reg2_i,
+           // 来自外部数据存储器 RAM
+           input wire [ `RegBus ] mem_data_i,
+           // 送到外部数据存储器 RAM
+           output reg [ `RegBus ] mem_addr_o,
+           output wire mem_we_o,
+           output reg [ 3: 0 ] mem_sel_o,
+           output reg [ `RegBus ] mem_data_o,
+           output reg mem_ce_o
 
        );
+wire [ `RegBus ] zero32;
+reg mem_we;
+
+// 外部存储器RAM的读写信号
+assign mem_we_o = mem_we;
+assign zero32 = `ZeroWord;
+
+
 
 // 纯组合逻辑，将上一个模块的值传递给下个模块
 always @ ( * )
@@ -60,6 +82,11 @@ always @ ( * )
                 hi_o <= `ZeroWord;
                 lo_o <= `ZeroWord;
                 whilo_o <= `WriteDisable;
+                mem_addr_o <= `ZeroWord;
+                mem_we <= `WriteDisable;
+                mem_sel_o <= 4'b0000;
+                mem_data_o <= `ZeroWord;
+                mem_ce_o <= `ChipDisable;
             end
         else
             begin
@@ -69,6 +96,30 @@ always @ ( * )
                 hi_o <= hi_i;
                 lo_o <= lo_i;
                 whilo_o <= whilo_i;
+                mem_we <= `WriteDisable;
+                mem_addr_o <= `ZeroWord;
+                mem_sel_o <= 4'b1111;
+                mem_ce_o <= `ChipDisable;
+
+                // 根据 aluop 判断指令类型，
+                case ( aluop_i )
+                    `EXE_LB_OP:
+                        begin
+                            mem_addr_o <= mem_addr_i;
+                            mem_we <= `WriteDisable;
+                            mem_ce_o <= `ChipEnable;
+
+                            case ( mem_addr_i[ 1: 0 ] )
+                                2'b00:
+                                    begin
+                                        wdata_o <= { { 24{ mem_data_i[ 31 ] } }, mem_data_i[ 31: 24 ] };
+                                        mem_sel_o <= 4'b0000;
+                                    end
+
+                            endcase
+                        end
+
+                endcase
             end    //if
     end      //always
 

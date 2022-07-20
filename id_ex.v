@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\id_ex.v
 //* @Date         : 2022-04-27 21:20:29
-//* @LastEditTime : 2022-07-17 14:05:21
+//* @LastEditTime : 2022-07-19 10:44:39
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 将译码阶段译出的指令信息传递到执行模块
@@ -32,7 +32,9 @@
 //^ 4   ex_link_address     32      out
 //^ 5  ex_is_in_delayslot   1       out
 //^ 6   is_in_delayslot_o   1       out
-
+//& 增加存储指令接口
+//^ 1       id_inst         32      in
+//^ 2       ex_inst         32      out
 
 `include "defines.v"
 module id_ex (
@@ -62,12 +64,11 @@ module id_ex (
            input wire next_inst_in_delayslot_i,
            output reg [ `RegBus ] ex_link_address,
            output reg ex_is_in_delayslot,
-           output reg is_in_delayslot_o
-       );
+           output reg is_in_delayslot_o,
 
-// stall[2]==Stop 译码阶段暂停
-// stall[3]==Stop 执行阶段暂停
-// stall[3]==Nostop 执行阶段继续
+           input wire [ `RegBus ] id_inst,
+           output reg [ `RegBus ] ex_inst
+       );
 
 always @ ( posedge clk )
     begin
@@ -82,7 +83,12 @@ always @ ( posedge clk )
                 ex_link_address <= `ZeroWord;
                 ex_is_in_delayslot <= `NotInDelaySlot;
                 is_in_delayslot_o <= `NotInDelaySlot;
+                ex_inst <= `ZeroWord;
             end
+
+        // stall[2]==Stop 译码阶段暂停
+        // stall[3]==Stop 执行阶段暂停
+        // stall[3]==NoStop 执行阶段继续
         else if ( stall[ 2 ] == `Stop && stall[ 3 ] == `NoStop )
             begin
                 ex_aluop <= `EXE_NOP_OP;
@@ -93,6 +99,7 @@ always @ ( posedge clk )
                 ex_wreg <= `WriteDisable;
                 ex_link_address <= `ZeroWord;
                 ex_is_in_delayslot <= `NotInDelaySlot;
+                ex_inst <= `ZeroWord;
             end
         else if ( stall[ 2 ] == `NoStop )
             begin
@@ -105,6 +112,7 @@ always @ ( posedge clk )
                 ex_link_address <= id_link_address;
                 ex_is_in_delayslot <= id_is_in_delayslot;
                 is_in_delayslot_o <= next_inst_in_delayslot_i;
+                ex_inst <= id_inst;
             end
     end
 

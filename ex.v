@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\ex.v
 //* @Date         : 2022-04-27 21:25:46
-//* @LastEditTime : 2022-07-17 14:04:12
+//* @LastEditTime : 2022-07-19 14:54:25
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 执行模块
@@ -48,6 +48,11 @@
 //& 转移指令相关接口
 //^ 1   is_in_delayslot_i   1       in      当前处于执行阶段的指令是否位于延迟槽
 //^ 2       link_address_i  32      in      处于执行阶段的转移指令要保存的返回地址
+//& 增加加载存储指令接口
+//^ 1       inst_i          32      in      当前处于执行阶段的指令
+//^ 2       aluop_o         8       out     当前指令的运算子类型
+//^ 3       mem_addr_o      32      out     加载存储指令对应的存储器地址
+//^ 4       reg2_o          32      out     存储指令要存储的数据或加载指令要加载的原始值
 
 `include "defines.v"
 module ex (
@@ -104,8 +109,15 @@ module ex (
            output reg signed_div_o,
 
            // 转移指令相关接口
-           input  wire is_in_delayslot_i,
-           input  wire [`RegBus] link_address_i
+           input wire is_in_delayslot_i,
+           input wire [ `RegBus ] link_address_i,
+
+           // 加载存储指令相关接口
+           input wire [ `RegBus ] inst_i,
+           output wire [ `AluOpBus ] aluop_o,
+           output wire [ `RegBus ] mem_addr_o,
+           output wire [ `RegBus ] reg2_o
+
 
        );
 
@@ -148,6 +160,14 @@ reg stallreq_for_madd_msub;
 // 是否因除法运算导致流水线暂停
 reg stallreq_for_div;
 
+// aluop_o 传递运算子类型到后续模块，在访存阶段确定指令的作用
+assign aluop_o = aluop_i;
+// mem_addr_o 传递到后续模块，指示加载、存储指令对应的存储器地址
+// 这里还需要计算指令中的 offset 和 base ，分别对应的指令的 [15-0] 和reg1_i
+assign mem_addr_o = reg1_i + { { 16{ inst_i[ 15 ] } }, inst_i[ 15: 0 ] };
+// reg2_i 传递到访存模块，确定指令要存储的数据
+assign reg2_o=reg2_i;
+
 // 解决数据相关性问题：HI，LO寄存器
 always @( * )
     begin
@@ -155,11 +175,11 @@ always @( * )
             begin
                 { HI, LO } <= { `ZeroWord, `ZeroWord };
             end
-        else if ( mem_whilo_i == `WriteEnable )                                        //  访存阶段的指令要写HI，LO寄存器
+        else if ( mem_whilo_i == `WriteEnable )                                          //  访存阶段的指令要写HI，LO寄存器
             begin
                 { HI, LO } <= { mem_hi_i, mem_lo_i };
             end
-        else if ( wb_whilo_i == `WriteEnable )                                         //  回写阶段的指令要写HI，LO寄存器
+        else if ( wb_whilo_i == `WriteEnable )                                           //  回写阶段的指令要写HI，LO寄存器
             begin
                 { HI, LO } <= { wb_hi_i, wb_lo_i };
             end
@@ -214,8 +234,8 @@ always @( * )
             end
         else
             begin
-                case ( aluop_i )                                             // 判断子类型
-                    `EXE_OR_OP:                                             // 子类型为 OR
+                case ( aluop_i )                                               // 判断子类型
+                    `EXE_OR_OP:                                               // 子类型为 OR
                         begin
                             logicout <= reg1_i | reg2_i;
                         end
@@ -479,10 +499,12 @@ always @ ( * )
                 begin
                     wdata_o <= mulres[ 31: 0 ];
                 end
+
             `EXE_RES_JUMP_BRANCH:
                 begin
-                    wdata_o<=link_address_i;
+                    wdata_o <= link_address_i;
                 end
+
             default :
                 begin
                     wdata_o <= `ZeroWord;

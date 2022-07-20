@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\openmips_min_sopc_tb.v
 //* @Date         : 2022-07-04 19:09:01
-//* @LastEditTime : 2022-07-12 19:37:21
+//* @LastEditTime : 2022-07-19 08:29:14
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : Testbench
