@@ -115,7 +115,7 @@
 .vscode/targets.log
 .vscode/configurationCache.log
 .vscode/extensions.json
-*.tags
+!*.tags
 !*.cmd
 !指令说明/*
 

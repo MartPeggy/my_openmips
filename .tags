@@ -1,0 +1,627 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	D:/Code/my_OpenMIPS/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	/p5.9.20220306.0/
+AluOpBus	defines.v	/^`define AluOpBus            7:0             \/\/ 译码阶段的输出 aluop_o 的宽度$/;"	kind:constant	line:19
+AluSelBus	defines.v	/^`define AluSelBus           2:0             \/\/ 译码阶段的输出 alusel_o的宽度$/;"	kind:constant	line:20
+Branch	defines.v	/^`define Branch              1'b1            \/\/ 发生转移$/;"	kind:constant	line:32
+ByteWidth	defines.v	/^`define ByteWidth           7:0             \/\/ 一个字节的宽度$/;"	kind:constant	line:246
+ChipDisable	defines.v	/^`define ChipDisable         1'b0            \/\/ 芯片禁止$/;"	kind:constant	line:26
+ChipEnable	defines.v	/^`define ChipEnable          1'b1            \/\/ 芯片使能$/;"	kind:constant	line:25
+DataAddrBus	defines.v	/^`define DataAddrBus         31:0            \/\/ RAM地址总线宽度$/;"	kind:constant	line:242
+DataBus	defines.v	/^`define DataBus             31:0            \/\/ RAM数据总线宽度$/;"	kind:constant	line:243
+DataMemNum	defines.v	/^`define DataMemNum          131071          \/\/ RAM的大小，单位是字（128K）$/;"	kind:constant	line:244
+DataMemNumLog2	defines.v	/^`define DataMemNumLog2      17              \/\/ 实际使用的地址宽度$/;"	kind:constant	line:245
+DivByZero	defines.v	/^`define DivByZero           2'b01           \/\/$/;"	kind:constant	line:233
+DivEnd	defines.v	/^`define DivEnd              2'b11           \/\/$/;"	kind:constant	line:235
+DivFree	defines.v	/^`define DivFree             2'b00           \/\/$/;"	kind:constant	line:232
+DivOn	defines.v	/^`define DivOn               2'b10           \/\/$/;"	kind:constant	line:234
+DivResultNotReady	defines.v	/^`define DivResultNotReady   1'b0            \/\/$/;"	kind:constant	line:237
+DivResultReady	defines.v	/^`define DivResultReady      1'b1            \/\/$/;"	kind:constant	line:236
+DivStart	defines.v	/^`define DivStart            1'b1            \/\/$/;"	kind:constant	line:238
+DivStop	defines.v	/^`define DivStop             1'b0            \/\/$/;"	kind:constant	line:239
+DoubleRegBus	defines.v	/^`define DoubleRegBus        63:0            \/\/ 通用寄存器的数据线宽度的两倍$/;"	kind:constant	line:226
+DoubleRegWidth	defines.v	/^`define DoubleRegWidth      64              \/\/ 通用寄存器的两倍宽度$/;"	kind:constant	line:225
+EXE_ADD	defines.v	/^`define EXE_ADD             6'b100000       \/\/ 加法指令$/;"	kind:constant	line:67
+EXE_ADDI	defines.v	/^`define EXE_ADDI            6'b001000       \/\/ 有符号立即数加法指令$/;"	kind:constant	line:71
+EXE_ADDIU	defines.v	/^`define EXE_ADDIU           6'b001001       \/\/ 无符号立即数加法指令$/;"	kind:constant	line:72
+EXE_ADDIU_OP	defines.v	/^`define EXE_ADDIU_OP        8'b01010110     \/\/$/;"	kind:constant	line:157
+EXE_ADDI_OP	defines.v	/^`define EXE_ADDI_OP         8'b01010101     \/\/$/;"	kind:constant	line:156
+EXE_ADDU	defines.v	/^`define EXE_ADDU            6'b100001       \/\/ 无符号数加法指令$/;"	kind:constant	line:68
+EXE_ADDU_OP	defines.v	/^`define EXE_ADDU_OP         8'b00100001     \/\/$/;"	kind:constant	line:153
+EXE_ADD_OP	defines.v	/^`define EXE_ADD_OP          8'b00100000     \/\/$/;"	kind:constant	line:152
+EXE_AND	defines.v	/^`define EXE_AND             6'b100100       \/\/ 逻辑与指令$/;"	kind:constant	line:40
+EXE_ANDI	defines.v	/^`define EXE_ANDI            6'b001100       \/\/ 立即数逻辑与指令$/;"	kind:constant	line:44
+EXE_ANDI_OP	defines.v	/^`define EXE_ANDI_OP         8'b01011001     \/\/$/;"	kind:constant	line:130
+EXE_AND_OP	defines.v	/^`define EXE_AND_OP          8'b00100100     \/\/$/;"	kind:constant	line:126
+EXE_BEQ	defines.v	/^`define EXE_BEQ             6'b000100       \/\/ 相等则转移指令$/;"	kind:constant	line:92
+EXE_BEQ_OP	defines.v	/^`define EXE_BEQ_OP          8'b01010001     \/\/$/;"	kind:constant	line:177
+EXE_BGEZ	defines.v	/^`define EXE_BGEZ            5'b00001        \/\/$/;"	kind:constant	line:93
+EXE_BGEZAL	defines.v	/^`define EXE_BGEZAL          5'b10001        \/\/$/;"	kind:constant	line:94
+EXE_BGEZAL_OP	defines.v	/^`define EXE_BGEZAL_OP       8'b01001011     \/\/$/;"	kind:constant	line:179
+EXE_BGEZ_OP	defines.v	/^`define EXE_BGEZ_OP         8'b01000001     \/\/$/;"	kind:constant	line:178
+EXE_BGTZ	defines.v	/^`define EXE_BGTZ            6'b000111       \/\/$/;"	kind:constant	line:95
+EXE_BGTZ_OP	defines.v	/^`define EXE_BGTZ_OP         8'b01010100     \/\/$/;"	kind:constant	line:180
+EXE_BLEZ	defines.v	/^`define EXE_BLEZ            6'b000110       \/\/$/;"	kind:constant	line:96
+EXE_BLEZ_OP	defines.v	/^`define EXE_BLEZ_OP         8'b01010011     \/\/$/;"	kind:constant	line:181
+EXE_BLTZ	defines.v	/^`define EXE_BLTZ            5'b00000        \/\/$/;"	kind:constant	line:97
+EXE_BLTZAL	defines.v	/^`define EXE_BLTZAL          5'b10000        \/\/$/;"	kind:constant	line:98
+EXE_BLTZAL_OP	defines.v	/^`define EXE_BLTZAL_OP       8'b01001010     \/\/$/;"	kind:constant	line:183
+EXE_BLTZ_OP	defines.v	/^`define EXE_BLTZ_OP         8'b01000000     \/\/$/;"	kind:constant	line:182
+EXE_BNE	defines.v	/^`define EXE_BNE             6'b000101       \/\/ 不相等则转移指令$/;"	kind:constant	line:99
+EXE_BNE_OP	defines.v	/^`define EXE_BNE_OP          8'b01010010     \/\/$/;"	kind:constant	line:184
+EXE_CLO	defines.v	/^`define EXE_CLO             6'b100001       \/\/ 对一计数指令$/;"	kind:constant	line:74
+EXE_CLO_OP	defines.v	/^`define EXE_CLO_OP          8'b10110001     \/\/$/;"	kind:constant	line:159
+EXE_CLZ	defines.v	/^`define EXE_CLZ             6'b100000       \/\/ 对零计数指令$/;"	kind:constant	line:73
+EXE_CLZ_OP	defines.v	/^`define EXE_CLZ_OP          8'b10110000     \/\/$/;"	kind:constant	line:158
+EXE_DIV	defines.v	/^`define EXE_DIV             6'b011010       \/\/ 除法指令$/;"	kind:constant	line:85
+EXE_DIVU	defines.v	/^`define EXE_DIVU            6'b011011       \/\/ 无符号数除法指令$/;"	kind:constant	line:86
+EXE_DIVU_OP	defines.v	/^`define EXE_DIVU_OP         8'b00011011     \/\/$/;"	kind:constant	line:171
+EXE_DIV_OP	defines.v	/^`define EXE_DIV_OP          8'b00011010     \/\/$/;"	kind:constant	line:170
+EXE_J	defines.v	/^`define EXE_J               6'b000010       \/\/ 无条件转移指令$/;"	kind:constant	line:88
+EXE_JAL	defines.v	/^`define EXE_JAL             6'b000011       \/\/ 过程调用指令$/;"	kind:constant	line:89
+EXE_JALR	defines.v	/^`define EXE_JALR            6'b001001       \/\/$/;"	kind:constant	line:90
+EXE_JALR_OP	defines.v	/^`define EXE_JALR_OP         8'b00001001     \/\/$/;"	kind:constant	line:175
+EXE_JAL_OP	defines.v	/^`define EXE_JAL_OP          8'b01010000     \/\/$/;"	kind:constant	line:174
+EXE_JR	defines.v	/^`define EXE_JR              6'b001000       \/\/ 按寄存器内容转移指令$/;"	kind:constant	line:91
+EXE_JR_OP	defines.v	/^`define EXE_JR_OP           8'b00001000     \/\/$/;"	kind:constant	line:176
+EXE_J_OP	defines.v	/^`define EXE_J_OP            8'b01001111     \/\/$/;"	kind:constant	line:173
+EXE_LB	defines.v	/^`define EXE_LB              6'b100000       \/\/$/;"	kind:constant	line:101
+EXE_LBU	defines.v	/^`define EXE_LBU             6'b100100       \/\/$/;"	kind:constant	line:102
+EXE_LBU_OP	defines.v	/^`define EXE_LBU_OP          8'b11100100     \/\/$/;"	kind:constant	line:187
+EXE_LB_OP	defines.v	/^`define EXE_LB_OP           8'b11100000     \/\/$/;"	kind:constant	line:186
+EXE_LH	defines.v	/^`define EXE_LH              6'b100001       \/\/$/;"	kind:constant	line:103
+EXE_LHU	defines.v	/^`define EXE_LHU             6'b100101       \/\/$/;"	kind:constant	line:104
+EXE_LHU_OP	defines.v	/^`define EXE_LHU_OP          8'b11100101     \/\/$/;"	kind:constant	line:189
+EXE_LH_OP	defines.v	/^`define EXE_LH_OP           8'b11100001     \/\/$/;"	kind:constant	line:188
+EXE_LL	defines.v	/^`define EXE_LL              6'b110000       \/\/$/;"	kind:constant	line:105
+EXE_LL_OP	defines.v	/^`define EXE_LL_OP           8'b11110000     \/\/$/;"	kind:constant	line:190
+EXE_LUI	defines.v	/^`define EXE_LUI             6'b001111       \/\/ 立即数赋值指令$/;"	kind:constant	line:47
+EXE_LUI_OP	defines.v	/^`define EXE_LUI_OP          8'b01011100     \/\/$/;"	kind:constant	line:133
+EXE_LW	defines.v	/^`define EXE_LW              6'b100011       \/\/$/;"	kind:constant	line:106
+EXE_LWL	defines.v	/^`define EXE_LWL             6'b100010       \/\/$/;"	kind:constant	line:107
+EXE_LWL_OP	defines.v	/^`define EXE_LWL_OP          8'b11100010     \/\/$/;"	kind:constant	line:192
+EXE_LWR	defines.v	/^`define EXE_LWR             6'b100110       \/\/$/;"	kind:constant	line:108
+EXE_LWR_OP	defines.v	/^`define EXE_LWR_OP          8'b11100110     \/\/$/;"	kind:constant	line:193
+EXE_LW_OP	defines.v	/^`define EXE_LW_OP           8'b11100011     \/\/$/;"	kind:constant	line:191
+EXE_MADD	defines.v	/^`define EXE_MADD            6'b000000       \/\/ 有符号数乘累加指令$/;"	kind:constant	line:80
+EXE_MADDU	defines.v	/^`define EXE_MADDU           6'b000001       \/\/ 无符号数乘累加指令$/;"	kind:constant	line:81
+EXE_MADDU_OP	defines.v	/^`define EXE_MADDU_OP        8'b10101000     \/\/$/;"	kind:constant	line:166
+EXE_MADD_OP	defines.v	/^`define EXE_MADD_OP         8'b10100110     \/\/$/;"	kind:constant	line:165
+EXE_MFHI	defines.v	/^`define EXE_MFHI            6'b010000       \/\/ 读HI寄存器指令$/;"	kind:constant	line:58
+EXE_MFHI_OP	defines.v	/^`define EXE_MFHI_OP         8'b00010000     \/\/$/;"	kind:constant	line:143
+EXE_MFLO	defines.v	/^`define EXE_MFLO            6'b010010       \/\/ 读LO寄存器指令$/;"	kind:constant	line:60
+EXE_MFLO_OP	defines.v	/^`define EXE_MFLO_OP         8'b00010010     \/\/$/;"	kind:constant	line:145
+EXE_MOVN	defines.v	/^`define EXE_MOVN            6'b001011       \/\/ 按寄存器值移动数据指令$/;"	kind:constant	line:57
+EXE_MOVN_OP	defines.v	/^`define EXE_MOVN_OP         8'b00001011     \/\/$/;"	kind:constant	line:142
+EXE_MOVZ	defines.v	/^`define EXE_MOVZ            6'b001010       \/\/ 按寄存器值移动数据指令$/;"	kind:constant	line:56
+EXE_MOVZ_OP	defines.v	/^`define EXE_MOVZ_OP         8'b00001010     \/\/$/;"	kind:constant	line:141
+EXE_MSUB	defines.v	/^`define EXE_MSUB            6'b000100       \/\/ 有符号数乘累减指令$/;"	kind:constant	line:82
+EXE_MSUBU	defines.v	/^`define EXE_MSUBU           6'b000101       \/\/ 无符号数乘累减指令$/;"	kind:constant	line:83
+EXE_MSUBU_OP	defines.v	/^`define EXE_MSUBU_OP        8'b10101011     \/\/$/;"	kind:constant	line:168
+EXE_MSUB_OP	defines.v	/^`define EXE_MSUB_OP         8'b10101010     \/\/$/;"	kind:constant	line:167
+EXE_MTHI	defines.v	/^`define EXE_MTHI            6'b010001       \/\/ 写HI寄存器指令$/;"	kind:constant	line:59
+EXE_MTHI_OP	defines.v	/^`define EXE_MTHI_OP         8'b00010001     \/\/$/;"	kind:constant	line:144
+EXE_MTLO	defines.v	/^`define EXE_MTLO            6'b010011       \/\/ 写LO寄存器指令$/;"	kind:constant	line:61
+EXE_MTLO_OP	defines.v	/^`define EXE_MTLO_OP         8'b00010011     \/\/$/;"	kind:constant	line:146
+EXE_MUL	defines.v	/^`define EXE_MUL             6'b000010       \/\/ 乘法指令$/;"	kind:constant	line:78
+EXE_MULT	defines.v	/^`define EXE_MULT            6'b011000       \/\/ 有符号数乘法指令$/;"	kind:constant	line:76
+EXE_MULTU	defines.v	/^`define EXE_MULTU           6'b011001       \/\/ 无符号数乘法指令$/;"	kind:constant	line:77
+EXE_MULTU_OP	defines.v	/^`define EXE_MULTU_OP        8'b00011001     \/\/$/;"	kind:constant	line:162
+EXE_MULT_OP	defines.v	/^`define EXE_MULT_OP         8'b00011000     \/\/$/;"	kind:constant	line:161
+EXE_MUL_OP	defines.v	/^`define EXE_MUL_OP          8'b10101001     \/\/$/;"	kind:constant	line:163
+EXE_NOP	defines.v	/^`define EXE_NOP             6'b000000       \/\/ NOP$/;"	kind:constant	line:118
+EXE_NOP_OP	defines.v	/^`define EXE_NOP_OP          8'b00000000     \/\/$/;"	kind:constant	line:203
+EXE_NOR	defines.v	/^`define EXE_NOR             6'b100111       \/\/ 逻辑或非指令$/;"	kind:constant	line:43
+EXE_NOR_OP	defines.v	/^`define EXE_NOR_OP          8'b00100111     \/\/$/;"	kind:constant	line:129
+EXE_OR	defines.v	/^`define EXE_OR              6'b100101       \/\/ 逻辑或指令$/;"	kind:constant	line:41
+EXE_ORI	defines.v	/^`define EXE_ORI             6'b001101       \/\/ 立即数逻辑或指令$/;"	kind:constant	line:45
+EXE_ORI_OP	defines.v	/^`define EXE_ORI_OP          8'b01011010     \/\/$/;"	kind:constant	line:131
+EXE_OR_OP	defines.v	/^`define EXE_OR_OP           8'b00100101     \/\/$/;"	kind:constant	line:127
+EXE_PREF	defines.v	/^`define EXE_PREF            6'b110011       \/\/ PREF 这里相当于空指令$/;"	kind:constant	line:117
+EXE_PREF_OP	defines.v	/^`define EXE_PREF_OP         8'b11110011     \/\/$/;"	kind:constant	line:194
+EXE_REGIMM_INST	defines.v	/^`define EXE_REGIMM_INST     6'b000001       \/\/$/;"	kind:constant	line:121
+EXE_RES_ARITHMETIC	defines.v	/^`define EXE_RES_ARITHMETIC  3'b100          \/\/$/;"	kind:constant	line:209
+EXE_RES_JUMP_BRANCH	defines.v	/^`define EXE_RES_JUMP_BRANCH 3'b110          \/\/$/;"	kind:constant	line:211
+EXE_RES_LOAD_STORE	defines.v	/^`define EXE_RES_LOAD_STORE  3'b111          \/\/$/;"	kind:constant	line:212
+EXE_RES_LOGIC	defines.v	/^`define EXE_RES_LOGIC       3'b001          \/\/$/;"	kind:constant	line:206
+EXE_RES_MOVE	defines.v	/^`define EXE_RES_MOVE        3'b011          \/\/$/;"	kind:constant	line:208
+EXE_RES_MUL	defines.v	/^`define EXE_RES_MUL         3'b101          \/\/$/;"	kind:constant	line:210
+EXE_RES_NOP	defines.v	/^`define EXE_RES_NOP         3'b000          \/\/$/;"	kind:constant	line:213
+EXE_RES_SHIFT	defines.v	/^`define EXE_RES_SHIFT       3'b010          \/\/$/;"	kind:constant	line:207
+EXE_SB	defines.v	/^`define EXE_SB              6'b101000       \/\/$/;"	kind:constant	line:109
+EXE_SB_OP	defines.v	/^`define EXE_SB_OP           8'b11101000     \/\/$/;"	kind:constant	line:195
+EXE_SC	defines.v	/^`define EXE_SC              6'b111000       \/\/$/;"	kind:constant	line:110
+EXE_SC_OP	defines.v	/^`define EXE_SC_OP           8'b11111000     \/\/$/;"	kind:constant	line:196
+EXE_SH	defines.v	/^`define EXE_SH              6'b101001       \/\/$/;"	kind:constant	line:111
+EXE_SH_OP	defines.v	/^`define EXE_SH_OP           8'b11101001     \/\/$/;"	kind:constant	line:197
+EXE_SLL	defines.v	/^`define EXE_SLL             6'b000000       \/\/ 逻辑左移指令$/;"	kind:constant	line:49
+EXE_SLLV	defines.v	/^`define EXE_SLLV            6'b000100       \/\/ 按寄存器值逻辑左移指令$/;"	kind:constant	line:50
+EXE_SLLV_OP	defines.v	/^`define EXE_SLLV_OP         8'b00000100     \/\/$/;"	kind:constant	line:135
+EXE_SLL_OP	defines.v	/^`define EXE_SLL_OP          8'b01111100     \/\/$/;"	kind:constant	line:134
+EXE_SLT	defines.v	/^`define EXE_SLT             6'b101010       \/\/ 小于则设置指令$/;"	kind:constant	line:63
+EXE_SLTI	defines.v	/^`define EXE_SLTI            6'b001010       \/\/ 小于立即数则设置指令$/;"	kind:constant	line:65
+EXE_SLTIU	defines.v	/^`define EXE_SLTIU           6'b001011       \/\/ 小于无符号立即数则设置指令$/;"	kind:constant	line:66
+EXE_SLTIU_OP	defines.v	/^`define EXE_SLTIU_OP        8'b01011000     \/\/$/;"	kind:constant	line:151
+EXE_SLTI_OP	defines.v	/^`define EXE_SLTI_OP         8'b01010111     \/\/$/;"	kind:constant	line:150
+EXE_SLTU	defines.v	/^`define EXE_SLTU            6'b101011       \/\/ 无符号小于则设置指令$/;"	kind:constant	line:64
+EXE_SLTU_OP	defines.v	/^`define EXE_SLTU_OP         8'b00101011     \/\/$/;"	kind:constant	line:149
+EXE_SLT_OP	defines.v	/^`define EXE_SLT_OP          8'b00101010     \/\/$/;"	kind:constant	line:148
+EXE_SPECIAL2_INST	defines.v	/^`define EXE_SPECIAL2_INST   6'b011100       \/\/$/;"	kind:constant	line:122
+EXE_SPECIAL_INST	defines.v	/^`define EXE_SPECIAL_INST    6'b000000       \/\/ 特殊指令$/;"	kind:constant	line:123
+EXE_SRA	defines.v	/^`define EXE_SRA             6'b000011       \/\/ 算术右移指令$/;"	kind:constant	line:53
+EXE_SRAV	defines.v	/^`define EXE_SRAV            6'b000111       \/\/ 按寄存器值算术右移指令$/;"	kind:constant	line:54
+EXE_SRAV_OP	defines.v	/^`define EXE_SRAV_OP         8'b00000111     \/\/$/;"	kind:constant	line:139
+EXE_SRA_OP	defines.v	/^`define EXE_SRA_OP          8'b00000011     \/\/$/;"	kind:constant	line:138
+EXE_SRL	defines.v	/^`define EXE_SRL             6'b000010       \/\/ 逻辑右移指令$/;"	kind:constant	line:51
+EXE_SRLV	defines.v	/^`define EXE_SRLV            6'b000110       \/\/ 按寄存器值逻辑右移指令$/;"	kind:constant	line:52
+EXE_SRLV_OP	defines.v	/^`define EXE_SRLV_OP         8'b00000110     \/\/$/;"	kind:constant	line:137
+EXE_SRL_OP	defines.v	/^`define EXE_SRL_OP          8'b00000010     \/\/$/;"	kind:constant	line:136
+EXE_SUB	defines.v	/^`define EXE_SUB             6'b100010       \/\/ 减法指令$/;"	kind:constant	line:69
+EXE_SUBU	defines.v	/^`define EXE_SUBU            6'b100011       \/\/ 无符号数减法指令$/;"	kind:constant	line:70
+EXE_SUBU_OP	defines.v	/^`define EXE_SUBU_OP         8'b00100011     \/\/$/;"	kind:constant	line:155
+EXE_SUB_OP	defines.v	/^`define EXE_SUB_OP          8'b00100010     \/\/$/;"	kind:constant	line:154
+EXE_SW	defines.v	/^`define EXE_SW              6'b101011       \/\/$/;"	kind:constant	line:112
+EXE_SWL	defines.v	/^`define EXE_SWL             6'b101010       \/\/$/;"	kind:constant	line:113
+EXE_SWL_OP	defines.v	/^`define EXE_SWL_OP          8'b11101010     \/\/$/;"	kind:constant	line:199
+EXE_SWR	defines.v	/^`define EXE_SWR             6'b101110       \/\/$/;"	kind:constant	line:114
+EXE_SWR_OP	defines.v	/^`define EXE_SWR_OP          8'b11101110     \/\/$/;"	kind:constant	line:200
+EXE_SW_OP	defines.v	/^`define EXE_SW_OP           8'b11101011     \/\/$/;"	kind:constant	line:198
+EXE_SYNC	defines.v	/^`define EXE_SYNC            6'b001111       \/\/ SYNC 这里相当于空指令$/;"	kind:constant	line:116
+EXE_SYNC_OP	defines.v	/^`define EXE_SYNC_OP         8'b00001111     \/\/$/;"	kind:constant	line:201
+EXE_XOR	defines.v	/^`define EXE_XOR             6'b100110       \/\/ 逻辑异或指令$/;"	kind:constant	line:42
+EXE_XORI	defines.v	/^`define EXE_XORI            6'b001110       \/\/ 立即数逻辑异或指令$/;"	kind:constant	line:46
+EXE_XORI_OP	defines.v	/^`define EXE_XORI_OP         8'b01011011     \/\/$/;"	kind:constant	line:132
+EXE_XOR_OP	defines.v	/^`define EXE_XOR_OP          8'b00100110     \/\/$/;"	kind:constant	line:128
+False_v	defines.v	/^`define False_v             1'b0            \/\/ 逻辑假$/;"	kind:constant	line:24
+HI	ex.v	/^reg [ `RegBus ] HI;$/;"	kind:register	line:138	module:ex
+InDelaySlot	defines.v	/^`define InDelaySlot         1'b1            \/\/ 在延迟槽中$/;"	kind:constant	line:30
+InstAddrBus	defines.v	/^`define InstAddrBus         31:0            \/\/ ROM的地址总线宽度$/;"	kind:constant	line:216
+InstBus	defines.v	/^`define InstBus             31:0            \/\/ ROM的数据总线宽度$/;"	kind:constant	line:217
+InstInvalid	defines.v	/^`define InstInvalid         1'b1            \/\/ 指令无效$/;"	kind:constant	line:22
+InstMemNum	defines.v	/^`define InstMemNum          131071          \/\/ ROM的实际大小$/;"	kind:constant	line:218
+InstMemNumLog2	defines.v	/^`define InstMemNumLog2      17              \/\/ ROM实际使用的地址线宽度$/;"	kind:constant	line:219
+InstValid	defines.v	/^`define InstValid           1'b0            \/\/ 指令有效$/;"	kind:constant	line:21
+InterruptAssert	defines.v	/^`define InterruptAssert     1'b1            \/\/$/;"	kind:constant	line:34
+InterruptNotAssert	defines.v	/^`define InterruptNotAssert  1'b0            \/\/$/;"	kind:constant	line:35
+LLbit	mem.v	/^reg LLbit;$/;"	kind:register	line:91	module:mem
+LLbit_i	LLbit_reg.v	/^           input wire LLbit_i,$/;"	kind:port	line:27	module:LLbit_reg
+LLbit_i	mem.v	/^           input wire LLbit_i,$/;"	kind:port	line:65	module:mem
+LLbit_o	LLbit_reg.v	/^           output reg LLbit_o$/;"	kind:port	line:31	module:LLbit_reg
+LLbit_o	openmips.v	/^wire LLbit_o;$/;"	kind:net	line:151	module:openmips
+LLbit_reg	LLbit_reg.v	/^module LLbit_reg($/;"	kind:module	line:20
+LLbit_reg0	openmips.v	/^LLbit_reg LLbit_reg0($/;"	kind:instance	line:488	module:openmips
+LLbit_value_o	mem.v	/^           output reg LLbit_value_o,$/;"	kind:port	line:79	module:mem
+LLbit_we_o	mem.v	/^           output reg LLbit_we_o,$/;"	kind:port	line:78	module:mem
+LO	ex.v	/^reg [ `RegBus ] LO;$/;"	kind:register	line:139	module:ex
+NOPRegAddr	defines.v	/^`define NOPRegAddr          5'b000000$/;"	kind:constant	line:229
+NoStop	defines.v	/^`define NoStop              1'b0            \/\/ 流水线继续$/;"	kind:constant	line:29
+NotBranch	defines.v	/^`define NotBranch           1'b0            \/\/ 不发生转移$/;"	kind:constant	line:33
+NotInDelaySlot	defines.v	/^`define NotInDelaySlot      1'b0            \/\/ 不在延迟槽中$/;"	kind:constant	line:31
+ReadDisable	defines.v	/^`define ReadDisable         1'b0            \/\/ 禁止读$/;"	kind:constant	line:17
+ReadEnable	defines.v	/^`define ReadEnable          1'b1            \/\/ 读使能$/;"	kind:constant	line:16
+RegAddrBus	defines.v	/^`define RegAddrBus          4:0             \/\/ RegFile的地址线宽度$/;"	kind:constant	line:222
+RegBus	defines.v	/^`define RegBus              31:0            \/\/ RegFile的数据线宽度$/;"	kind:constant	line:223
+RegNum	defines.v	/^`define RegNum              32              \/\/ 通用寄存器的数量$/;"	kind:constant	line:227
+RegNumLog2	defines.v	/^`define RegNumLog2          5               \/\/ 寻址通用寄存器使用的地址位宽$/;"	kind:constant	line:228
+RegWidth	defines.v	/^`define RegWidth            32              \/\/ 通用寄存器的宽度$/;"	kind:constant	line:224
+RstDisable	defines.v	/^`define RstDisable          1'b0            \/\/ 复位无效$/;"	kind:constant	line:12
+RstEnable	defines.v	/^`define RstEnable           1'b1            \/\/ 复位有效$/;"	kind:constant	line:11
+SSNOP	defines.v	/^`define SSNOP               32'b00000000000000000000000001000000$/;"	kind:constant	line:119
+Stop	defines.v	/^`define Stop                1'b1            \/\/ 流水线暂停$/;"	kind:constant	line:28
+TrapAssert	defines.v	/^`define TrapAssert          1'b1            \/\/$/;"	kind:constant	line:36
+TrapNotAssert	defines.v	/^`define TrapNotAssert       1'b0            \/\/$/;"	kind:constant	line:37
+True_v	defines.v	/^`define True_v              1'b1            \/\/ 逻辑真$/;"	kind:constant	line:23
+WriteDisable	defines.v	/^`define WriteDisable        1'b0            \/\/ 禁止写$/;"	kind:constant	line:15
+WriteEnable	defines.v	/^`define WriteEnable         1'b1            \/\/ 写使能$/;"	kind:constant	line:14
+ZeroWord	defines.v	/^`define ZeroWord            32'h00000000    \/\/ 32位的数值0$/;"	kind:constant	line:13
+addr	data_ram.v	/^           input wire [ `DataAddrBus ] addr,$/;"	kind:port	line:24	module:data_ram
+addr	inst_rom.v	/^           input wire [ `InstAddrBus ] addr,$/;"	kind:port	line:18	module:inst_rom
+aluop_i	ex.v	/^           input wire [ `AluOpBus ] aluop_i,$/;"	kind:port	line:64	module:ex
+aluop_i	mem.v	/^           input wire [ `AluOpBus ] aluop_i,$/;"	kind:port	line:57	module:mem
+aluop_o	ex.v	/^           output wire [ `AluOpBus ] aluop_o,$/;"	kind:port	line:114	module:ex
+aluop_o	id.v	/^           output reg [ `AluOpBus ] aluop_o,$/;"	kind:port	line:82	module:id
+alusel_i	ex.v	/^           input wire [ `AluSelBus ] alusel_i,$/;"	kind:port	line:65	module:ex
+alusel_o	id.v	/^           output reg [ `AluSelBus ] alusel_o,$/;"	kind:port	line:83	module:id
+annul_i	div.v	/^           input wire annul_i,$/;"	kind:port	line:30	module:div
+arithmeticres	ex.v	/^reg [ `RegBus ] arithmeticres;$/;"	kind:register	line:132	module:ex
+branch_flag_i	pc_reg.v	/^           input wire branch_flag_i,$/;"	kind:port	line:31	module:pc_reg
+branch_flag_o	id.v	/^           output reg branch_flag_o,$/;"	kind:port	line:94	module:id
+branch_target_address	openmips.v	/^wire [ `RegBus ] branch_target_address;$/;"	kind:net	line:144	module:openmips
+branch_target_address_i	pc_reg.v	/^           input wire [ `RegBus ] branch_target_address_i,$/;"	kind:port	line:32	module:pc_reg
+branch_target_address_o	id.v	/^           output reg [ `RegBus ] branch_target_address_o,$/;"	kind:port	line:95	module:id
+ce	data_ram.v	/^           input wire ce,$/;"	kind:port	line:22	module:data_ram
+ce	inst_rom.v	/^           input wire ce,$/;"	kind:port	line:17	module:inst_rom
+ce	pc_reg.v	/^           output reg ce$/;"	kind:port	line:35	module:pc_reg
+clk	LLbit_reg.v	/^           input wire clk,$/;"	kind:port	line:22	module:LLbit_reg
+clk	data_ram.v	/^           input wire clk,$/;"	kind:port	line:21	module:data_ram
+clk	div.v	/^           input wire clk,$/;"	kind:port	line:23	module:div
+clk	ex_mem.v	/^           input wire clk,$/;"	kind:port	line:38	module:ex_mem
+clk	hilo_reg.v	/^           input wire clk,$/;"	kind:port	line:22	module:hilo_reg
+clk	id_ex.v	/^           input wire clk,$/;"	kind:port	line:43	module:id_ex
+clk	if_fd.v	/^           input wire clk,$/;"	kind:port	line:28	module:if_id
+clk	mem_wb.v	/^           input wire clk,$/;"	kind:port	line:37	module:mem_wb
+clk	openmips.v	/^           input wire clk,$/;"	kind:port	line:22	module:openmips
+clk	openmips_min_sopc.v	/^           input wire clk,$/;"	kind:port	line:14	module:openmips_min_sopc
+clk	openmips_min_sopc_tb.v	/^reg clk;$/;"	kind:register	line:15	module:openmips_min_sopc_tb
+clk	pc_reg.v	/^           input wire clk,$/;"	kind:port	line:24	module:pc_reg
+clk	regfile.v	/^           input wire clk,$/;"	kind:port	line:12	module:regfile
+cnt	div.v	/^reg [ 5: 0 ] cnt;$/;"	kind:register	line:40	module:div
+cnt_i	ex.v	/^           input wire [ 1: 0 ] cnt_i,$/;"	kind:port	line:87	module:ex
+cnt_i	ex_mem.v	/^           input wire [ 1: 0 ] cnt_i,$/;"	kind:port	line:58	module:ex_mem
+cnt_i	openmips.v	/^wire [ 1: 0 ] cnt_i;$/;"	kind:net	line:128	module:openmips
+cnt_o	ex.v	/^           output reg [ 1: 0 ] cnt_o,$/;"	kind:port	line:106	module:ex
+cnt_o	ex_mem.v	/^           output reg [ 1: 0 ] cnt_o$/;"	kind:port	line:74	module:ex_mem
+cnt_o	openmips.v	/^wire [ 1: 0 ] cnt_o;$/;"	kind:net	line:125	module:openmips
+ctrl	ctrl.v	/^module ctrl ($/;"	kind:module	line:17
+ctrl0	openmips.v	/^ctrl ctrl0($/;"	kind:instance	line:461	module:openmips
+data_i	data_ram.v	/^           input wire [ `DataBus ] data_i,$/;"	kind:port	line:26	module:data_ram
+data_mem0	data_ram.v	/^reg [ `ByteWidth ] data_mem0[ 0: `DataMemNum - 1 ];$/;"	kind:register	line:31	module:data_ram
+data_mem1	data_ram.v	/^reg [ `ByteWidth ] data_mem1[ 0: `DataMemNum - 1 ];$/;"	kind:register	line:32	module:data_ram
+data_mem2	data_ram.v	/^reg [ `ByteWidth ] data_mem2[ 0: `DataMemNum - 1 ];$/;"	kind:register	line:33	module:data_ram
+data_mem3	data_ram.v	/^reg [ `ByteWidth ] data_mem3[ 0: `DataMemNum - 1 ];$/;"	kind:register	line:34	module:data_ram
+data_o	data_ram.v	/^           output reg [ `DataBus ] data_o$/;"	kind:port	line:27	module:data_ram
+data_ram	data_ram.v	/^module data_ram ($/;"	kind:module	line:20
+data_ram0	openmips_min_sopc.v	/^data_ram data_ram0($/;"	kind:instance	line:55	module:openmips_min_sopc
+div	div.v	/^module div($/;"	kind:module	line:22
+div0	openmips.v	/^div div0($/;"	kind:instance	line:473	module:openmips
+div_annul	openmips.v	/^wire div_annul;$/;"	kind:net	line:136	module:openmips
+div_opdata1	openmips.v	/^wire [ `RegBus ] div_opdata1;$/;"	kind:net	line:133	module:openmips
+div_opdata1_o	ex.v	/^           output reg [ `RegBus ] div_opdata1_o,$/;"	kind:port	line:108	module:ex
+div_opdata2	openmips.v	/^wire [ `RegBus ] div_opdata2;$/;"	kind:net	line:134	module:openmips
+div_opdata2_o	ex.v	/^           output reg [ `RegBus ] div_opdata2_o,$/;"	kind:port	line:109	module:ex
+div_ready	openmips.v	/^wire div_ready;$/;"	kind:net	line:132	module:openmips
+div_ready_i	ex.v	/^           input wire div_ready_i,$/;"	kind:port	line:91	module:ex
+div_result	openmips.v	/^wire [ `DoubleRegBus ] div_result;$/;"	kind:net	line:131	module:openmips
+div_result_i	ex.v	/^           input wire [ `DoubleRegBus ] div_result_i,$/;"	kind:port	line:90	module:ex
+div_start	openmips.v	/^wire div_start;$/;"	kind:net	line:135	module:openmips
+div_start_o	ex.v	/^           output reg div_start_o,$/;"	kind:port	line:110	module:ex
+div_temp	div.v	/^wire [ 32: 0 ] div_temp;$/;"	kind:net	line:37	module:div
+dividend	div.v	/^reg [ 64: 0 ] dividend;$/;"	kind:register	line:43	module:div
+divisor	div.v	/^reg [ 31: 0 ] divisor;$/;"	kind:register	line:47	module:div
+ex	ex.v	/^module ex($/;"	kind:module	line:59
+ex0	openmips.v	/^ex ex0($/;"	kind:instance	line:277	module:openmips
+ex_aluop	ex_mem.v	/^           input wire [ `AluOpBus ] ex_aluop,$/;"	kind:port	line:53	module:ex_mem
+ex_aluop	id_ex.v	/^           output reg [ `AluOpBus ] ex_aluop,$/;"	kind:port	line:62	module:id_ex
+ex_aluop_i	id.v	/^           input wire [ `AluOpBus ] ex_aluop_i,$/;"	kind:port	line:57	module:id
+ex_aluop_i	openmips.v	/^wire [ `AluOpBus ] ex_aluop_i;$/;"	kind:net	line:57	module:openmips
+ex_aluop_o	openmips.v	/^wire [ `AluOpBus ] ex_aluop_o;$/;"	kind:net	line:74	module:openmips
+ex_alusel	id_ex.v	/^           output reg [ `AluSelBus ] ex_alusel,$/;"	kind:port	line:63	module:id_ex
+ex_alusel_i	openmips.v	/^wire [ `AluSelBus ] ex_alusel_i;$/;"	kind:net	line:58	module:openmips
+ex_hi	ex_mem.v	/^           input wire [ `RegBus ] ex_hi,$/;"	kind:port	line:48	module:ex_mem
+ex_hi_o	openmips.v	/^wire [ `RegBus ] ex_hi_o;$/;"	kind:net	line:71	module:openmips
+ex_inst	id_ex.v	/^           output reg [ `RegBus ] ex_inst$/;"	kind:port	line:71	module:id_ex
+ex_inst_i	openmips.v	/^wire [ `RegBus ] ex_inst_i;$/;"	kind:net	line:65	module:openmips
+ex_is_in_delayslot	id_ex.v	/^           output reg ex_is_in_delayslot,$/;"	kind:port	line:69	module:id_ex
+ex_is_in_delayslot_i	openmips.v	/^wire ex_is_in_delayslot_i;$/;"	kind:net	line:63	module:openmips
+ex_link_address	id_ex.v	/^           output reg [ `RegBus ] ex_link_address,$/;"	kind:port	line:68	module:id_ex
+ex_link_address_i	openmips.v	/^wire [ `RegBus ] ex_link_address_i;$/;"	kind:net	line:64	module:openmips
+ex_lo	ex_mem.v	/^           input wire [ `RegBus ] ex_lo,$/;"	kind:port	line:49	module:ex_mem
+ex_lo_o	openmips.v	/^wire [ `RegBus ] ex_lo_o;$/;"	kind:net	line:72	module:openmips
+ex_mem	ex_mem.v	/^module ex_mem($/;"	kind:module	line:36
+ex_mem0	openmips.v	/^ex_mem ex_mem0($/;"	kind:instance	line:332	module:openmips
+ex_mem_addr	ex_mem.v	/^           input wire [ `RegBus ] ex_mem_addr,$/;"	kind:port	line:54	module:ex_mem
+ex_mem_addr_o	openmips.v	/^wire [ `RegBus ] ex_mem_addr_o;$/;"	kind:net	line:75	module:openmips
+ex_reg1	id_ex.v	/^           output reg [ `RegBus ] ex_reg1,$/;"	kind:port	line:64	module:id_ex
+ex_reg1_i	openmips.v	/^wire [ `RegBus ] ex_reg1_i;$/;"	kind:net	line:59	module:openmips
+ex_reg1_o	openmips.v	/^wire [ `RegBus ] ex_reg1_o;$/;"	kind:net	line:76	module:openmips
+ex_reg2	ex_mem.v	/^           input wire [ `RegBus ] ex_reg2,$/;"	kind:port	line:55	module:ex_mem
+ex_reg2	id_ex.v	/^           output reg [ `RegBus ] ex_reg2,$/;"	kind:port	line:65	module:id_ex
+ex_reg2_i	openmips.v	/^wire [ `RegBus ] ex_reg2_i;$/;"	kind:net	line:60	module:openmips
+ex_reg2_o	openmips.v	/^wire [ `RegBus ] ex_reg2_o;$/;"	kind:net	line:77	module:openmips
+ex_wd	ex_mem.v	/^           input wire [ `RegAddrBus ] ex_wd,$/;"	kind:port	line:45	module:ex_mem
+ex_wd	id_ex.v	/^           output reg [ `RegAddrBus ] ex_wd,$/;"	kind:port	line:66	module:id_ex
+ex_wd_i	id.v	/^           input wire [ `RegAddrBus ] ex_wd_i,$/;"	kind:port	line:62	module:id
+ex_wd_i	openmips.v	/^wire [ `RegAddrBus ] ex_wd_i;$/;"	kind:net	line:62	module:openmips
+ex_wd_o	openmips.v	/^wire [ `RegAddrBus ] ex_wd_o;$/;"	kind:net	line:69	module:openmips
+ex_wdata	ex_mem.v	/^           input wire [ `RegBus ] ex_wdata,$/;"	kind:port	line:47	module:ex_mem
+ex_wdata_i	id.v	/^           input wire [ `RegBus ] ex_wdata_i,$/;"	kind:port	line:61	module:id
+ex_wdata_o	openmips.v	/^wire [ `RegBus ] ex_wdata_o;$/;"	kind:net	line:70	module:openmips
+ex_whilo	ex_mem.v	/^           input wire ex_whilo,$/;"	kind:port	line:50	module:ex_mem
+ex_whilo_o	openmips.v	/^wire ex_whilo_o;$/;"	kind:net	line:73	module:openmips
+ex_wreg	ex_mem.v	/^           input wire ex_wreg,$/;"	kind:port	line:46	module:ex_mem
+ex_wreg	id_ex.v	/^           output reg ex_wreg,$/;"	kind:port	line:67	module:id_ex
+ex_wreg_i	id.v	/^           input wire ex_wreg_i,$/;"	kind:port	line:60	module:id
+ex_wreg_i	openmips.v	/^wire ex_wreg_i;$/;"	kind:net	line:61	module:openmips
+ex_wreg_o	openmips.v	/^wire ex_wreg_o;$/;"	kind:net	line:68	module:openmips
+flush	LLbit_reg.v	/^           input wire flush,$/;"	kind:port	line:25	module:LLbit_reg
+hi	openmips.v	/^wire [ `RegBus ] hi;$/;"	kind:net	line:120	module:openmips
+hi_i	ex.v	/^           input wire [ `RegBus ] hi_i,$/;"	kind:port	line:73	module:ex
+hi_i	hilo_reg.v	/^           input wire [ `RegBus ] hi_i,$/;"	kind:port	line:26	module:hilo_reg
+hi_i	mem.v	/^           input wire [ `RegBus ] hi_i,$/;"	kind:port	line:53	module:mem
+hi_o	ex.v	/^           output reg [ `RegBus ] hi_o,$/;"	kind:port	line:101	module:ex
+hi_o	hilo_reg.v	/^           output reg [ `RegBus ] hi_o,$/;"	kind:port	line:29	module:hilo_reg
+hi_o	mem.v	/^           output reg [ `RegBus ] hi_o,$/;"	kind:port	line:74	module:mem
+hilo_i	ex_mem.v	/^           input wire [ `DoubleRegBus ] hilo_i,$/;"	kind:port	line:57	module:ex_mem
+hilo_o	ex_mem.v	/^           output reg [ `DoubleRegBus ] hilo_o,$/;"	kind:port	line:73	module:ex_mem
+hilo_reg	hilo_reg.v	/^module hilo_reg ($/;"	kind:module	line:21
+hilo_reg0	openmips.v	/^hilo_reg hilo_reg0($/;"	kind:instance	line:446	module:openmips
+hilo_temp	ex.v	/^wire [ `DoubleRegBus ] hilo_temp;$/;"	kind:net	line:166	module:ex
+hilo_temp1	ex.v	/^reg [ `DoubleRegBus ] hilo_temp1;$/;"	kind:register	line:169	module:ex
+hilo_temp_i	ex.v	/^           input wire [ `DoubleRegBus ] hilo_temp_i,$/;"	kind:port	line:86	module:ex
+hilo_temp_i	openmips.v	/^wire [ `DoubleRegBus ] hilo_temp_i;$/;"	kind:net	line:127	module:openmips
+hilo_temp_o	ex.v	/^           output reg [ `DoubleRegBus ] hilo_temp_o,$/;"	kind:port	line:105	module:ex
+hilo_temp_o	openmips.v	/^wire [ `DoubleRegBus ] hilo_temp_o;$/;"	kind:net	line:124	module:openmips
+id	id.v	/^module id($/;"	kind:module	line:50
+id0	openmips.v	/^id id0($/;"	kind:instance	line:180	module:openmips
+id_aluop	id_ex.v	/^           input wire [ `AluOpBus ] id_aluop,$/;"	kind:port	line:50	module:id_ex
+id_aluop_o	openmips.v	/^wire [ `AluOpBus ] id_aluop_o;$/;"	kind:net	line:46	module:openmips
+id_alusel	id_ex.v	/^           input wire [ `AluSelBus ] id_alusel,$/;"	kind:port	line:51	module:id_ex
+id_alusel_o	openmips.v	/^wire [ `AluSelBus ] id_alusel_o;$/;"	kind:net	line:47	module:openmips
+id_branch_flag_o	openmips.v	/^wire id_branch_flag_o;$/;"	kind:net	line:143	module:openmips
+id_ex	id_ex.v	/^module id_ex($/;"	kind:module	line:41
+id_ex0	openmips.v	/^id_ex id_ex0($/;"	kind:instance	line:245	module:openmips
+id_inst	id_ex.v	/^           input wire [ `RegBus ] id_inst,$/;"	kind:port	line:59	module:id_ex
+id_inst	if_fd.v	/^           output reg [ `InstBus ] id_inst$/;"	kind:port	line:37	module:if_id
+id_inst_i	openmips.v	/^wire [ `InstBus ] id_inst_i;$/;"	kind:net	line:43	module:openmips
+id_inst_o	openmips.v	/^wire [ `RegBus ] id_inst_o;$/;"	kind:net	line:54	module:openmips
+id_is_in_delayslot	id_ex.v	/^           input wire id_is_in_delayslot,$/;"	kind:port	line:57	module:id_ex
+id_is_in_delayslot_o	openmips.v	/^wire id_is_in_delayslot_o;$/;"	kind:net	line:52	module:openmips
+id_link_address	id_ex.v	/^           input wire [ `RegBus ] id_link_address,$/;"	kind:port	line:56	module:id_ex
+id_link_address_o	openmips.v	/^wire [ `RegBus ] id_link_address_o;$/;"	kind:net	line:53	module:openmips
+id_pc	if_fd.v	/^           output reg [ `InstAddrBus ] id_pc,$/;"	kind:port	line:36	module:if_id
+id_pc_i	openmips.v	/^wire [ `InstAddrBus ] id_pc_i;$/;"	kind:net	line:42	module:openmips
+id_reg1	id_ex.v	/^           input wire [ `RegBus ] id_reg1,$/;"	kind:port	line:52	module:id_ex
+id_reg1_o	openmips.v	/^wire [ `RegBus ] id_reg1_o;$/;"	kind:net	line:48	module:openmips
+id_reg2	id_ex.v	/^           input wire [ `RegBus ] id_reg2,$/;"	kind:port	line:53	module:id_ex
+id_reg2_o	openmips.v	/^wire [ `RegBus ] id_reg2_o;$/;"	kind:net	line:49	module:openmips
+id_wd	id_ex.v	/^           input wire [ `RegAddrBus ] id_wd,$/;"	kind:port	line:54	module:id_ex
+id_wd_o	openmips.v	/^wire [ `RegAddrBus ] id_wd_o;$/;"	kind:net	line:51	module:openmips
+id_wreg	id_ex.v	/^           input wire id_wreg,$/;"	kind:port	line:55	module:id_ex
+id_wreg_o	openmips.v	/^wire id_wreg_o;$/;"	kind:net	line:50	module:openmips
+if_id	if_fd.v	/^module if_id($/;"	kind:module	line:26
+if_id0	openmips.v	/^if_id if_id0($/;"	kind:instance	line:169	module:openmips
+if_inst	if_fd.v	/^           input wire [ `InstBus ] if_inst,$/;"	kind:port	line:35	module:if_id
+if_pc	if_fd.v	/^           input wire [ `InstAddrBus ] if_pc,$/;"	kind:port	line:34	module:if_id
+imm	id.v	/^reg [ `RegBus ] imm;$/;"	kind:register	line:110	module:id
+imm_sll2_signedext	id.v	/^wire [ `RegBus ] imm_sll2_signedext;$/;"	kind:net	line:118	module:id
+inst	inst_rom.v	/^           output reg [ `InstBus ] inst$/;"	kind:port	line:19	module:inst_rom
+inst	openmips_min_sopc.v	/^wire [ `InstBus ] inst;$/;"	kind:net	line:20	module:openmips_min_sopc
+inst_addr	openmips_min_sopc.v	/^wire [ `InstAddrBus ] inst_addr;$/;"	kind:net	line:19	module:openmips_min_sopc
+inst_i	ex.v	/^           input wire [ `RegBus ] inst_i,$/;"	kind:port	line:70	module:ex
+inst_i	id.v	/^           input wire [ `InstBus ] inst_i,$/;"	kind:port	line:54	module:id
+inst_mem	inst_rom.v	/^reg [ `InstBus ] inst_mem [ 0: `InstMemNum - 1 ];$/;"	kind:register	line:23	module:inst_rom
+inst_o	id.v	/^           output wire [ `RegBus ] inst_o,$/;"	kind:port	line:88	module:id
+inst_rom	inst_rom.v	/^module inst_rom($/;"	kind:module	line:16
+inst_rom0	openmips_min_sopc.v	/^inst_rom inst_rom0($/;"	kind:instance	line:49	module:openmips_min_sopc
+instvalid	id.v	/^reg instvalid;$/;"	kind:register	line:113	module:id
+is_in_delayslot_i	ex.v	/^           input wire is_in_delayslot_i,$/;"	kind:port	line:95	module:ex
+is_in_delayslot_i	id.v	/^           input wire is_in_delayslot_i,$/;"	kind:port	line:73	module:id
+is_in_delayslot_i	openmips.v	/^wire is_in_delayslot_i;$/;"	kind:net	line:140	module:openmips
+is_in_delayslot_o	id.v	/^           output reg is_in_delayslot_o,$/;"	kind:port	line:97	module:id
+is_in_delayslot_o	id_ex.v	/^           output reg is_in_delayslot_o,$/;"	kind:port	line:70	module:id_ex
+is_in_delayslot_o	openmips.v	/^wire is_in_delayslot_o;$/;"	kind:net	line:141	module:openmips
+link_addr_o	id.v	/^           output reg [ `RegBus ] link_addr_o,$/;"	kind:port	line:96	module:id
+link_address_i	ex.v	/^           input wire [ `RegBus ] link_address_i,$/;"	kind:port	line:94	module:ex
+lo	openmips.v	/^wire [ `RegBus ] lo;$/;"	kind:net	line:121	module:openmips
+lo_i	ex.v	/^           input wire [ `RegBus ] lo_i,$/;"	kind:port	line:74	module:ex
+lo_i	hilo_reg.v	/^           input wire [ `RegBus ] lo_i,$/;"	kind:port	line:27	module:hilo_reg
+lo_i	mem.v	/^           input wire [ `RegBus ] lo_i,$/;"	kind:port	line:54	module:mem
+lo_o	ex.v	/^           output reg [ `RegBus ] lo_o,$/;"	kind:port	line:102	module:ex
+lo_o	hilo_reg.v	/^           output reg [ `RegBus ] lo_o$/;"	kind:port	line:30	module:hilo_reg
+lo_o	mem.v	/^           output reg [ `RegBus ] lo_o,$/;"	kind:port	line:75	module:mem
+logicout	ex.v	/^reg [ `RegBus ] logicout;$/;"	kind:register	line:123	module:ex
+mem	mem.v	/^module mem($/;"	kind:module	line:45
+mem0	openmips.v	/^mem mem0($/;"	kind:instance	line:371	module:openmips
+mem_LLbit_value	mem_wb.v	/^           input wire mem_LLbit_value,$/;"	kind:port	line:49	module:mem_wb
+mem_LLbit_value_o	openmips.v	/^wire mem_LLbit_value_o;$/;"	kind:net	line:98	module:openmips
+mem_LLbit_we	mem_wb.v	/^           input wire mem_LLbit_we,$/;"	kind:port	line:48	module:mem_wb
+mem_LLbit_we_o	openmips.v	/^wire mem_LLbit_we_o;$/;"	kind:net	line:99	module:openmips
+mem_addr_i	mem.v	/^           input wire [ `RegBus ] mem_addr_i,$/;"	kind:port	line:58	module:mem
+mem_addr_i	openmips_min_sopc.v	/^wire[ `RegBus ] mem_addr_i;$/;"	kind:net	line:25	module:openmips_min_sopc
+mem_addr_o	ex.v	/^           output wire [ `RegBus ] mem_addr_o,$/;"	kind:port	line:115	module:ex
+mem_addr_o	mem.v	/^           output reg [ `RegBus ] mem_addr_o,$/;"	kind:port	line:82	module:mem
+mem_aluop	ex_mem.v	/^           output reg [ `AluOpBus ] mem_aluop,$/;"	kind:port	line:69	module:ex_mem
+mem_aluop_i	openmips.v	/^wire [ `AluOpBus ] mem_aluop_i;$/;"	kind:net	line:86	module:openmips
+mem_ce_i	openmips_min_sopc.v	/^wire mem_ce_i;$/;"	kind:net	line:29	module:openmips_min_sopc
+mem_ce_o	mem.v	/^           output reg mem_ce_o$/;"	kind:port	line:86	module:mem
+mem_data_i	mem.v	/^           input wire [ `RegBus ] mem_data_i,$/;"	kind:port	line:62	module:mem
+mem_data_i	openmips_min_sopc.v	/^wire[ `RegBus ] mem_data_i;$/;"	kind:net	line:26	module:openmips_min_sopc
+mem_data_o	mem.v	/^           output reg [ `RegBus ] mem_data_o,$/;"	kind:port	line:85	module:mem
+mem_data_o	openmips_min_sopc.v	/^wire[ `RegBus ] mem_data_o;$/;"	kind:net	line:27	module:openmips_min_sopc
+mem_hi	ex_mem.v	/^           output reg [ `RegBus ] mem_hi,$/;"	kind:port	line:64	module:ex_mem
+mem_hi	mem_wb.v	/^           input wire [ `RegBus ] mem_hi,$/;"	kind:port	line:45	module:mem_wb
+mem_hi_i	ex.v	/^           input wire [ `RegBus ] mem_hi_i,$/;"	kind:port	line:82	module:ex
+mem_hi_i	openmips.v	/^wire [ `RegBus ] mem_hi_i;$/;"	kind:net	line:83	module:openmips
+mem_hi_o	openmips.v	/^wire [ `RegBus ] mem_hi_o;$/;"	kind:net	line:95	module:openmips
+mem_lo	ex_mem.v	/^           output reg [ `RegBus ] mem_lo,$/;"	kind:port	line:65	module:ex_mem
+mem_lo	mem_wb.v	/^           input wire [ `RegBus ] mem_lo,$/;"	kind:port	line:46	module:mem_wb
+mem_lo_i	ex.v	/^           input wire [ `RegBus ] mem_lo_i,$/;"	kind:port	line:83	module:ex
+mem_lo_i	openmips.v	/^wire [ `RegBus ] mem_lo_i;$/;"	kind:net	line:84	module:openmips
+mem_lo_o	openmips.v	/^wire [ `RegBus ] mem_lo_o;$/;"	kind:net	line:96	module:openmips
+mem_mem_addr	ex_mem.v	/^           output reg [ `RegBus ] mem_mem_addr,$/;"	kind:port	line:70	module:ex_mem
+mem_mem_addr_i	openmips.v	/^wire [ `RegBus ] mem_mem_addr_i;$/;"	kind:net	line:87	module:openmips
+mem_reg1_i	openmips.v	/^wire [ `RegBus ] mem_reg1_i;$/;"	kind:net	line:88	module:openmips
+mem_reg2	ex_mem.v	/^           output reg [ `RegBus ] mem_reg2,$/;"	kind:port	line:71	module:ex_mem
+mem_reg2_i	openmips.v	/^wire [ `RegBus ] mem_reg2_i;$/;"	kind:net	line:89	module:openmips
+mem_sel_i	openmips_min_sopc.v	/^wire[ 3: 0 ] mem_sel_i;$/;"	kind:net	line:28	module:openmips_min_sopc
+mem_sel_o	mem.v	/^           output reg [ 3: 0 ] mem_sel_o,$/;"	kind:port	line:84	module:mem
+mem_wb	mem_wb.v	/^module mem_wb($/;"	kind:module	line:36
+mem_wb0	openmips.v	/^mem_wb mem_wb0($/;"	kind:instance	line:415	module:openmips
+mem_wd	ex_mem.v	/^           output reg [ `RegAddrBus ] mem_wd,$/;"	kind:port	line:61	module:ex_mem
+mem_wd	mem_wb.v	/^           input wire [ `RegAddrBus ] mem_wd,$/;"	kind:port	line:41	module:mem_wb
+mem_wd_i	id.v	/^           input wire [ `RegAddrBus ] mem_wd_i,$/;"	kind:port	line:67	module:id
+mem_wd_i	openmips.v	/^wire [ `RegAddrBus ] mem_wd_i;$/;"	kind:net	line:81	module:openmips
+mem_wd_o	openmips.v	/^wire [ `RegAddrBus ] mem_wd_o;$/;"	kind:net	line:93	module:openmips
+mem_wdata	ex_mem.v	/^           output reg [ `RegBus ] mem_wdata,$/;"	kind:port	line:63	module:ex_mem
+mem_wdata	mem_wb.v	/^           input wire [ `RegBus ] mem_wdata,$/;"	kind:port	line:43	module:mem_wb
+mem_wdata_i	id.v	/^           input wire [ `RegBus ] mem_wdata_i,$/;"	kind:port	line:66	module:id
+mem_wdata_i	openmips.v	/^wire [ `RegBus ] mem_wdata_i;$/;"	kind:net	line:82	module:openmips
+mem_wdata_o	openmips.v	/^wire [ `RegBus ] mem_wdata_o;$/;"	kind:net	line:94	module:openmips
+mem_we	mem.v	/^reg mem_we;$/;"	kind:register	line:93	module:mem
+mem_we_i	openmips_min_sopc.v	/^wire mem_we_i;$/;"	kind:net	line:24	module:openmips_min_sopc
+mem_we_o	mem.v	/^           output wire mem_we_o,$/;"	kind:port	line:83	module:mem
+mem_whilo	ex_mem.v	/^           output reg mem_whilo,$/;"	kind:port	line:66	module:ex_mem
+mem_whilo	mem_wb.v	/^           input wire mem_whilo,$/;"	kind:port	line:47	module:mem_wb
+mem_whilo_i	ex.v	/^           input wire mem_whilo_i,$/;"	kind:port	line:84	module:ex
+mem_whilo_i	openmips.v	/^wire mem_whilo_i;$/;"	kind:net	line:85	module:openmips
+mem_whilo_o	openmips.v	/^wire mem_whilo_o;$/;"	kind:net	line:97	module:openmips
+mem_wreg	ex_mem.v	/^           output reg mem_wreg,$/;"	kind:port	line:62	module:ex_mem
+mem_wreg	mem_wb.v	/^           input wire mem_wreg,$/;"	kind:port	line:42	module:mem_wb
+mem_wreg_i	id.v	/^           input wire mem_wreg_i,$/;"	kind:port	line:65	module:id
+mem_wreg_i	openmips.v	/^wire mem_wreg_i;$/;"	kind:net	line:80	module:openmips
+mem_wreg_o	openmips.v	/^wire mem_wreg_o;$/;"	kind:net	line:92	module:openmips
+moveres	ex.v	/^reg [ `RegBus ] moveres;$/;"	kind:register	line:129	module:ex
+mulres	ex.v	/^reg [ `DoubleRegBus ] mulres;$/;"	kind:register	line:135	module:ex
+next_inst_in_delayslot_i	id_ex.v	/^           input wire next_inst_in_delayslot_i,$/;"	kind:port	line:58	module:id_ex
+next_inst_in_delayslot_o	id.v	/^           output reg next_inst_in_delayslot_o,$/;"	kind:port	line:91	module:id
+next_inst_in_delayslot_o	openmips.v	/^wire next_inst_in_delayslot_o;$/;"	kind:net	line:142	module:openmips
+op	id.v	/^wire [ 5: 0 ] op = inst_i[ 31: 26 ];$/;"	kind:net	line:104	module:id
+op2	id.v	/^wire [ 4: 0 ] op2 = inst_i[ 10: 6 ];$/;"	kind:net	line:105	module:id
+op3	id.v	/^wire [ 5: 0 ] op3 = inst_i[ 5: 0 ];$/;"	kind:net	line:106	module:id
+op4	id.v	/^wire [ 4: 0 ] op4 = inst_i[ 20: 16 ];$/;"	kind:net	line:107	module:id
+opdata1_i	div.v	/^           input wire [ 31: 0 ] opdata1_i,$/;"	kind:port	line:27	module:div
+opdata1_mult	ex.v	/^wire [ `RegBus ] opdata1_mult;$/;"	kind:net	line:160	module:ex
+opdata2_i	div.v	/^           input wire [ 31: 0 ] opdata2_i,$/;"	kind:port	line:28	module:div
+opdata2_mult	ex.v	/^wire [ `RegBus ] opdata2_mult;$/;"	kind:net	line:163	module:ex
+openmips	openmips.v	/^module openmips($/;"	kind:module	line:20
+openmips0	openmips_min_sopc.v	/^openmips openmips0($/;"	kind:instance	line:32	module:openmips_min_sopc
+openmips_min_sopc	openmips_min_sopc.v	/^module openmips_min_sopc ($/;"	kind:module	line:13
+openmips_min_sopc0	openmips_min_sopc_tb.v	/^openmips_min_sopc openmips_min_sopc0($/;"	kind:instance	line:34	module:openmips_min_sopc_tb
+openmips_min_sopc_tb	openmips_min_sopc_tb.v	/^module openmips_min_sopc_tb();$/;"	kind:module	line:13
+ov_sum	ex.v	/^wire ov_sum;$/;"	kind:net	line:151	module:ex
+pc	openmips.v	/^wire [ `InstAddrBus ] pc;$/;"	kind:net	line:41	module:openmips
+pc	pc_reg.v	/^           output reg [ `InstAddrBus ] pc,$/;"	kind:port	line:34	module:pc_reg
+pc_i	id.v	/^           input wire [ `InstAddrBus ] pc_i,$/;"	kind:port	line:53	module:id
+pc_plus_4	id.v	/^wire [ `RegBus ] pc_plus_4;$/;"	kind:net	line:117	module:id
+pc_plus_8	id.v	/^wire [ `RegBus ] pc_plus_8;$/;"	kind:net	line:116	module:id
+pc_reg	pc_reg.v	/^module pc_reg($/;"	kind:module	line:22
+pc_reg0	openmips.v	/^pc_reg pc_reg0($/;"	kind:instance	line:154	module:openmips
+pre_inst_is_load	id.v	/^wire pre_inst_is_load;$/;"	kind:net	line:126	module:id
+raddr1	regfile.v	/^           input wire [ `RegAddrBus ] raddr1,$/;"	kind:port	line:22	module:regfile
+raddr2	regfile.v	/^           input wire [ `RegAddrBus ] raddr2,$/;"	kind:port	line:27	module:regfile
+ram_addr_o	openmips.v	/^           output wire [ `RegBus ] ram_addr_o,$/;"	kind:port	line:32	module:openmips
+ram_ce_o	openmips.v	/^           output wire [ 3: 0 ] ram_ce_o$/;"	kind:port	line:36	module:openmips
+ram_data_i	openmips.v	/^           input wire [ `RegBus ] ram_data_i,$/;"	kind:port	line:31	module:openmips
+ram_data_o	openmips.v	/^           output wire [ `RegBus ] ram_data_o,$/;"	kind:port	line:33	module:openmips
+ram_sel_o	openmips.v	/^           output wire [ 3: 0 ] ram_sel_o,$/;"	kind:port	line:35	module:openmips
+ram_we_o	openmips.v	/^           output wire ram_we_o,$/;"	kind:port	line:34	module:openmips
+rdata1	regfile.v	/^           output reg [ `RegBus ] rdata1,$/;"	kind:port	line:23	module:regfile
+rdata2	regfile.v	/^           output reg [ `RegBus ] rdata2$/;"	kind:port	line:28	module:regfile
+re1	regfile.v	/^           input wire re1,$/;"	kind:port	line:21	module:regfile
+re2	regfile.v	/^           input wire re2,$/;"	kind:port	line:26	module:regfile
+ready_o	div.v	/^           output reg ready_o$/;"	kind:port	line:33	module:div
+reg1_addr	openmips.v	/^wire [ `RegAddrBus ] reg1_addr;$/;"	kind:net	line:116	module:openmips
+reg1_addr_o	id.v	/^           output reg [ `RegAddrBus ] reg1_addr_o,$/;"	kind:port	line:78	module:id
+reg1_data	openmips.v	/^wire [ `RegBus ] reg1_data;$/;"	kind:net	line:114	module:openmips
+reg1_data_i	id.v	/^           input wire [ `RegBus ] reg1_data_i,$/;"	kind:port	line:69	module:id
+reg1_eq_reg2	ex.v	/^wire reg1_eq_reg2;$/;"	kind:net	line:154	module:ex
+reg1_i	ex.v	/^           input wire [ `RegBus ] reg1_i,$/;"	kind:port	line:66	module:ex
+reg1_i_not	ex.v	/^wire [ `RegBus ] reg1_i_not;$/;"	kind:net	line:145	module:ex
+reg1_lt_reg2	ex.v	/^wire reg1_lt_reg2;$/;"	kind:net	line:157	module:ex
+reg1_o	id.v	/^           output reg [ `RegBus ] reg1_o,$/;"	kind:port	line:84	module:id
+reg1_read	openmips.v	/^wire reg1_read;$/;"	kind:net	line:112	module:openmips
+reg1_read_o	id.v	/^           output reg reg1_read_o,$/;"	kind:port	line:76	module:id
+reg2_addr	openmips.v	/^wire [ `RegAddrBus ] reg2_addr;$/;"	kind:net	line:117	module:openmips
+reg2_addr_o	id.v	/^           output reg [ `RegAddrBus ] reg2_addr_o,$/;"	kind:port	line:79	module:id
+reg2_data	openmips.v	/^wire [ `RegBus ] reg2_data;$/;"	kind:net	line:115	module:openmips
+reg2_data_i	id.v	/^           input wire [ `RegBus ] reg2_data_i,$/;"	kind:port	line:70	module:id
+reg2_i	ex.v	/^           input wire [ `RegBus ] reg2_i,$/;"	kind:port	line:67	module:ex
+reg2_i	mem.v	/^           input wire [ `RegBus ] reg2_i,$/;"	kind:port	line:59	module:mem
+reg2_i_mux	ex.v	/^wire [ `RegBus ] reg2_i_mux;$/;"	kind:net	line:142	module:ex
+reg2_o	ex.v	/^           output wire [ `RegBus ] reg2_o,$/;"	kind:port	line:116	module:ex
+reg2_o	id.v	/^           output reg [ `RegBus ] reg2_o,$/;"	kind:port	line:85	module:id
+reg2_read	openmips.v	/^wire reg2_read;$/;"	kind:net	line:113	module:openmips
+reg2_read_o	id.v	/^           output reg reg2_read_o,$/;"	kind:port	line:77	module:id
+regfile	regfile.v	/^module regfile ($/;"	kind:module	line:11
+regfile0	openmips.v	/^regfile regfile0($/;"	kind:instance	line:230	module:openmips
+regs	regfile.v	/^reg [ `RegBus ] regs [ 0: `RegNum - 1 ];$/;"	kind:register	line:32	module:regfile
+result_o	div.v	/^           output reg[ 63: 0 ] result_o,$/;"	kind:port	line:32	module:div
+result_sum	ex.v	/^wire [ `RegBus ] result_sum;$/;"	kind:net	line:148	module:ex
+rom_addr_o	openmips.v	/^           output wire [ `RegBus ] rom_addr_o,$/;"	kind:port	line:27	module:openmips
+rom_ce	openmips_min_sopc.v	/^wire rom_ce;$/;"	kind:net	line:21	module:openmips_min_sopc
+rom_ce_o	openmips.v	/^           output wire rom_ce_o,$/;"	kind:port	line:28	module:openmips
+rom_data_i	openmips.v	/^           input wire [ `RegBus ] rom_data_i,$/;"	kind:port	line:26	module:openmips
+rst	LLbit_reg.v	/^           input wire rst,$/;"	kind:port	line:23	module:LLbit_reg
+rst	ctrl.v	/^           input wire rst,$/;"	kind:port	line:18	module:ctrl
+rst	div.v	/^           input wire rst,$/;"	kind:port	line:24	module:div
+rst	ex.v	/^           input wire rst,$/;"	kind:port	line:61	module:ex
+rst	ex_mem.v	/^           input wire rst,$/;"	kind:port	line:39	module:ex_mem
+rst	hilo_reg.v	/^           input wire rst,$/;"	kind:port	line:23	module:hilo_reg
+rst	id.v	/^           input wire rst,$/;"	kind:port	line:52	module:id
+rst	id_ex.v	/^           input wire rst,$/;"	kind:port	line:44	module:id_ex
+rst	if_fd.v	/^           input wire rst,$/;"	kind:port	line:29	module:if_id
+rst	mem.v	/^           input wire rst,$/;"	kind:port	line:47	module:mem
+rst	mem_wb.v	/^           input wire rst,$/;"	kind:port	line:38	module:mem_wb
+rst	openmips.v	/^           input wire rst,$/;"	kind:port	line:23	module:openmips
+rst	openmips_min_sopc.v	/^           input wire rst$/;"	kind:port	line:15	module:openmips_min_sopc
+rst	openmips_min_sopc_tb.v	/^reg rst;$/;"	kind:register	line:16	module:openmips_min_sopc_tb
+rst	pc_reg.v	/^           input wire rst,$/;"	kind:port	line:25	module:pc_reg
+rst	regfile.v	/^           input wire rst,$/;"	kind:port	line:13	module:regfile
+sel	data_ram.v	/^           input wire [ 3: 0 ] sel,$/;"	kind:port	line:25	module:data_ram
+shiftres	ex.v	/^reg [ `RegBus ] shiftres;$/;"	kind:register	line:126	module:ex
+signed_div	openmips.v	/^wire signed_div;$/;"	kind:net	line:137	module:openmips
+signed_div_i	div.v	/^           input wire signed_div_i,$/;"	kind:port	line:26	module:div
+signed_div_o	ex.v	/^           output reg signed_div_o,$/;"	kind:port	line:111	module:ex
+stall	ctrl.v	/^           output reg [ 5: 0 ] stall$/;"	kind:port	line:21	module:ctrl
+stall	ex_mem.v	/^           input wire [ 5: 0 ] stall,$/;"	kind:port	line:42	module:ex_mem
+stall	id_ex.v	/^           input wire [ 5: 0 ] stall,$/;"	kind:port	line:47	module:id_ex
+stall	if_fd.v	/^           input wire [ 5: 0 ] stall,$/;"	kind:port	line:32	module:if_id
+stall	mem_wb.v	/^           input wire [ 5: 0 ] stall$/;"	kind:port	line:62	module:mem_wb
+stall	openmips.v	/^wire [ 5: 0 ] stall;$/;"	kind:net	line:147	module:openmips
+stall	pc_reg.v	/^           input wire [ 5: 0 ] stall,$/;"	kind:port	line:28	module:pc_reg
+stallreq	ex.v	/^           output reg stallreq$/;"	kind:port	line:118	module:ex
+stallreq	id.v	/^           output wire stallreq$/;"	kind:port	line:100	module:id
+stallreq_for_div	ex.v	/^reg stallreq_for_div;$/;"	kind:register	line:174	module:ex
+stallreq_for_madd_msub	ex.v	/^reg stallreq_for_madd_msub;$/;"	kind:register	line:172	module:ex
+stallreq_for_reg1_loadrelate	id.v	/^reg stallreq_for_reg1_loadrelate;$/;"	kind:register	line:122	module:id
+stallreq_for_reg2_loadrelate	id.v	/^reg stallreq_for_reg2_loadrelate;$/;"	kind:register	line:124	module:id
+stallreq_from_ex	ctrl.v	/^           input wire stallreq_from_ex,$/;"	kind:port	line:20	module:ctrl
+stallreq_from_ex	openmips.v	/^wire stallreq_from_ex;$/;"	kind:net	line:149	module:openmips
+stallreq_from_id	ctrl.v	/^           input wire stallreq_from_id,$/;"	kind:port	line:19	module:ctrl
+stallreq_from_id	openmips.v	/^wire stallreq_from_id;$/;"	kind:net	line:148	module:openmips
+start_i	div.v	/^           input wire start_i,$/;"	kind:port	line:29	module:div
+state	div.v	/^reg [ 1: 0 ] state;$/;"	kind:register	line:46	module:div
+temp_op1	div.v	/^reg [ 31: 0 ] temp_op1;$/;"	kind:register	line:48	module:div
+temp_op2	div.v	/^reg [ 31: 0 ] temp_op2;$/;"	kind:register	line:49	module:div
+waddr	regfile.v	/^           input wire [ `RegAddrBus ] waddr,$/;"	kind:port	line:17	module:regfile
+wb_LLbit_value	mem_wb.v	/^           output reg wb_LLbit_value,$/;"	kind:port	line:60	module:mem_wb
+wb_LLbit_value_i	mem.v	/^           input wire wb_LLbit_value_i,$/;"	kind:port	line:68	module:mem
+wb_LLbit_value_i	openmips.v	/^wire wb_LLbit_value_i;$/;"	kind:net	line:108	module:openmips
+wb_LLbit_we	mem_wb.v	/^           output reg wb_LLbit_we,$/;"	kind:port	line:59	module:mem_wb
+wb_LLbit_we_i	mem.v	/^           input wire wb_LLbit_we_i,$/;"	kind:port	line:67	module:mem
+wb_LLbit_we_i	openmips.v	/^wire wb_LLbit_we_i;$/;"	kind:net	line:109	module:openmips
+wb_hi	mem_wb.v	/^           output reg [ `RegBus ] wb_hi,$/;"	kind:port	line:56	module:mem_wb
+wb_hi_i	ex.v	/^           input wire [ `RegBus ] wb_hi_i,$/;"	kind:port	line:77	module:ex
+wb_hi_i	openmips.v	/^wire [ `RegBus ] wb_hi_i;$/;"	kind:net	line:105	module:openmips
+wb_lo	mem_wb.v	/^           output reg [ `RegBus ] wb_lo,$/;"	kind:port	line:57	module:mem_wb
+wb_lo_i	ex.v	/^           input wire [ `RegBus ] wb_lo_i,$/;"	kind:port	line:78	module:ex
+wb_lo_i	openmips.v	/^wire [ `RegBus ] wb_lo_i;$/;"	kind:net	line:106	module:openmips
+wb_wd	mem_wb.v	/^           output reg [ `RegAddrBus ] wb_wd,$/;"	kind:port	line:52	module:mem_wb
+wb_wd_i	openmips.v	/^wire [ `RegAddrBus ] wb_wd_i;$/;"	kind:net	line:103	module:openmips
+wb_wdata	mem_wb.v	/^           output reg [ `RegBus ] wb_wdata,$/;"	kind:port	line:54	module:mem_wb
+wb_wdata_i	openmips.v	/^wire [ `RegBus ] wb_wdata_i;$/;"	kind:net	line:104	module:openmips
+wb_whilo	mem_wb.v	/^           output reg wb_whilo,$/;"	kind:port	line:58	module:mem_wb
+wb_whilo_i	ex.v	/^           input wire wb_whilo_i,$/;"	kind:port	line:79	module:ex
+wb_whilo_i	openmips.v	/^wire wb_whilo_i;$/;"	kind:net	line:107	module:openmips
+wb_wreg	mem_wb.v	/^           output reg wb_wreg,$/;"	kind:port	line:53	module:mem_wb
+wb_wreg_i	openmips.v	/^wire wb_wreg_i;$/;"	kind:net	line:102	module:openmips
+wd_i	ex.v	/^           input wire [ `RegAddrBus ] wd_i,$/;"	kind:port	line:68	module:ex
+wd_i	mem.v	/^           input wire [ `RegAddrBus ] wd_i,$/;"	kind:port	line:50	module:mem
+wd_o	ex.v	/^           output reg [ `RegAddrBus ] wd_o,$/;"	kind:port	line:97	module:ex
+wd_o	id.v	/^           output reg [ `RegAddrBus ] wd_o,$/;"	kind:port	line:86	module:id
+wd_o	mem.v	/^           output reg [ `RegAddrBus ] wd_o,$/;"	kind:port	line:71	module:mem
+wdata	regfile.v	/^           input wire [ `RegBus ] wdata,$/;"	kind:port	line:18	module:regfile
+wdata_i	mem.v	/^           input wire [ `RegBus ] wdata_i,$/;"	kind:port	line:52	module:mem
+wdata_o	ex.v	/^           output reg [ `RegBus ] wdata_o,$/;"	kind:port	line:99	module:ex
+wdata_o	mem.v	/^           output reg [ `RegBus ] wdata_o,$/;"	kind:port	line:73	module:mem
+we	LLbit_reg.v	/^           input wire we,$/;"	kind:port	line:28	module:LLbit_reg
+we	data_ram.v	/^           input wire we,$/;"	kind:port	line:23	module:data_ram
+we	hilo_reg.v	/^           input wire we,$/;"	kind:port	line:25	module:hilo_reg
+we	regfile.v	/^           input wire we,$/;"	kind:port	line:16	module:regfile
+whilo_i	mem.v	/^           input wire whilo_i,$/;"	kind:port	line:55	module:mem
+whilo_o	ex.v	/^           output reg whilo_o,$/;"	kind:port	line:103	module:ex
+whilo_o	mem.v	/^           output reg whilo_o,$/;"	kind:port	line:76	module:mem
+wreg_i	ex.v	/^           input wire wreg_i,$/;"	kind:port	line:69	module:ex
+wreg_i	mem.v	/^           input wire wreg_i,$/;"	kind:port	line:51	module:mem
+wreg_o	ex.v	/^           output reg wreg_o,$/;"	kind:port	line:98	module:ex
+wreg_o	id.v	/^           output reg wreg_o,$/;"	kind:port	line:87	module:id
+wreg_o	mem.v	/^           output reg wreg_o,$/;"	kind:port	line:72	module:mem
+zero32	mem.v	/^wire [ `RegBus ] zero32;$/;"	kind:net	line:92	module:mem
