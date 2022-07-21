@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\if_fd.v
 //* @Date         : 2022-04-24 11:08:17
-//* @LastEditTime : 2022-07-12 14:13:57
+//* @LastEditTime : 2022-07-21 10:27:09
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 暂时保存取值阶段取得的指令和指令地址
@@ -22,23 +22,26 @@
 //^ 1       stall           6       in
 
 `include "defines.v"
-module if_fd (
+
+module if_id(
+
            input wire clk,
            input wire rst,
 
+           //来自控制模块的信息
+           input wire [ 5: 0 ] stall,
+
            input wire [ `InstAddrBus ] if_pc,
            input wire [ `InstBus ] if_inst,
-
            output reg [ `InstAddrBus ] id_pc,
-           output reg [ `InstBus ] id_inst,
+           output reg [ `InstBus ] id_inst
 
-           input wire [ 5: 0 ] stall
        );
 
 // stall[1]==`Stop 取指暂停
 // stall[2]==`Stop 译码暂停
 // stall[2]==`NoStop 译码不暂停
-always @( posedge clk )
+always @ ( posedge clk )
     begin
         if ( rst == `RstEnable )
             begin
@@ -61,4 +64,4 @@ always @( posedge clk )
             end
     end
 
-endmodule //if_fd
+endmodule

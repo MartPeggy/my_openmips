@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\ctrl.v
 //* @Date         : 2022-07-10 09:49:02
-//* @LastEditTime : 2022-07-19 06:40:08
+//* @LastEditTime : 2022-07-21 10:08:00
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 控制流水线的暂停
@@ -21,12 +21,13 @@ module ctrl (
            output reg [ 5: 0 ] stall
        );
        
-// stall[0]:pc是否保持不变，1不变
-// stall[1]:取值是否保持不变，1暂停
-// stall[2]:译码是否保持不变，1暂停
-// stall[3]:执行是否保持不变，1暂停
-// stall[4]:访存是否保持不变，1不变
-// stall[5]:回写是否保持不变，1不变
+// stall[0]:地址PC是否保持不变，1不变
+// stall[1]:取值是否暂停，1暂停
+// stall[2]:译码是否暂停，1暂停
+// stall[3]:执行是否暂停，1暂停
+// stall[4]:访存是否暂停，1暂停
+// stall[5]:回写是否暂停，1暂停
+
 always @ ( * )
     begin
         if ( rst == `RstEnable )

@@ -1,13 +1,13 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\defines.v
 //* @Date         : 2022-04-24 09:53:09
-//* @LastEditTime : 2022-07-19 10:09:26
+//* @LastEditTime : 2022-07-21 10:03:55
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB Ctrl+t 转到定义
-//* @Description  : 一些宏定义
+//* @Description  : 宏定义
 //************************************************
 
-//*  全局宏定义  *//
+//*** 全局宏定义 ***//
 `define RstEnable           1'b1            // 复位有效
 `define RstDisable          1'b0            // 复位无效
 `define ZeroWord            32'h00000000    // 32位的数值0
@@ -31,12 +31,12 @@
 `define NotInDelaySlot      1'b0            // 不在延迟槽中
 `define Branch              1'b1            // 发生转移
 `define NotBranch           1'b0            // 不发生转移
-`define InterruptAssert     1'b1            //  
-`define InterruptNotAssert  1'b0            // 
-`define TrapAssert          1'b1            // 
-`define TrapNotAssert       1'b0            // 
-//*   指令宏定义    *//
+`define InterruptAssert     1'b1            //
+`define InterruptNotAssert  1'b0            //
+`define TrapAssert          1'b1            //
+`define TrapNotAssert       1'b0            //
 
+//*** 指令宏定义 ***//
 `define EXE_AND             6'b100100       // 逻辑与指令
 `define EXE_OR              6'b100101       // 逻辑或指令
 `define EXE_XOR             6'b100110       // 逻辑异或指令
@@ -87,7 +87,7 @@
 
 `define EXE_J               6'b000010       // 无条件转移指令
 `define EXE_JAL             6'b000011       // 过程调用指令
-`define EXE_JALR            6'b001001       // 
+`define EXE_JALR            6'b001001       //
 `define EXE_JR              6'b001000       // 按寄存器内容转移指令
 `define EXE_BEQ             6'b000100       // 相等则转移指令
 `define EXE_BGEZ            5'b00001
@@ -98,7 +98,7 @@
 `define EXE_BLTZAL          5'b10000
 `define EXE_BNE             6'b000101       // 不相等则转移指令
 
-`define EXE_LB              6'b100000       
+`define EXE_LB              6'b100000
 `define EXE_LBU             6'b100100
 `define EXE_LH              6'b100001
 `define EXE_LHU             6'b100101
@@ -118,15 +118,11 @@
 `define EXE_NOP             6'b000000       // NOP
 `define SSNOP               32'b00000000000000000000000001000000
 
-`define lw                                  // 存储器读（字操作）指令
-`define sw                                  // 存储器写（字操作）指令
-
-
 `define EXE_REGIMM_INST     6'b000001       //
 `define EXE_SPECIAL2_INST   6'b011100       //
 `define EXE_SPECIAL_INST    6'b000000       // 特殊指令
 
-//Aluop
+//*** Aluop宏定义（运算子类型） ***//
 `define EXE_AND_OP          8'b00100100
 `define EXE_OR_OP           8'b00100101
 `define EXE_XOR_OP          8'b00100110
@@ -206,41 +202,45 @@
 
 `define EXE_NOP_OP          8'b00000000
 
-//AluSel
+//*** AluSel宏定义（运算类型） ***//
 `define EXE_RES_LOGIC       3'b001
 `define EXE_RES_SHIFT       3'b010
 `define EXE_RES_MOVE        3'b011
 `define EXE_RES_ARITHMETIC  3'b100
 `define EXE_RES_MUL         3'b101
 `define EXE_RES_JUMP_BRANCH 3'b110
-`define EXE_RES_LOAD_STORE  3'b111	
-
+`define EXE_RES_LOAD_STORE  3'b111
 `define EXE_RES_NOP         3'b000
 
+//*** ROM相关的宏定义 ***//
+`define InstAddrBus         31:0            // ROM的地址总线宽度
+`define InstBus             31:0            // ROM的数据总线宽度
+`define InstMemNum          131071          // ROM的实际大小
+`define InstMemNumLog2      17              // ROM实际使用的地址线宽度
 
-
-//*   与ROM相关的宏指令    *//
-`define InstAddrBus         31:0    // ROM的地址总线宽度
-`define InstBus             31:0    // ROM的数据总线宽度
-`define InstMemNum          131071  // ROM的实际大小
-`define InstMemNumLog2      17      // ROM实际使用的地址线宽度
-
-//*    与通用寄存器regfile有关的宏指令    *//
-`define RegAddrBus          4:0     // RegFile的地址线宽度
-`define RegBus              31:0    // RegFile的数据线宽度
-`define RegWidth            32      // 通用寄存器的宽度
-`define DoubleRegWidth      64      // 通用寄存器的两倍宽度
-`define DoubleRegBus        63:0    // 通用寄存器的数据线宽度的两倍
-`define RegNum              32      // 通用寄存器的数量
-`define RegNumLog2          5       // 寻址通用寄存器使用的地址位宽
+//*** 通用寄存器regfile有关的宏定义 ***//
+`define RegAddrBus          4:0             // RegFile的地址线宽度
+`define RegBus              31:0            // RegFile的数据线宽度
+`define RegWidth            32              // 通用寄存器的宽度
+`define DoubleRegWidth      64              // 通用寄存器的两倍宽度
+`define DoubleRegBus        63:0            // 通用寄存器的数据线宽度的两倍
+`define RegNum              32              // 通用寄存器的数量
+`define RegNumLog2          5               // 寻址通用寄存器使用的地址位宽
 `define NOPRegAddr          5'b000000
 
-//*     除法相关     *//
-`define DivFree             2'b00   // 
-`define DivByZero           2'b01   // 
-`define DivOn               2'b10   // 
-`define DivEnd              2'b11   // 
-`define DivResultReady      1'b1    // 
-`define DivResultNotReady   1'b0  // 
-`define DivStart            1'b1    // 
-`define DivStop             1'b0    // 
+//*** 除法指令相关的宏定义 ***//
+`define DivFree             2'b00           //
+`define DivByZero           2'b01           //
+`define DivOn               2'b10           //
+`define DivEnd              2'b11           //
+`define DivResultReady      1'b1            //
+`define DivResultNotReady   1'b0            //
+`define DivStart            1'b1            //
+`define DivStop             1'b0            //
+
+//*** RAM相关的宏定义 ***//
+`define DataAddrBus         31:0            // RAM地址总线宽度
+`define DataBus             31:0            // RAM数据总线宽度
+`define DataMemNum          131071          // RAM的大小，单位是字（128K）
+`define DataMemNumLog2      17              // 实际使用的地址宽度
+`define ByteWidth           7:0             // 一个字节的宽度

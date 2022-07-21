@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\regfile.v
 //* @Date         : 2022-04-24 13:41:01
-//* @LastEditTime : 2022-07-04 14:56:18
+//* @LastEditTime : 2022-07-21 11:55:56
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 通用寄存器读写模块
@@ -49,7 +49,6 @@ always @( posedge clk )
 // 读出和写入为同一个寄存器 ： 直接输出要写入的值
 // 不为以上任一种情况 ：读出对应地址的值
 // 不为以上任一情况 ： 读出0
-
 always @( * )
     begin
         if ( rst == `RstEnable )
@@ -98,6 +97,5 @@ always @( * )
                 rdata2 <= `ZeroWord;
             end
     end
-
 
 endmodule //regfile

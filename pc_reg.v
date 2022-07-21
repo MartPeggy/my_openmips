@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\pc_reg.v
 //* @Date         : 2022-04-24 09:06:59
-//* @LastEditTime : 2022-07-17 14:05:49
+//* @LastEditTime : 2022-07-21 10:33:02
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : PC模块(取值阶段)
@@ -19,44 +19,32 @@
 //^ 2   branch_target_address_i  32 in      转移到的目的地址
 
 `include "defines.v"
-module pc_reg (
+module pc_reg(
+
            input wire clk,
            input wire rst,
 
-           output reg [ `InstAddrBus ] pc,
-           output reg ce,
+           //来自控制模块的信息
+           input wire [ 5: 0 ] stall,
 
+           //来自译码阶段的信息
            input wire branch_flag_i,
            input wire [ `RegBus ] branch_target_address_i,
 
-           input wire [ 5: 0 ] stall
+           output reg [ `InstAddrBus ] pc,
+           output reg ce
+
        );
 
-// 这里always 均使用同步复位
-// 复位时指令存储器禁用
-always @( posedge clk )
-    begin
-        if ( rst == `RstEnable )
-            begin
-                ce <= `ChipDisable;
-            end
-
-        else
-            begin
-                ce <= `ChipEnable;
-            end
-    end
-
-// 指令存储器禁用时，ce=0
-// 指令存储器使能时且无流水线暂停信号时，ce=ce+4
-// 流水线暂停时，保持pc不变
-always @( posedge clk )
+// 指令存储器禁用时，pc=0
+// 指令存储器使能时且无流水线暂停信号且不发生转移，pc=pc+4
+// 发生转移，pc=转移目标地址
+always @ ( posedge clk )
     begin
         if ( ce == `ChipDisable )
             begin
-                pc <= `ZeroWord;
+                pc <= 32'h00000000;
             end
-
         else if ( stall[ 0 ] == `NoStop )
             begin
                 if ( branch_flag_i == `Branch )
@@ -67,8 +55,20 @@ always @( posedge clk )
                     begin
                         pc <= pc + 4'h4;
                     end
-
             end
     end
 
-endmodule //pc_reg
+// 复位时指令存储器禁用
+always @ ( posedge clk )
+    begin
+        if ( rst == `RstEnable )
+            begin
+                ce <= `ChipDisable;
+            end
+        else
+            begin
+                ce <= `ChipEnable;
+            end
+    end
+
+endmodule

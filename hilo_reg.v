@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\hilo_reg.v
 //* @Date         : 2022-07-09 09:07:22
-//* @LastEditTime : 2022-07-12 14:14:35
+//* @LastEditTime : 2022-07-21 11:56:38
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : HI、LO寄存器模块
@@ -29,6 +29,7 @@ module hilo_reg (
            output reg [ `RegBus ] hi_o,
            output reg [ `RegBus ] lo_o
        );
+       
 always @( posedge clk )
     begin
         if ( rst == `RstEnable )

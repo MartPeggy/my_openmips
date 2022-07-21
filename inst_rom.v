@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\inst_rom.v
 //* @Date         : 2022-04-28 12:04:38
-//* @LastEditTime : 2022-07-12 14:14:07
+//* @LastEditTime : 2022-07-21 11:57:35
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 指令存储器
@@ -18,6 +18,7 @@ module inst_rom(
            input wire [ `InstAddrBus ] addr,
            output reg [ `InstBus ] inst
        );
+       
 // 二维数组，大小是 InstMemNum 宽度为 InstBus
 reg [ `InstBus ] inst_mem [ 0: `InstMemNum - 1 ];
 

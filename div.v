@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\div.v
 //* @Date         : 2022-07-12 14:29:12
-//* @LastEditTime : 2022-07-12 16:26:54
+//* @LastEditTime : 2022-07-21 10:28:26
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 除法模块
@@ -19,25 +19,29 @@
 //^ 9       ready_o         1       out     运算结束标志
 
 `include "defines.v"
-module div (
+module div(
            input wire clk,
            input wire rst,
 
-           input wire signed_div_i ,
+           input wire signed_div_i,
            input wire [ 31: 0 ] opdata1_i,
            input wire [ 31: 0 ] opdata2_i,
            input wire start_i,
            input wire annul_i,
 
-           output reg [ 63: 0 ] result_o,
+           output reg[ 63: 0 ] result_o,
            output reg ready_o
        );
 
-wire [ 32: 0 ] div_temp;
 // 记录试商法进行的轮数
+wire [ 32: 0 ] div_temp;
+
+// 记录除法过程中的数据
 reg [ 5: 0 ] cnt;
+
 // 记录除法过程中的数据
 reg [ 64: 0 ] dividend;
+
 // 状态机变量
 reg [ 1: 0 ] state;
 reg [ 31: 0 ] divisor;
@@ -46,7 +50,7 @@ reg [ 31: 0 ] temp_op2;
 
 assign div_temp = { 1'b0, dividend[ 63: 32 ] } - { 1'b0, divisor };
 
-always @( posedge clk )
+always @ ( posedge clk )
     begin
         if ( rst == `RstEnable )
             begin
@@ -58,14 +62,14 @@ always @( posedge clk )
             begin
                 // 状态机
                 case ( state )
-                    /*
-                    state==`DivFree：
-                      a) 处于 divstart 且 不取消除法运算
-                        a1) 除数为0，进入 `DivByZero 状态
-                        a2) 除数不为0，进入`DivOn 状态，判断是否需要取补码
-                      b) 取消除法运算，变量赋0                
-                    */
                     `DivFree:
+                        /*
+                        state==`DivFree：
+                            a) 处于 `DivStart 且 不取消除法运算
+                                a1) 除数为0，进入 `DivByZero 状态
+                                a2) 除数不为0，进入`DivOn 状态，判断是否需要取补码
+                            b) 取消除法运算，变量赋0                
+                        */
                         begin
                             if ( start_i == `DivStart && annul_i == 1'b0 )
                                 begin
@@ -100,7 +104,6 @@ always @( posedge clk )
                                             dividend[ 32: 1 ] <= temp_op1;
                                             divisor <= temp_op2;
                                         end
-
                                 end
                             else
                                 begin
@@ -109,28 +112,26 @@ always @( posedge clk )
                                 end
                         end
 
-                    /*
-                    state==`DivByZero：
-                        赋0值，结束运算
-                    */
                     `DivByZero:
+                        /*
+                        state==`DivByZero：0值，结束运算
+                        */
                         begin
                             dividend <= { `ZeroWord, `ZeroWord };
                             state <= `DivEnd;
                         end
 
-                    /*
-                    state==`DivOn:
-                        a) 取消除法运算，变量赋0
-                            a1) 除法次数不为32，继续执行试商法
-                                a11) 执行结果为负数，此次迭代结果为0
-                                a12) 执行结果不为负，此次迭代结果为1
-                            a2) 除法次数为32，试商法结束
-                                a21) 有符号整数除法 且 一正一负，结果取补码
-
-                    */
                     `DivOn:
-                        begin
+                        /*
+                        state == `DivOn:
+                            a) 不取消除法运算
+                                a1) 除法次数不为32，继续执行试商法
+                                    a11) 执行结果为负数，此次迭代结果为0并与之前的数据拼接
+                                    a12) 执行结果不为负，此次迭代结果为1并拼接
+                                a2) 除法次数为32，试商法结束
+                                    a21) 有符号整数除法 且 一正一负，结果取补码
+                            */
+                        begin               //DivOn状态
                             if ( annul_i == 1'b0 )
                                 begin
                                     if ( cnt != 6'b100000 )
@@ -168,12 +169,12 @@ always @( posedge clk )
                                 end
                         end
 
-                    /*
-                    state==`DivEnd:
-                    输出运算结果，高32位存储余数，低32位存储商，当ex模块送来DivStop信号，返回DivFree状态
-                    */
                     `DivEnd:
-                        begin
+                        /*
+                        state==`DivEnd:
+                        输出运算结果，高32位存储余数，低32位存储商，当ex模块送来DivStop信号，返回DivFree状态
+                        */
+                        begin               //DivEnd状态
                             result_o <= { dividend[ 64: 33 ], dividend[ 31: 0 ] };
                             ready_o <= `DivResultReady;
 
@@ -189,4 +190,4 @@ always @( posedge clk )
             end
     end
 
-endmodule //div
+endmodule

@@ -208,6 +208,41 @@
 		],
 		"description": ""
 	},
+	"DataAddrBus 31:0": {
+		"prefix": "DataAddrBus",
+		"body": [
+			"DataAddrBus"
+		],
+		"description": "RAM 地址总线宽度",
+	},
+	"DataBus 31:0": {
+		"prefix": "DataBus",
+		"body": [
+			"DataBus"
+		],
+		"description": "RAM 数据总线宽度",
+	},
+	"DataMemNum 131071": {
+		"prefix": "DataMemNum",
+		"body": [
+			"DataMemNum"
+		],
+		"description": "RAM的大小,单位是字(共128K)",
+	},
+	"DataMemNumLog2 17": {
+		"prefix": "DataMemNumLog2",
+		"body": [
+			"DataMemNumLog2"
+		],
+		"description": "实际使用的地址宽度",
+	},
+	"ByteWidth 7:0": {
+		"prefix": "ByteWidth",
+		"body": [
+			"ByteWidth"
+		],
+		"description": "一个字节的宽度",
+	},
 
 	//*   指令宏定义    *//
 	"EXE_AND 6'b100100": {

@@ -1,7 +1,7 @@
 //************************************************
 //* @FilePath     : \my_OpenMIPS\id_ex.v
 //* @Date         : 2022-04-27 21:20:29
-//* @LastEditTime : 2022-07-19 10:44:39
+//* @LastEditTime : 2022-07-21 11:08:48
 //* @Author       : mart
 //* @Tips         : CA+I 头注释 CA+P TB
 //* @Description  : 将译码阶段译出的指令信息传递到执行模块
@@ -37,9 +37,14 @@
 //^ 2       ex_inst         32      out
 
 `include "defines.v"
-module id_ex (
+
+module id_ex(
+
            input wire clk,
            input wire rst,
+
+           //来自控制模块的信息
+           input wire [ 5: 0 ] stall,
 
            //从译码阶段传递的信息
            input wire [ `AluOpBus ] id_aluop,
@@ -48,6 +53,10 @@ module id_ex (
            input wire [ `RegBus ] id_reg2,
            input wire [ `RegAddrBus ] id_wd,
            input wire id_wreg,
+           input wire [ `RegBus ] id_link_address,
+           input wire id_is_in_delayslot,
+           input wire next_inst_in_delayslot_i,
+           input wire [ `RegBus ] id_inst,
 
            //传递到执行阶段的信息
            output reg [ `AluOpBus ] ex_aluop,
@@ -56,20 +65,16 @@ module id_ex (
            output reg [ `RegBus ] ex_reg2,
            output reg [ `RegAddrBus ] ex_wd,
            output reg ex_wreg,
-
-           input wire [ 5: 0 ] stall,
-
-           input wire [ `RegBus ] id_link_address,
-           input wire id_is_in_delayslot,
-           input wire next_inst_in_delayslot_i,
            output reg [ `RegBus ] ex_link_address,
            output reg ex_is_in_delayslot,
            output reg is_in_delayslot_o,
-
-           input wire [ `RegBus ] id_inst,
            output reg [ `RegBus ] ex_inst
+
        );
 
+// stall[2]==Stop 译码阶段暂停
+// stall[3]==Stop 执行阶段暂停
+// stall[3]==NoStop 执行阶段继续
 always @ ( posedge clk )
     begin
         if ( rst == `RstEnable )
@@ -78,24 +83,20 @@ always @ ( posedge clk )
                 ex_alusel <= `EXE_RES_NOP;
                 ex_reg1 <= `ZeroWord;
                 ex_reg2 <= `ZeroWord;
-                ex_wd <= 4'b0000;
+                ex_wd <= `NOPRegAddr;
                 ex_wreg <= `WriteDisable;
                 ex_link_address <= `ZeroWord;
                 ex_is_in_delayslot <= `NotInDelaySlot;
                 is_in_delayslot_o <= `NotInDelaySlot;
                 ex_inst <= `ZeroWord;
             end
-
-        // stall[2]==Stop 译码阶段暂停
-        // stall[3]==Stop 执行阶段暂停
-        // stall[3]==NoStop 执行阶段继续
         else if ( stall[ 2 ] == `Stop && stall[ 3 ] == `NoStop )
             begin
                 ex_aluop <= `EXE_NOP_OP;
                 ex_alusel <= `EXE_RES_NOP;
                 ex_reg1 <= `ZeroWord;
                 ex_reg2 <= `ZeroWord;
-                ex_wd <= 4'b0000;
+                ex_wd <= `NOPRegAddr;
                 ex_wreg <= `WriteDisable;
                 ex_link_address <= `ZeroWord;
                 ex_is_in_delayslot <= `NotInDelaySlot;
@@ -116,4 +117,4 @@ always @ ( posedge clk )
             end
     end
 
-endmodule //id_ex
+endmodule
